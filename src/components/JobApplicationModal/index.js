@@ -2,6 +2,8 @@ import React from "react";
 import { Box, Grid } from "@mui/material";
 import { Colors } from "../../constants/Colors";
 import listIcon1 from "../../assets/images/home-dialog-list-icon-1.png";
+import listIcon2 from "../../assets/images/home-dialog-list-icon-2.png";
+import listIcon3 from "../../assets/images/home-dialog-list-icon-3.png";
 
 const BackgroundStyle = {
   margin: "auto",
@@ -36,7 +38,7 @@ const DialogElement = (props) => {
                   mr: 1,
                   height: { md: "3rem", sm: "2rem", xs: "2rem" },
                   marginBottom: "1rem",
-                  width: { xs: "3rem" },
+                  width: { md: "auto", xs: "3rem" },
                   marginTop: { md: "0.5rem" }
                 }}
                 alt="project-rebound-logo"
@@ -95,18 +97,19 @@ const JobApplicationModal = () => {
       <div style={{ marginTop: "2rem" }}>
         <Box sx={innerComponentStyle}>
           <DialogElement
-            image={listIcon1}
-            heading="Search For a Job"
-            desc="Identify your skills using our smart skill identification tool!"
+            image={listIcon2}
+            heading="Build Your Resume"
+            desc="Use our Q&A Prompts to build a professional resume with
+your skills."
           />
         </Box>
       </div>
       <div style={{ marginTop: "2rem" }}>
         <Box sx={innerComponentStyle}>
           <DialogElement
-            image={listIcon1}
-            heading="Search For a Job"
-            desc="Identify your skills using our smart skill identification tool!"
+            image={listIcon3}
+            heading="Ask for Help!"
+            desc="Post a question to seek help from our community!"
           />
         </Box>
       </div>
