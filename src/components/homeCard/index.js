@@ -42,7 +42,6 @@ const HomeCard = (props) => {
         <CardMedia
           component="img"
           sx={{
-            // width: "283px",
             height: "130px",
             margin: "auto",
             marginBottom: "2rem",
