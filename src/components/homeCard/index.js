@@ -3,7 +3,6 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Modal, Box } from "@mui/material/";
 import { Colors } from "../../constants/Colors";
@@ -43,7 +42,7 @@ const HomeCard = (props) => {
         <CardMedia
           component="img"
           sx={{
-            width: "283px",
+            // width: "283px",
             height: "130px",
             margin: "auto",
             marginBottom: "2rem",
