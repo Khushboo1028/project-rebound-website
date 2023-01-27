@@ -4,7 +4,7 @@ import { Box, Grid, Button } from "@mui/material";
 import HomeIntroImage from "../../../assets/images/tech-meeting-pic.png";
 import { Colors } from "../../../constants/Colors";
 import SendIcon from "@mui/icons-material/Send";
-import { Link, scroll } from "react-scroll";
+import { Link } from "react-scroll";
 
 const HomeIntro = () => {
   return (

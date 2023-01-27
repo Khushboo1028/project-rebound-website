@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Grid, Button, Fade } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { Colors } from "../../../constants/Colors";
 import HomeCard from "../../../components/homeCard";
 import cardImage1 from "../../../assets/images/card-image-1.png";
