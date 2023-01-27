@@ -4,6 +4,7 @@ import { Box, Grid, Button } from "@mui/material";
 import HomeIntroImage from "../../../assets/images/tech-meeting-pic.png";
 import { Colors } from "../../../constants/Colors";
 import SendIcon from "@mui/icons-material/Send";
+import { Link, scroll } from "react-scroll";
 
 const HomeIntro = () => {
   return (
@@ -16,7 +17,7 @@ const HomeIntro = () => {
                 sx={{
                   marginTop: "2rem",
                   textAlign: "center",
-                  marginLeft: { md: "8rem", sm: "13rem", xs: "4rem" }
+                  marginLeft: { md: "8rem", sm: "8rem", xs: "1rem" }
                 }}
               >
                 <Box
@@ -60,25 +61,27 @@ const HomeIntro = () => {
                 </Box>
               </Box>
 
-              <Button
-                sx={{
-                  marginTop: "5rem",
-                  fontFamily: "Inria Sans",
-                  color: Colors.white,
-                  backgroundColor: Colors.primaryColor,
-                  fontSize: { md: "1.5rem", xs: "1.2rem" },
-                  marginLeft: { md: "8rem", sm: "13rem", xs: "4rem" },
-                  "&:hover": {
-                    backgroundColor: Colors.primaryColorLight,
-                    boxShadow: "5rem",
-                    transition: "0.2s"
-                  }
-                }}
-                variant="contained"
-                endIcon={<SendIcon />}
-              >
-                Explore
-              </Button>
+              <Link to="#homeMain" smooth={true}>
+                <Button
+                  sx={{
+                    marginTop: "5rem",
+                    fontFamily: "Inria Sans",
+                    color: Colors.white,
+                    backgroundColor: Colors.primaryColor,
+                    fontSize: { md: "1.5rem", xs: "1.2rem" },
+                    marginLeft: { md: "8rem", sm: "8rem", xs: "1rem" },
+                    "&:hover": {
+                      backgroundColor: Colors.primaryColorLight,
+                      boxShadow: "5rem",
+                      transition: "0.2s"
+                    }
+                  }}
+                  variant="contained"
+                  endIcon={<SendIcon />}
+                >
+                  Explore
+                </Button>
+              </Link>
             </div>
           </Grid>
           <Grid item md={6} xs={12}>

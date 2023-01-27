@@ -48,14 +48,14 @@ const cardHeadingList = [
 //have same number of bullets for all cards
 const HomeMain = () => {
   return (
-    <div>
+    <div id="#homeMain">
       <Box
         sx={{
           marginTop: { md: "12rem", xs: "4rem" },
           fontFamily: "Inria Sans",
           fontSize: "2rem",
           color: Colors.primaryColor,
-          marginLeft: { md: "6rem", sm: "13rem", xs: "4rem" }
+          marginLeft: { md: "6rem", sm: "8rem", xs: "1rem" }
         }}
       >
         Begin your journey here!
