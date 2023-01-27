@@ -28,17 +28,17 @@ const list2 = [
   "Printing and Scanning",
   "Email and Document Upload"
 ];
-const list3 = ["Phishing and Scams", "Financial Security"];
-const list4 = ["Auto Pay", "Bill Check", "Ledger", "Credit Rating"];
+const list3 = ["Phishing and Scams", "Financial Security", "Malware and More"];
+const list4 = ["Auto Pay", "Bill Check", "Credit Rating"];
 const list5 = ["Job Search", "Identify Your Skills", "Resume Builder"];
-const list6 = ["Social Services", "Govt Support"];
+const list6 = ["Social Services", "Govt Support", "NGO Support"];
 const mainBodyCardLists = [list1, list2, list3, list4, list5, list6];
 
 const cardHeadingList = [
   "Technology Use in Daily Life",
   "Technology use for Class and Word",
   "Technology Safety and Privacy",
-  "Financial Well Being and Money Management",
+  "Financial Well Being and Management",
   "Job Application Support",
   "Accessing Public Services and Resources"
 ];
@@ -80,6 +80,7 @@ const HomeMain = () => {
                 alt={cardHeadingList[index]}
                 heading={cardHeadingList[index]}
                 list={mainBodyCardLists[index]}
+                index={index}
               />
             </Grid>
           ))}

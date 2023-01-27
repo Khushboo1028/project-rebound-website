@@ -1,16 +1,45 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { Modal, Box } from "@mui/material/";
 import { Colors } from "../../constants/Colors";
+import JobApplicationModal from "../JobApplicationModal";
 
 const HomeCard = (props) => {
+  const [isJobApplicationModalOpen, setJobApplicationModalOpen] =
+    useState(false);
+
+  const cardClicked = () => {
+    if (props.index === 4) {
+      setJobApplicationModalOpen(true);
+    }
+  };
+
+  const openJobApplicationModal = () => {
+    const handleClose = () => setJobApplicationModalOpen(false);
+
+    return (
+      <Modal
+        open={isJobApplicationModalOpen}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <JobApplicationModal />
+      </Modal>
+    );
+  };
+
   return (
     <div>
-      <Card sx={{ maxWidth: 345, background: Colors.backgroundColor }}>
+      <Card
+        sx={{ maxWidth: 345, background: Colors.backgroundColor }}
+        onClick={cardClicked}
+      >
         <CardMedia
           component="img"
           sx={{
@@ -58,6 +87,8 @@ const HomeCard = (props) => {
           ))}
         </CardContent>
       </Card>
+
+      <div>{openJobApplicationModal()}</div>
     </div>
   );
 };
