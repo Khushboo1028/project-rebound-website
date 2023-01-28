@@ -7,7 +7,7 @@ import listIcon3 from "../../assets/images/home-dialog-list-icon-3.png";
 
 const BackgroundStyle = {
   margin: "auto",
-  width: { md: "20%", sm: "30%", xs: "50%" },
+  width: { md: "30%", sm: "30%", xs: "50%" },
   mt: 10,
   bgcolor: Colors.primaryColor,
   borderRadius: "0.5rem",
@@ -36,9 +36,10 @@ const DialogElement = (props) => {
                 sx={{
                   display: "flex",
                   mr: 1,
-                  height: { md: "3rem", sm: "2rem", xs: "2rem" },
+                  width: { md: "6rem", sm: "3rem", xs: "3rem" },
                   marginBottom: "1rem",
-                  width: { md: "auto", xs: "3rem" },
+                  maxHeight: { md: "auto", sm: "4rem", xs: "2rem" },
+                  // width: { md: "auto", xs: "3rem" },
                   marginTop: { md: "0.5rem" }
                 }}
                 alt="project-rebound-logo"
@@ -65,7 +66,7 @@ const DialogElement = (props) => {
               component="p"
               sx={{
                 fontFamily: "Inria Sans",
-                fontSize: { md: "0.70rem", sm: "0.5rem", xs: "0.3rem" },
+                fontSize: { md: "0.70rem", sm: "0.5rem", xs: "0.25rem" },
                 color: Colors.primaryColor,
                 display: "flex",
                 marginTop: "-0.2rem",
@@ -93,6 +94,8 @@ const JobApplicationModal = () => {
           />
         </Box>
       </div>
+
+      {/* TODO: Fix the resume icon - maybe change it if it is not fixing */}
 
       <div style={{ marginTop: "2rem" }}>
         <Box sx={innerComponentStyle}>
