@@ -21,7 +21,8 @@ const innerComponentStyle = {
   height: { md: 100, sm: 60, xs: 60 },
   bgcolor: Colors.white,
   marginBottom: { md: "1rem", sm: "0.5rem", xs: "0.5rem" },
-  borderRadius: "1rem"
+  borderRadius: "1rem",
+  cursor: "pointer"
 };
 
 const DialogElement = (props) => {

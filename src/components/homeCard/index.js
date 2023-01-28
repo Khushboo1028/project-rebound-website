@@ -36,7 +36,11 @@ const HomeCard = (props) => {
   return (
     <div>
       <Card
-        sx={{ maxWidth: 345, background: Colors.backgroundColor }}
+        sx={{
+          maxWidth: 345,
+          background: Colors.backgroundColor,
+          cursor: "pointer"
+        }}
         onClick={cardClicked}
       >
         <CardMedia
