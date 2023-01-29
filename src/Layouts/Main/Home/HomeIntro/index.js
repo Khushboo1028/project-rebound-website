@@ -1,8 +1,8 @@
 import * as React from "react";
 import styles from "./index.module.css";
 import { Box, Grid, Button } from "@mui/material";
-import HomeIntroImage from "../../../assets/images/tech-meeting-pic.png";
-import { Colors } from "../../../constants/Colors";
+import HomeIntroImage from "../../../../assets/images/tech-meeting-pic.png";
+import { Colors } from "../../../../constants/Colors";
 import SendIcon from "@mui/icons-material/Send";
 import { Link } from "react-scroll";
 

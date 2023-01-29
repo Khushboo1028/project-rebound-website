@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
 import { Colors } from "../../constants/Colors";
+import { useNavigate } from "react-router-dom";
 import listIcon1 from "../../assets/images/home-dialog-list-icon-1.png";
 import listIcon2 from "../../assets/images/home-dialog-list-icon-2.png";
 import listIcon3 from "../../assets/images/home-dialog-list-icon-3.png";
@@ -26,9 +27,17 @@ const innerComponentStyle = {
 };
 
 const DialogElement = (props) => {
+  let navigate = useNavigate();
   return (
     <div>
-      <Box sx={{ margin: "auto", width: "90%" }}>
+      <Box
+        sx={{ margin: "auto", width: "90%" }}
+        onClick={() => {
+          if (props.index === "1") {
+            navigate("/jobSupport");
+          }
+        }}
+      >
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <Box sx={{ margin: "auto" }}>
@@ -40,7 +49,6 @@ const DialogElement = (props) => {
                   width: { md: "6rem", sm: "3rem", xs: "3rem" },
                   marginBottom: "1rem",
                   maxHeight: { md: "auto", sm: "4rem", xs: "2rem" },
-                  // width: { md: "auto", xs: "3rem" },
                   marginTop: { md: "0.5rem" }
                 }}
                 alt="project-rebound-logo"
@@ -92,11 +100,10 @@ const JobApplicationModal = () => {
             image={listIcon1}
             heading="Search For a Job"
             desc="Identify your skills using our smart skill identification tool!"
+            index="1"
           />
         </Box>
       </div>
-
-      {/* TODO: Fix the resume icon - maybe change it if it is not fixing */}
 
       <div style={{ marginTop: "2rem" }}>
         <Box sx={innerComponentStyle}>
@@ -104,7 +111,9 @@ const JobApplicationModal = () => {
             image={listIcon2}
             heading="Build Your Resume"
             desc="Use our Q&A Prompts to build a professional resume with
+
 your skills."
+            index="2"
           />
         </Box>
       </div>
@@ -114,6 +123,7 @@ your skills."
             image={listIcon3}
             heading="Ask for Help!"
             desc="Post a question to seek help from our community!"
+            index="3"
           />
         </Box>
       </div>

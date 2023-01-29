@@ -1,13 +1,13 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
-import { Colors } from "../../../constants/Colors";
-import HomeCard from "../../../components/homeCard";
-import cardImage1 from "../../../assets/images/card-image-1.png";
-import cardImage2 from "../../../assets/images/card-image-2.png";
-import cardImage3 from "../../../assets/images/card-image-3.png";
-import cardImage4 from "../../../assets/images/card-image-4.png";
-import cardImage5 from "../../../assets/images/card-image-5.png";
-import cardImage6 from "../../../assets/images/card-image-6.png";
+import { Colors } from "../../../../constants/Colors";
+import HomeCard from "../../../../components/homeCard";
+import cardImage1 from "../../../../assets/images/card-image-1.png";
+import cardImage2 from "../../../../assets/images/card-image-2.png";
+import cardImage3 from "../../../../assets/images/card-image-3.png";
+import cardImage4 from "../../../../assets/images/card-image-4.png";
+import cardImage5 from "../../../../assets/images/card-image-5.png";
+import cardImage6 from "../../../../assets/images/card-image-6.png";
 
 const cardImageList = [
   cardImage1,
@@ -43,9 +43,6 @@ const cardHeadingList = [
   "Accessing Public Services and Resources"
 ];
 
-//TODO: FIX images (top is cutting)
-//Explore button navigation
-//have same number of bullets for all cards
 const HomeMain = () => {
   return (
     <div id="#homeMain">

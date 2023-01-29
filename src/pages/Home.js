@@ -1,6 +1,6 @@
 import React from "react";
-import HomeIntro from "../Layouts/Main/HomeIntro";
-import HomeMain from "../Layouts/Main/HomeMain";
+import HomeIntro from "../Layouts/Main/Home/HomeIntro";
+import HomeMain from "../Layouts/Main/Home/HomeMain";
 
 const Home = () => {
   return (

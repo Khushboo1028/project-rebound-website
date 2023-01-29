@@ -14,11 +14,13 @@ import MenuItem from "@mui/material/MenuItem";
 import logo from "../../assets/images/logo.png";
 import PersonIcon from "@mui/icons-material/Person";
 import { Colors } from "../../constants/Colors";
+import { useNavigate } from "react-router-dom";
 
 const pages = ["Home", "Learn", "Help"];
 const settings = ["Login", "Account Settings"];
 
 const Navbar = () => {
+  let navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -29,8 +31,11 @@ const Navbar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (page) => {
     setAnchorElNav(null);
+    if (page === pages[0]) {
+      navigate("/home");
+    }
   };
 
   const handleCloseUserMenu = () => {
@@ -135,7 +140,7 @@ const Navbar = () => {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => handleCloseNavMenu(page)}
                 sx={{
                   my: 2,
                   color: Colors.primaryColor,
@@ -146,6 +151,45 @@ const Navbar = () => {
                 {page}
               </Button>
             ))}
+
+            {/* <Button
+              key={"home"}
+              onClick={() => handleCloseNavMenu("home")}
+              sx={{
+                my: 2,
+                color: Colors.primaryColor,
+                display: "block",
+                alignItems: "right"
+              }}
+            >
+              home
+            </Button>
+
+            <Button
+              key={"home"}
+              onClick={handleCloseNavMenu}
+              sx={{
+                my: 2,
+                color: Colors.primaryColor,
+                display: "block",
+                alignItems: "right"
+              }}
+            >
+              learn
+            </Button>
+
+            <Button
+              key={"home"}
+              onClick={handleCloseNavMenu}
+              sx={{
+                my: 2,
+                color: Colors.primaryColor,
+                display: "block",
+                alignItems: "right"
+              }}
+            >
+              help
+            </Button> */}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip>
