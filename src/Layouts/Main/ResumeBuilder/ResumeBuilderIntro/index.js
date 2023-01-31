@@ -43,12 +43,10 @@ const ResumeBuilderIntro = () => {
                 display: { xs: "flex" },
                 mr: 1,
                 margin: "auto",
-
-                width: { md: "50%", xs: "40%" },
-
+                width: { md: "45%", xs: "40%" },
                 marginTop: { xs: "2rem" }
               }}
-              alt="project-rebound-logo"
+              alt="resume-builder"
               src={ResumeBuilderImage}
             />
           </Grid>
