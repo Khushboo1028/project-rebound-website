@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import { Box, Grid, Icon, TextField } from "@mui/material";
 import { Colors } from "../../../../constants/Colors";
-import { Box, Grid, TextField, Icon } from "@mui/material";
 import { inputStyle } from "../styles";
 
-const PersonalDetailsForm = () => {
+const EducationBlock = (props) => {
   return (
     <div>
+      {" "}
+      {/* Education Block */}
       <Box
         sx={{
           backgroundColor: Colors.backgroundColor,
@@ -14,7 +16,7 @@ const PersonalDetailsForm = () => {
           boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
           margin: "auto",
           paddingBottom: "2rem",
-          width: "90%"
+          width: "100%"
         }}
       >
         <Grid container spacing={2} sx={{ margin: "auto", width: "97%" }}>
@@ -27,7 +29,7 @@ const PersonalDetailsForm = () => {
                 color: Colors.primaryColor
               }}
             >
-              Personal Details
+              Education/School
             </Box>
             <Box
               sx={{
@@ -40,9 +42,11 @@ const PersonalDetailsForm = () => {
                 }
               }}
             >
-              Please add your personal details
+              You can add relevant courses, bootcamps or programs that you are
+              enrolled in.
             </Box>
           </Grid>
+          {/* Help Row */}
           <Grid item xs={4}>
             <Box sx={{ float: "right" }}>
               <Box
@@ -71,7 +75,7 @@ const PersonalDetailsForm = () => {
             </Box>
           </Grid>
 
-          {/* First Name */}
+          {/* School Name */}
           <Grid item xs={6}>
             <Box
               component="form"
@@ -83,14 +87,14 @@ const PersonalDetailsForm = () => {
               <TextField
                 sx={inputStyle}
                 required
-                label="First Name"
+                label="School Name"
                 variant="filled"
                 focused
               />
             </Box>
           </Grid>
 
-          {/* last name        */}
+          {/* Start Date*/}
           <Grid item xs={6}>
             <Box
               component="form"
@@ -102,103 +106,14 @@ const PersonalDetailsForm = () => {
               <TextField
                 sx={inputStyle}
                 required
-                label="Last Name"
+                label="Start Date"
                 variant="filled"
                 focused
               />
             </Box>
           </Grid>
 
-          {/* address row */}
-          <Grid item xs={12}>
-            <Grid item xs={12}>
-              <Box
-                component="form"
-                sx={{
-                  "& > :not(style)": { width: "100%" }
-                }}
-                autoComplete="off"
-              >
-                {/* <TextField
-                  sx={inputStyle}
-                  required
-                  id="filled-multiline-static"
-                  label="Address"
-                  multiline
-                  rows={4}
-                  defaultValue="Default Valueeeee"
-                  variant="filled"
-                /> */}
-                <TextField
-                  sx={inputStyle}
-                  required
-                  label="Address"
-                  variant="filled"
-                  focused
-                />
-              </Box>
-            </Grid>
-          </Grid>
-
-          {/* City */}
-          <Grid item xs={4}>
-            <Box
-              component="form"
-              sx={{
-                "& > :not(style)": { width: "100%" }
-              }}
-              autoComplete="off"
-            >
-              <TextField
-                sx={inputStyle}
-                required
-                label="City"
-                variant="filled"
-                focused
-              />
-            </Box>
-          </Grid>
-
-          {/* State */}
-          <Grid item xs={4}>
-            <Box
-              component="form"
-              sx={{
-                "& > :not(style)": { width: "100%" }
-              }}
-              autoComplete="off"
-            >
-              <TextField
-                sx={inputStyle}
-                required
-                label="State"
-                variant="filled"
-                focused
-              />
-            </Box>
-          </Grid>
-
-          {/* Zip Code */}
-          <Grid item xs={4}>
-            <Box
-              component="form"
-              sx={{
-                "& > :not(style)": { width: "100%" }
-              }}
-              autoComplete="off"
-            >
-              <TextField
-                sx={inputStyle}
-                required
-                label="Zip Code"
-                variant="filled"
-                focused
-              />
-            </Box>
-          </Grid>
-
-          {/* Phone */}
-
+          {/* School Location */}
           <Grid item xs={6}>
             <Box
               component="form"
@@ -210,14 +125,14 @@ const PersonalDetailsForm = () => {
               <TextField
                 sx={inputStyle}
                 required
-                label="Phone"
+                label="School Location"
                 variant="filled"
                 focused
               />
             </Box>
           </Grid>
 
-          {/* Email */}
+          {/* End Date*/}
           <Grid item xs={6}>
             <Box
               component="form"
@@ -229,10 +144,64 @@ const PersonalDetailsForm = () => {
               <TextField
                 sx={inputStyle}
                 required
-                label="Email"
+                label="End Date"
                 variant="filled"
                 focused
               />
+            </Box>
+          </Grid>
+
+          {/* Degree */}
+          <Grid item xs={6}>
+            <Box
+              component="form"
+              sx={{
+                "& > :not(style)": { width: "100%" }
+              }}
+              autoComplete="off"
+            >
+              <TextField
+                sx={inputStyle}
+                required
+                label="Degree"
+                variant="filled"
+                focused
+              />
+            </Box>
+          </Grid>
+
+          {/* Field of Study */}
+          <Grid item xs={6}>
+            <Box
+              component="form"
+              sx={{
+                "& > :not(style)": { width: "100%" }
+              }}
+              autoComplete="off"
+            >
+              <TextField
+                sx={inputStyle}
+                required
+                label="Field Of Study"
+                variant="filled"
+                focused
+              />
+            </Box>
+          </Grid>
+
+          {/* Button to add another block */}
+          <Grid item xs={6}></Grid>
+          <Grid item xs={6}>
+            <Box
+              sx={{
+                color: Colors.primaryColor,
+                fontSize: "1rem",
+                textAlign: "end",
+                marginTOp: "0.7rem"
+              }}
+              onClick={props.method}
+            >
+              + Add another Education
             </Box>
           </Grid>
         </Grid>
@@ -241,4 +210,4 @@ const PersonalDetailsForm = () => {
   );
 };
 
-export default PersonalDetailsForm;
+export default EducationBlock;
