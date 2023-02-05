@@ -17,8 +17,9 @@ const PersonalDetailsForm = () => {
           width: "90%"
         }}
       >
+        {/* Heading row */}
         <Grid container spacing={2} sx={{ margin: "auto", width: "97%" }}>
-          {/* Heading row */}
+          {/* Heading Text */}
           <Grid item md={8} xs={8}>
             <Box
               sx={{
