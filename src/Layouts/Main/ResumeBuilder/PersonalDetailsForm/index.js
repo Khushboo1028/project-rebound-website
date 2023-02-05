@@ -78,7 +78,6 @@ const PersonalDetailsForm = () => {
             </Box>
           </Grid>
         </Grid>
-
         <Grid
           container
           spacing={2}

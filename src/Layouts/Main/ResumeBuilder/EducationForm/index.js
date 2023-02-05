@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Grid, Icon, TextField } from "@mui/material";
 import { Colors } from "../../../../constants/Colors";
 import { inputStyle } from "../styles";
+import { fontWeight } from "@mui/system";
 
 const EducationForm = () => {
   const [inputList, setInputList] = useState([]);
@@ -259,7 +260,6 @@ const EducationForm = () => {
     <div>
       <Box
         sx={{
-          display: "flex",
           height: "auto",
           borderRadius: "1rem",
           margin: "auto",
@@ -267,55 +267,57 @@ const EducationForm = () => {
           width: "90%"
         }}
       >
-        <Box>
-          <EducationBlock />
-        </Box>
-
-        {/* Notes Block */}
-        <Box
-          sx={{
-            backgroundColor: Colors.backgroundColor,
-            height: "auto",
-            borderRadius: "1rem",
-            boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-            margin: "auto",
-            paddingBottom: "2rem",
-            width: "40%",
-            marginLeft: "3rem"
-          }}
-        >
-          <Grid
-            container
-            spacing={2}
-            sx={{ margin: "auto", width: "97%", marginTop: "1rem" }}
-          >
-            <Box
-              sx={{
-                fontFamily: "Inria Sans",
-                fontSize: "1.3rem",
-                color: Colors.primaryColor
-              }}
-            >
-              Remember to list your different degrees!
-            </Box>
-            <Box sx={{ marginTop: "0.5rem" }}>
-              {education_list.map((e) => (
-                <Box
-                  sx={{
-                    marginLeft: "0.5rem",
-                    fontFamily: "Inria Sans",
-                    color: Colors.primaryColor,
-                    marginBottom: "0.5",
-                    fontSize: "1rem"
-                  }}
-                >
-                  {" "}
-                  - {e}
-                </Box>
-              ))}
+        <Grid container spacing={2}>
+          <Grid item sm={9} xs={12}>
+            <Box>
+              <EducationBlock />
             </Box>
           </Grid>
-        </Box>
+
+          <Grid item sm={3} xs={12}>
+            {/* Notes Block */}
+            <Box
+              sx={{
+                backgroundColor: Colors.backgroundColor,
+                height: "auto",
+                borderRadius: "1rem",
+                boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                margin: "auto",
+                padding: "0.5rem",
+                width: "100%"
+              }}
+            >
+              <Grid container spacing={2} sx={{ margin: "auto", width: "97%" }}>
+                <Box
+                  sx={{
+                    fontFamily: "Inria Sans",
+                    fontSize: { sm: "1.3rem", xs: "0.5" },
+                    color: Colors.primaryColor,
+                    fontWeight: 700
+                  }}
+                >
+                  Remember to list your different degrees!
+                </Box>
+                <Box sx={{ marginTop: "0.5rem" }}>
+                  {education_list.map((e) => (
+                    <Box
+                      sx={{
+                        marginLeft: "0.5rem",
+                        fontFamily: "Inria Sans",
+                        color: Colors.primaryColor,
+                        marginBottom: "0.5",
+                        fontSize: { sm: "1.1rem", xs: "0.5" }
+                      }}
+                    >
+                      {" "}
+                      - {e}
+                    </Box>
+                  ))}
+                </Box>
+              </Grid>
+            </Box>
+          </Grid>
+        </Grid>
       </Box>
     </div>
   );
