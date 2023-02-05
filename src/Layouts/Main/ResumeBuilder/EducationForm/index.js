@@ -14,11 +14,151 @@ const EducationForm = () => {
   ];
 
   const onAddBtnClick = (event) => {
-    setInputList(inputList.concat(<EducationBlock />));
+    setInputList(
+      inputList.concat(
+        <div style={{ marginTop: "2rem" }}>
+          <Box
+            sx={{
+              margin: "auto",
+              width: "93%",
+              fontFamily: "Inria Sans",
+              color: Colors.primaryColor,
+              fontWeight: "700"
+            }}
+          >
+            Education #{inputList.length + 2}
+          </Box>
+          <EducationForm />
+        </div>
+      )
+    );
     console.log(inputList);
   };
 
-  const educationForm = () => {};
+  const EducationForm = () => {
+    return (
+      <Grid
+        id="education-form"
+        container
+        spacing={2}
+        sx={{ margin: "auto", width: "97%" }}
+      >
+        {/* School Name */}
+        <Grid item xs={6}>
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { width: "100%" }
+            }}
+            autoComplete="off"
+          >
+            <TextField
+              sx={inputStyle}
+              required
+              label="School Name"
+              variant="filled"
+              focused
+            />
+          </Box>
+        </Grid>
+
+        {/* Start Date*/}
+        <Grid item xs={6}>
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { width: "100%" }
+            }}
+            autoComplete="off"
+          >
+            <TextField
+              sx={inputStyle}
+              required
+              label="Start Date"
+              variant="filled"
+              focused
+            />
+          </Box>
+        </Grid>
+
+        {/* School Location */}
+        <Grid item xs={6}>
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { width: "100%" }
+            }}
+            autoComplete="off"
+          >
+            <TextField
+              sx={inputStyle}
+              required
+              label="School Location"
+              variant="filled"
+              focused
+            />
+          </Box>
+        </Grid>
+
+        {/* End Date*/}
+        <Grid item xs={6}>
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { width: "100%" }
+            }}
+            autoComplete="off"
+          >
+            <TextField
+              sx={inputStyle}
+              required
+              label="End Date"
+              variant="filled"
+              focused
+            />
+          </Box>
+        </Grid>
+
+        {/* Degree */}
+        <Grid item xs={6}>
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { width: "100%" }
+            }}
+            autoComplete="off"
+          >
+            <TextField
+              sx={inputStyle}
+              required
+              label="Degree"
+              variant="filled"
+              focused
+            />
+          </Box>
+        </Grid>
+
+        {/* Field of Study */}
+        <Grid item xs={6}>
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { width: "100%" }
+            }}
+            autoComplete="off"
+          >
+            <TextField
+              sx={inputStyle}
+              required
+              label="Field Of Study"
+              variant="filled"
+              focused
+            />
+          </Box>
+        </Grid>
+      </Grid>
+    );
+  };
   const EducationBlock = () => {
     return (
       <div>
@@ -90,136 +230,24 @@ const EducationForm = () => {
                 </Box>
               </Box>
             </Grid>
-
-            {/* School Name */}
-            <Grid item xs={6}>
-              <Box
-                component="form"
-                sx={{
-                  "& > :not(style)": { width: "100%" }
-                }}
-                autoComplete="off"
-              >
-                <TextField
-                  sx={inputStyle}
-                  required
-                  label="School Name"
-                  variant="filled"
-                  focused
-                />
-              </Box>
-            </Grid>
-
-            {/* Start Date*/}
-            <Grid item xs={6}>
-              <Box
-                component="form"
-                sx={{
-                  "& > :not(style)": { width: "100%" }
-                }}
-                autoComplete="off"
-              >
-                <TextField
-                  sx={inputStyle}
-                  required
-                  label="Start Date"
-                  variant="filled"
-                  focused
-                />
-              </Box>
-            </Grid>
-
-            {/* School Location */}
-            <Grid item xs={6}>
-              <Box
-                component="form"
-                sx={{
-                  "& > :not(style)": { width: "100%" }
-                }}
-                autoComplete="off"
-              >
-                <TextField
-                  sx={inputStyle}
-                  required
-                  label="School Location"
-                  variant="filled"
-                  focused
-                />
-              </Box>
-            </Grid>
-
-            {/* End Date*/}
-            <Grid item xs={6}>
-              <Box
-                component="form"
-                sx={{
-                  "& > :not(style)": { width: "100%" }
-                }}
-                autoComplete="off"
-              >
-                <TextField
-                  sx={inputStyle}
-                  required
-                  label="End Date"
-                  variant="filled"
-                  focused
-                />
-              </Box>
-            </Grid>
-
-            {/* Degree */}
-            <Grid item xs={6}>
-              <Box
-                component="form"
-                sx={{
-                  "& > :not(style)": { width: "100%" }
-                }}
-                autoComplete="off"
-              >
-                <TextField
-                  sx={inputStyle}
-                  required
-                  label="Degree"
-                  variant="filled"
-                  focused
-                />
-              </Box>
-            </Grid>
-
-            {/* Field of Study */}
-            <Grid item xs={6}>
-              <Box
-                component="form"
-                sx={{
-                  "& > :not(style)": { width: "100%" }
-                }}
-                autoComplete="off"
-              >
-                <TextField
-                  sx={inputStyle}
-                  required
-                  label="Field Of Study"
-                  variant="filled"
-                  focused
-                />
-              </Box>
-            </Grid>
-
-            {/* Button to add another block */}
-            <Grid item xs={6}></Grid>
-            <Grid item xs={6}>
-              <Box
-                sx={{
-                  color: Colors.primaryColor,
-                  fontSize: "1rem",
-                  textAlign: "end",
-                  marginTOp: "0.7rem"
-                }}
-                onClick={onAddBtnClick}
-              >
-                + Add another Education
-              </Box>
-            </Grid>
+          </Grid>
+          <EducationForm />
+          {inputList}
+          {/* Button to add another block */}
+          <Grid item xs={6}></Grid>
+          <Grid item xs={6}>
+            <Box
+              sx={{
+                color: Colors.primaryColor,
+                fontSize: "1rem",
+                textAlign: "end",
+                marginTop: "1rem",
+                paddingRight: "1rem"
+              }}
+              onClick={onAddBtnClick}
+            >
+              + Add another Education
+            </Box>
           </Grid>
         </Box>
       </div>
@@ -240,7 +268,6 @@ const EducationForm = () => {
       >
         <Box>
           <EducationBlock />
-          {inputList}
         </Box>
 
         {/* Notes Block */}
