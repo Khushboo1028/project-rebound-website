@@ -19,11 +19,11 @@ const PersonalDetailsForm = () => {
       >
         <Grid container spacing={2} sx={{ margin: "auto", width: "97%" }}>
           {/* Heading row */}
-          <Grid item xs={8}>
+          <Grid item md={8} xs={8}>
             <Box
               sx={{
                 fontWeight: "700",
-                fontSize: { md: "1rem", sm: "0.5rem", xs: "0.8rem" },
+                fontSize: { md: "1rem", sm: "1rem", xs: "0.8rem" },
                 color: Colors.primaryColor
               }}
             >
@@ -33,8 +33,8 @@ const PersonalDetailsForm = () => {
               sx={{
                 fontSize: {
                   md: "1rem",
-                  sm: "0.5rem",
-                  xs: "0.5rem",
+                  sm: "0.8rem",
+                  xs: "0.8rem",
                   fontFamily: "Inria Sans",
                   color: Colors.primaryColor
                 }
@@ -43,36 +43,48 @@ const PersonalDetailsForm = () => {
               Please add your personal details
             </Box>
           </Grid>
-          <Grid item xs={4}>
-            <Box sx={{ float: "right" }}>
+          {/* Help Button */}
+          <Grid item md={4} xs={4}>
+            <Box
+              sx={{
+                float: "right",
+                display: "flex",
+                bgcolor: { md: Colors.white, sm: Colors.white, xs: "None" },
+                paddingRight: { md: "1.2rem", sm: "1rem", xs: "0.5rem" },
+                paddingLeft: { md: "1.2rem", sm: "1rem", xs: "0.5rem" }
+              }}
+            >
               <Box
                 sx={{
-                  display: "flex",
-                  bgcolor: Colors.white,
-                  paddingLeft: "1.2rem",
-                  paddingRight: "1.2rem",
+                  display: { md: "flex", sm: "flex", xs: "None" },
                   borderRadius: "0.1rem",
-                  fontSize: "1rem",
+                  fontSize: { md: "1rem", sm: "0.7rem", xs: "0.7rem" },
                   color: Colors.primaryColor,
                   fontWeight: "700"
                 }}
               >
                 <p>Need Help</p>
-                <Icon
-                  style={{
-                    color: Colors.primaryColor,
-                    marginTop: "0.85rem",
-                    marginLeft: "0.5rem"
-                  }}
-                >
-                  help_circle
-                </Icon>
+              </Box>
+              <Box
+                sx={{
+                  color: Colors.primaryColor,
+                  marginTop: { md: "0.85rem", sm: "0.5rem", xs: "0 " },
+                  marginLeft: "0.5rem"
+                }}
+              >
+                <Icon>help_circle</Icon>
               </Box>
             </Box>
           </Grid>
+        </Grid>
 
+        <Grid
+          container
+          spacing={2}
+          sx={{ margin: "auto", width: "97%", paddingRight: "0.5rem" }}
+        >
           {/* First Name */}
-          <Grid item xs={6}>
+          <Grid item md={6} sm={6} xs={12}>
             <Box
               component="form"
               sx={{
@@ -91,7 +103,7 @@ const PersonalDetailsForm = () => {
           </Grid>
 
           {/* last name        */}
-          <Grid item xs={6}>
+          <Grid item md={6} sm={6} xs={12}>
             <Box
               component="form"
               sx={{
@@ -141,7 +153,7 @@ const PersonalDetailsForm = () => {
           </Grid>
 
           {/* City */}
-          <Grid item xs={4}>
+          <Grid item md={4} sm={4} xs={12}>
             <Box
               component="form"
               sx={{
@@ -160,7 +172,7 @@ const PersonalDetailsForm = () => {
           </Grid>
 
           {/* State */}
-          <Grid item xs={4}>
+          <Grid item md={4} sm={4} xs={12}>
             <Box
               component="form"
               sx={{
@@ -179,7 +191,7 @@ const PersonalDetailsForm = () => {
           </Grid>
 
           {/* Zip Code */}
-          <Grid item xs={4}>
+          <Grid item md={4} sm={4} xs={12}>
             <Box
               component="form"
               sx={{
@@ -199,7 +211,7 @@ const PersonalDetailsForm = () => {
 
           {/* Phone */}
 
-          <Grid item xs={6}>
+          <Grid item md={6} sm={6} xs={12}>
             <Box
               component="form"
               sx={{
@@ -218,7 +230,7 @@ const PersonalDetailsForm = () => {
           </Grid>
 
           {/* Email */}
-          <Grid item xs={6}>
+          <Grid item md={6} sm={6} xs={12}>
             <Box
               component="form"
               sx={{

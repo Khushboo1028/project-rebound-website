@@ -13,7 +13,7 @@ const EducationForm = () => {
     "Vocational Training"
   ];
 
-  const onAddBtnClick = (event) => {
+  const onAddBtnClick = () => {
     setInputList(
       inputList.concat(
         <div style={{ marginTop: "2rem" }}>
@@ -23,7 +23,8 @@ const EducationForm = () => {
               width: "93%",
               fontFamily: "Inria Sans",
               color: Colors.primaryColor,
-              fontWeight: "700"
+              fontWeight: "700",
+              fontSize: "1rem"
             }}
           >
             Education #{inputList.length + 2}
