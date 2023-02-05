@@ -24,7 +24,7 @@ const PersonalDetailsForm = () => {
             <Box
               sx={{
                 fontWeight: "700",
-                fontSize: { md: "1rem", sm: "1rem", xs: "0.8rem" },
+                fontSize: { md: "1.3rem", sm: "1rem", xs: "1.2rem" },
                 color: Colors.primaryColor
               }}
             >
