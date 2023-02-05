@@ -210,7 +210,8 @@ const EducationForm = () => {
                   display: "flex",
                   bgcolor: { md: Colors.white, sm: Colors.white, xs: "None" },
                   paddingRight: { md: "1.2rem", sm: "1rem", xs: "0.5rem" },
-                  paddingLeft: { md: "1.2rem", sm: "1rem", xs: "0.5rem" }
+                  paddingLeft: { md: "1.2rem", sm: "1rem", xs: "0.5rem" },
+                  marginRight: "0.5rem"
                 }}
               >
                 <Box
