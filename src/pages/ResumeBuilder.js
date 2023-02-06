@@ -15,7 +15,7 @@ const ResumeBuilder = () => {
         <EducationForm />
       </div>
 
-      <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
+      <div>
         <ProfessionalExperience />
       </div>
     </div>
