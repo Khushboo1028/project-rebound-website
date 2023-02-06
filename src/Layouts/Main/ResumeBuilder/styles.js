@@ -23,12 +23,7 @@ export const inputStyle = {
   ".css-1ff8729-MuiInputBase-root-MuiFilledInput-root:after": {
     borderBottom: "0"
   },
-
-  ".css-85zwa9-MuiInputBase-root-MuiFilledInput-root": {
-    backgroundColor: Colors.white,
-    color: Colors.primaryColor,
-    borderRadius: "1rem"
-  },
+  ".MuiBox-root css-1otw7zh": { background: Colors.white },
   ".css-85zwa9-MuiInputBase-root-MuiFilledInput-root:hover": {
     backgroundColor: Colors.white,
     color: Colors.primaryColor
@@ -37,5 +32,31 @@ export const inputStyle = {
     color: Colors.primaryColor,
     fontWeight: 700,
     backgroundColor: Colors.white
+  },
+  "&.Mui-checked": {
+    color: Colors.primaryColor
+  }
+};
+
+export const multiLineInputStyle = {
+  backgroundColor: "#fff",
+  border: "None",
+  label: {
+    color: Colors.primaryColor,
+    fontWeight: "700",
+    fontSize: "0.9rem",
+    marginTop: "-0.7rem",
+    paddingLeft: "0.6rem"
+  },
+  ".css-66dh3a-MuiInputBase-input-MuiInput-input": {
+    padding: "0.5rem",
+    fontFamily: "Inria Sans",
+    color: Colors.primaryColor
+  },
+  ".css-1c2i806-MuiFormLabel-root-MuiInputLabel-root": {
+    fontSize: "1.2rem!important",
+    color: Colors.primaryColor,
+    fontFamily: "Inria Sans",
+    marginTop: "0.2rem"
   }
 };

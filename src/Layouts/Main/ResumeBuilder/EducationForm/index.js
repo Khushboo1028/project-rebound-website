@@ -159,6 +159,7 @@ const EducationForm = () => {
       </Grid>
     );
   };
+
   const EducationBlock = () => {
     return (
       <div>
