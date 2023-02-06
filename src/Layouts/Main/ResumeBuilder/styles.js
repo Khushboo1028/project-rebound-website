@@ -60,3 +60,20 @@ export const multiLineInputStyle = {
     marginTop: "0.2rem"
   }
 };
+
+export const btnClickStyle = {
+  margin: "auto",
+  width: "93%",
+  fontFamily: "Inria Sans",
+  color: Colors.primaryColor,
+  fontWeight: "700",
+  fontSize: "1rem"
+};
+
+export const formBackground = {
+  height: "auto",
+  borderRadius: "1rem",
+  margin: "auto",
+  paddingBottom: "2rem",
+  width: "90%"
+};

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Colors } from "../../../../constants/Colors";
 import {
   Box,
@@ -8,9 +8,22 @@ import {
   FormControlLabel,
   Checkbox
 } from "@mui/material";
-import { inputStyle, multiLineInputStyle } from "../styles";
+import { inputStyle, multiLineInputStyle, btnClickStyle } from "../styles";
 
 const ProfessionalExperience = () => {
+  const [inputList, setInputList] = useState([]);
+
+  const onAddBtnClick = () => {
+    setInputList(
+      inputList.concat(
+        <div style={{ marginTop: "2rem" }}>
+          <Box sx={btnClickStyle}>Experience #{inputList.length + 2}</Box>
+          <ExperienceForm />
+        </div>
+      )
+    );
+  };
+
   const ExperienceForm = () => {
     return (
       <Grid
@@ -119,7 +132,7 @@ const ProfessionalExperience = () => {
           >
             <FormControlLabel
               sx={inputStyle}
-              control={<Checkbox sx={inputStyle} defaultChecked />}
+              control={<Checkbox sx={inputStyle} />}
               label="I am currently enrolled here"
             />
           </Box>
@@ -152,6 +165,7 @@ const ProfessionalExperience = () => {
       </Grid>
     );
   };
+
   return (
     <Box
       sx={{
@@ -227,6 +241,26 @@ const ProfessionalExperience = () => {
         </Grid>
       </Grid>
       <ExperienceForm />
+      {inputList}
+
+      {/* Button to add another block */}
+      <Grid container spacing={2} sx={{ margin: "auto", width: "97%" }}>
+        <Grid item md={6} xs={3}></Grid>
+        <Grid item md={6} xs={9}>
+          <Box
+            sx={{
+              color: Colors.primaryColor,
+              fontSize: { sm: "1rem", xs: "0.8rem" },
+              textAlign: "end",
+              marginTop: "1rem",
+              paddingRight: "1rem"
+            }}
+            onClick={onAddBtnClick}
+          >
+            + Add Another Experience
+          </Box>
+        </Grid>
+      </Grid>
     </Box>
   );
 };

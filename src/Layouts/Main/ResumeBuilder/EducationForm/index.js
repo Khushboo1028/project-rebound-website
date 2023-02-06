@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box, Grid, Icon, TextField } from "@mui/material";
 import { Colors } from "../../../../constants/Colors";
-import { inputStyle } from "../styles";
+import { inputStyle, btnClickStyle, formBackground } from "../styles";
 
 const EducationForm = () => {
   const [inputList, setInputList] = useState([]);
@@ -17,18 +17,7 @@ const EducationForm = () => {
     setInputList(
       inputList.concat(
         <div style={{ marginTop: "2rem" }}>
-          <Box
-            sx={{
-              margin: "auto",
-              width: "93%",
-              fontFamily: "Inria Sans",
-              color: Colors.primaryColor,
-              fontWeight: "700",
-              fontSize: "1rem"
-            }}
-          >
-            Education #{inputList.length + 2}
-          </Box>
+          <Box sx={btnClickStyle}>Education #{inputList.length + 2}</Box>
           <EducationForm />
         </div>
       )
@@ -254,7 +243,7 @@ const EducationForm = () => {
                 }}
                 onClick={onAddBtnClick}
               >
-                + Add another Education
+                + Add Another Education
               </Box>
             </Grid>
           </Grid>
@@ -265,15 +254,7 @@ const EducationForm = () => {
 
   return (
     <div>
-      <Box
-        sx={{
-          height: "auto",
-          borderRadius: "1rem",
-          margin: "auto",
-          paddingBottom: "2rem",
-          width: "90%"
-        }}
-      >
+      <Box sx={formBackground}>
         <Grid container spacing={2}>
           <Grid item sm={9} xs={12} order={{ xs: 2, md: 1, sm: 1 }}>
             <Box>
