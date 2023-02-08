@@ -8,12 +8,7 @@ import {
   FormControlLabel,
   Checkbox
 } from "@mui/material";
-import {
-  inputStyle,
-  multiLineInputStyle,
-  btnClickStyle,
-  formBackground
-} from "../styles";
+import { inputStyle, multiLineInputStyle, btnClickStyle } from "../styles";
 
 const ProfessionalExperience = () => {
   const [inputList, setInputList] = useState([]);

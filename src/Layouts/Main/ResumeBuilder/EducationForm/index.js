@@ -33,7 +33,7 @@ const EducationForm = () => {
         sx={{ margin: "auto", width: "97%", paddingRight: "0.5rem" }}
       >
         {/* School Name */}
-        <Grid item md={6} sm={6} xs={12}>
+        <Grid item md={6} sm={6} xs={12} order={{ xs: 1 }}>
           <Box
             component="form"
             sx={{
@@ -52,7 +52,7 @@ const EducationForm = () => {
         </Grid>
 
         {/* Start Date*/}
-        <Grid item md={6} sm={6} xs={12}>
+        <Grid item md={6} sm={6} xs={12} order={{ xs: 2 }}>
           <Box
             component="form"
             sx={{
@@ -71,7 +71,7 @@ const EducationForm = () => {
         </Grid>
 
         {/* School Location */}
-        <Grid item md={6} sm={6} xs={12}>
+        <Grid item md={6} sm={6} xs={12} order={{ xs: 4 }}>
           <Box
             component="form"
             sx={{
@@ -90,7 +90,7 @@ const EducationForm = () => {
         </Grid>
 
         {/* End Date*/}
-        <Grid item md={6} sm={6} xs={12}>
+        <Grid item md={6} sm={6} xs={12} order={{ xs: 3 }}>
           <Box
             component="form"
             sx={{
@@ -109,7 +109,7 @@ const EducationForm = () => {
         </Grid>
 
         {/* Degree */}
-        <Grid item md={6} sm={6} xs={12}>
+        <Grid item md={6} sm={6} xs={12} order={{ xs: 5 }}>
           <Box
             component="form"
             sx={{
@@ -128,7 +128,7 @@ const EducationForm = () => {
         </Grid>
 
         {/* Field of Study */}
-        <Grid item md={6} sm={6} xs={12}>
+        <Grid item md={6} sm={6} xs={12} order={{ xs: 6 }}>
           <Box
             component="form"
             sx={{
