@@ -15,9 +15,10 @@ import logo from "../../assets/images/logo.png";
 import PersonIcon from "@mui/icons-material/Person";
 import { Colors } from "../../constants/Colors";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../firebase";
 
 const pages = ["Home", "Learn", "Help"];
-const settings = ["Login", "Account Settings"];
+const settings = ["Login", "Account Settings", "Logout"];
 
 const Navbar = () => {
   let navigate = useNavigate();
@@ -38,8 +39,14 @@ const Navbar = () => {
     }
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (setting) => {
     setAnchorElUser(null);
+
+    if (setting === settings[0]) {
+      navigate("/login");
+    } else if (setting === settings[2]) {
+      logout();
+    }
   };
 
   return (
@@ -53,10 +60,14 @@ const Navbar = () => {
               mr: 1,
               height: "4rem",
               marginTop: "1rem",
-              marginBottom: "1rem"
+              marginBottom: "1rem",
+              cursor: "pointer"
             }}
             alt="project-rebound-logo"
             src={logo}
+            onClick={() => {
+              navigate("/home");
+            }}
           />
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -216,7 +227,10 @@ const Navbar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={() => handleCloseUserMenu(setting)}
+                >
                   <Typography
                     style={{ fontFamily: "Inria Sans" }}
                     textAlign="center"

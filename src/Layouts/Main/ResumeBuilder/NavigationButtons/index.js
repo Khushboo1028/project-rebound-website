@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Grid, Icon, TextField, Fab, Button } from "@mui/material";
+import { Box, Grid, Button } from "@mui/material";
 import { formBackground } from "../styles";
 import { Colors } from "../../../../constants/Colors";
 
@@ -40,7 +40,6 @@ const NavigationButtons = () => {
               </Button>
             </Box>
             <Box>
-              {" "}
               <Button
                 variant="contained"
                 sx={{

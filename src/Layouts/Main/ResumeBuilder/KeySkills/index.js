@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Box, Grid, Icon, TextField, Fab, Button } from "@mui/material";
+import { Box, Grid, Icon, Button } from "@mui/material";
 import { formBackground } from "../styles";
 import { Colors } from "../../../../constants/Colors";
-import AddIcon from "@mui/icons-material/Add";
+import AddSkills from "../../../../components/AddSkills";
 
 const KeySkillBlock = () => {
   const [inputList, setInputList] = useState([""]);
@@ -27,6 +27,7 @@ const KeySkillBlock = () => {
     "Public Speaking"
   ];
 
+  // eslint-disable-next-line
   const onAddBtnClick = () => {
     setInputList(inputList.concat([""]));
   };
@@ -36,7 +37,7 @@ const KeySkillBlock = () => {
       <Box sx={{ height: "20rem", overflowY: "auto" }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            {inputList.map((e) => {
+            {/* {inputList.map((e) => {
               return (
                 <div style={{ display: "flex", width: "90%" }}>
                   <div style={{ width: "95%" }}>
@@ -66,7 +67,8 @@ const KeySkillBlock = () => {
                   </div>
                 </div>
               );
-            })}
+            })} */}
+            <AddSkills />
           </Grid>
         </Grid>
       </Box>
