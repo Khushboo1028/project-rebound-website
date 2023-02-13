@@ -15,7 +15,7 @@ import logo from "../../assets/images/logo.png";
 import PersonIcon from "@mui/icons-material/Person";
 import { Colors } from "../../constants/Colors";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../../firebase";
+import { logout } from "../../firebase/firebase";
 
 const pages = ["Home", "Learn", "Help"];
 const settings = ["Login", "Account Settings", "Logout"];

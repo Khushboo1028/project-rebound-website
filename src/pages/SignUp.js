@@ -13,7 +13,7 @@ import {
 import { Colors } from "../constants/Colors";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { auth, registerWithEmailAndPassword } from "../firebase";
+import { auth, registerWithEmailAndPassword } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 

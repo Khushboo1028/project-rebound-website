@@ -6,6 +6,7 @@ import JobSupport from "./pages/JobSupport";
 import ResumeBuilder from "./pages/ResumeBuilder";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import ProtectedRoute from "./firebase/ProtectedRoute";
 
 function App() {
   return (
@@ -13,12 +14,30 @@ function App() {
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path="/jobSupport" element={<JobSupport />} />
-        <Route exact path="/resumeBuilder" element={<ResumeBuilder />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signUp" element={<SignUp />} />
         <Route path="*" element={<Home />} />
+
+        {/* protected routes */}
+        <Route
+          path="/jobSupport"
+          element={
+            <ProtectedRoute>
+              <JobSupport />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/resumeBuilder"
+          element={
+            <ProtectedRoute>
+              <ResumeBuilder />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
+
       <Footer />
     </Router>
   );
