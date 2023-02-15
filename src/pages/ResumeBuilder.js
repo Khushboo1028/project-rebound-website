@@ -7,10 +7,10 @@ import ProfessionalExperience from "../Layouts/Main/ResumeBuilder/ProfessionalEx
 import ResumeBuilderIntro from "../Layouts/Main/ResumeBuilder/ResumeBuilderIntro";
 
 import { useAuth } from "../firebase/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, createSearchParams } from "react-router-dom";
 
 const ResumeBuilder = () => {
-  const { currentUser, register } = useAuth();
+  const { currentUser, setCurrentUser } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,7 +18,10 @@ const ResumeBuilder = () => {
     if (currentUser) {
       navigate("/resumeBuilder");
     } else {
-      navigate("/login");
+      navigate({
+        pathname: "/login",
+        search: createSearchParams({ fromPath: "/resumeBuilder" }).toString()
+      });
     }
   }, [currentUser, navigate]);
   return (

@@ -6,7 +6,6 @@ import JobSupport from "./pages/JobSupport";
 import ResumeBuilder from "./pages/ResumeBuilder";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import ProtectedRoute from "./firebase/ProtectedRoute";
 import { AuthProvider } from "./firebase/AuthContext";
 
 function App() {

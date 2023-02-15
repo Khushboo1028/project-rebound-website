@@ -13,15 +13,16 @@ import {
 import { Colors } from "../constants/Colors";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, logInWithEmailAndPassword } from "../firebase/firebase";
-import { useAuth } from "../firebase/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
+
+  const [searchParams] = useSearchParams();
 
   const navigate = useNavigate();
   const theme = createTheme();
@@ -31,7 +32,13 @@ const Login = () => {
       // maybe trigger a loading screen
       return;
     }
-    if (user) navigate("/home");
+    if (user) {
+      if (searchParams.get("fromPath")) {
+        navigate(searchParams.get("fromPath"));
+      } else {
+        navigate("/");
+      }
+    }
   }, [user, loading]);
 
   const onBtnPressed = (e) => {

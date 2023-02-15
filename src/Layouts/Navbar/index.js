@@ -17,13 +17,26 @@ import { Colors } from "../../constants/Colors";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../firebase/firebase";
 
-const pages = ["Home", "Learn", "Help"];
-const settings = ["Login", "Account Settings", "Logout"];
+import { useAuth } from "../../firebase/AuthContext";
 
 const Navbar = () => {
-  let navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [settings, setSettings] = React.useState([]);
+
+  const { currentUser } = useAuth();
+
+  const pages = ["Home", "Learn", "Help"];
+
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (currentUser) {
+      setSettings(["Logout"]);
+    } else {
+      setSettings(["Login"]);
+    }
+  }, [currentUser, navigate]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -43,9 +56,11 @@ const Navbar = () => {
     setAnchorElUser(null);
 
     if (setting === settings[0]) {
-      navigate("/login");
-    } else if (setting === settings[2]) {
-      logout();
+      if (settings[0] === "Login") {
+        navigate("/login");
+      } else {
+        logout();
+      }
     }
   };
 
