@@ -7,39 +7,27 @@ import ResumeBuilder from "./pages/ResumeBuilder";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import ProtectedRoute from "./firebase/ProtectedRoute";
+import { AuthProvider } from "./firebase/AuthContext";
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/signUp" element={<SignUp />} />
-        <Route path="*" element={<Home />} />
+    <AuthProvider>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signUp" element={<SignUp />} />
+          <Route path="*" element={<Home />} />
 
-        {/* protected routes */}
-        <Route
-          path="/jobSupport"
-          element={
-            <ProtectedRoute>
-              <JobSupport />
-            </ProtectedRoute>
-          }
-        />
+          {/* protected routes */}
+          <Route path="/jobSupport" element={<JobSupport />} />
+          <Route path="/resumeBuilder" element={<ResumeBuilder />} />
+        </Routes>
 
-        <Route
-          path="/resumeBuilder"
-          element={
-            <ProtectedRoute>
-              <ResumeBuilder />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-
-      <Footer />
-    </Router>
+        <Footer />
+      </Router>
+    </AuthProvider>
   );
 }
 

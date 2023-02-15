@@ -9,6 +9,16 @@ import {
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 // import { getAnalytics } from "firebase/analytics";
 
+// const firebaseConfig = {
+//   apiKey: process.env.REACT_APP_API_KEY,
+//   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+//   projectId: process.env.REACT_APP_PROJECT_ID,
+//   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+//   messagingSenderId: process.env.REACT_APP_MESSAGE_SENDER_ID,
+//   appId: process.env.REACT_APP_APP_ID,
+//   measurementId: process.env.REACT_APP_MEASUREMENT_ID
+// };
+
 const firebaseConfig = {
   apiKey: "AIzaSyBq45D6KyboCvnimkw__kAu_l9G_FMsdbs",
   authDomain: "project-rebound.firebaseapp.com",
@@ -18,7 +28,6 @@ const firebaseConfig = {
   appId: "1:153561813215:web:e5933cd6a4bea3f0f6596a",
   measurementId: "G-YXK7MRFKQV"
 };
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -68,5 +77,6 @@ export {
   logInWithEmailAndPassword,
   logout,
   sendPasswordReset,
-  auth
+  auth,
+  db
 };
