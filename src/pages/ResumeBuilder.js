@@ -10,7 +10,7 @@ import { useAuth } from "../firebase/AuthContext";
 import { useNavigate, createSearchParams } from "react-router-dom";
 
 const ResumeBuilder = () => {
-  const { currentUser, setCurrentUser } = useAuth();
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {

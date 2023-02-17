@@ -60,7 +60,7 @@ const AddSkills = () => {
               <AddIcon />
             </Fab>
           </Box>
-          <Box sx={{ height: "18rem", overflowY: "auto" }}>
+          <Box sx={{ height: "13rem", overflowY: "auto" }}>
             {inputList.map((e, index) => {
               return (
                 <Box sx={{ display: "flex" }} key={e.id}>

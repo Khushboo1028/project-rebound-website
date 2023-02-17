@@ -23,7 +23,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [searchParams] = useSearchParams();
   const theme = createTheme();
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ const SignUp = () => {
         navigate("/");
       }
     }
-  }, [user, loading]);
+  }, [user, loading, navigate, searchParams]);
 
   const register = (e) => {
     e.preventDefault();
