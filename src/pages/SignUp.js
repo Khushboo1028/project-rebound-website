@@ -14,8 +14,9 @@ import { Colors } from "../constants/Colors";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { auth, registerWithEmailAndPassword } from "../firebase/firebase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { isEmailValid, isPasswordValid } from "../utils";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -23,19 +24,35 @@ const SignUp = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [user, loading, error] = useAuthState(auth);
+  const [searchParams] = useSearchParams();
   const theme = createTheme();
   const navigate = useNavigate();
 
-  const register = (e) => {
-    e.preventDefault();
-    if (!firstName && !lastName) alert("Please enter name");
-    registerWithEmailAndPassword(firstName + " " + lastName, email, password);
-  };
-
   useEffect(() => {
     if (loading) return;
-    if (user) navigate("/home");
+    if (user) {
+      if (searchParams.get("fromPath")) {
+        navigate(searchParams.get("fromPath"));
+      } else {
+        navigate("/");
+      }
+    }
   }, [user, loading]);
+
+  const register = (e) => {
+    e.preventDefault();
+    if (!firstName || !lastName || !email || !password) {
+      alert("Please enter all fields");
+    } else if (password.length < 6 || !isPasswordValid(password)) {
+      alert(
+        "Password must contain at least one uppercase character, one lowercase character and one digit with minimum length of 6 digits"
+      );
+    } else if (!isEmailValid(email)) {
+      alert("Please enter a valid email");
+    } else {
+      registerWithEmailAndPassword(firstName + " " + lastName, email, password);
+    }
+  };
 
   return (
     <div style={{ marginTop: "5rem" }}>

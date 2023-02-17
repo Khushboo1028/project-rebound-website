@@ -13,9 +13,14 @@ import {
 import { Colors } from "../constants/Colors";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import {
+  useNavigate,
+  useSearchParams,
+  createSearchParams
+} from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, logInWithEmailAndPassword } from "../firebase/firebase";
+import { isEmailValid, isPasswordValid } from "../utils";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -26,6 +31,9 @@ const Login = () => {
 
   const navigate = useNavigate();
   const theme = createTheme();
+
+  //TODO: Put password data on side
+  //sign up -> to add demographic info form (Device, level of comfort with those devices) -> this should be optional
 
   useEffect(() => {
     if (loading) {
@@ -39,12 +47,19 @@ const Login = () => {
         navigate("/");
       }
     }
-  }, [user, loading]);
+  }, [user, loading, navigate, searchParams]);
 
   const onBtnPressed = (e) => {
     e.preventDefault();
-    logInWithEmailAndPassword(email, password);
+    if (!isEmailValid(email)) {
+      alert("Please enter a valid email");
+    } else if (!isPasswordValid) {
+      alert("Your password is invalid");
+    } else {
+      logInWithEmailAndPassword(email, password);
+    }
   };
+
   return (
     <div style={{ marginTop: "5rem" }}>
       <Box
@@ -131,9 +146,17 @@ const Login = () => {
                       </Grid>
                       <Grid item>
                         <Link
-                          href="/signUp"
+                          // href="/signUp"
                           variant="body2"
                           sx={{ color: Colors.primaryColor }}
+                          onClick={() => {
+                            navigate({
+                              pathname: "/signup",
+                              search: createSearchParams({
+                                fromPath: searchParams.get("fromPath")
+                              }).toString()
+                            });
+                          }}
                         >
                           {"Don't have an account? Sign Up"}
                         </Link>
