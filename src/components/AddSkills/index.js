@@ -39,8 +39,14 @@ const AddSkills = () => {
               id="standard-basic"
               variant="standard"
               value={item}
+              placeholder="Type Skills Here"
               onChange={(e) => setItem(e.target.value)}
               sx={{ width: "90%", marginTop: "1rem" }}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  onAddBtnClick();
+                }
+              }}
             />
             <Fab
               size="medium"
@@ -70,8 +76,7 @@ const AddSkills = () => {
                         sx={{
                           fontFamily: "Inria Sans",
                           fontSize: "1.3rem",
-                          fontColor: Colors.primaryColor,
-                          width: "10rem"
+                          fontColor: Colors.primaryColor
                         }}
                       >
                         {e.name}
