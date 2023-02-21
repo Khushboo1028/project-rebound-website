@@ -52,11 +52,6 @@ const registerWithEmailAndPassword = async (name, email, password) => {
       email: email
     };
     addData(docRef, docData);
-    // await addDoc(collection(db, "users", user, user.uid), {
-    //   uid: user.uid,
-    //   name,
-    //   email
-    // });
   } catch (err) {
     console.error(err);
     alert(err.message);

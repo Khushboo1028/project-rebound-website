@@ -21,7 +21,10 @@ const AddSkills = () => {
   const [loading, setLoading] = useState(true);
 
   const { currentUser } = useAuth();
-  const docRef = doc(db, "users", currentUser.uid);
+  let docRef;
+  if (currentUser !== null) {
+    docRef = doc(db, "users", currentUser.uid);
+  }
 
   const onAddBtnClick = () => {
     if (item !== "") {
@@ -46,26 +49,27 @@ const AddSkills = () => {
   //TODO: Fix this bug
 
   useEffect(() => {
-    console.log("In use efect");
-    const unsubscribe = onSnapshot(docRef, (doc) => {
-      setLoading(false);
-      setFirebaseList(() => {
-        const newList = doc.data().skills_list;
+    if (currentUser) {
+      const unsubscribe = onSnapshot(docRef, (doc) => {
+        setLoading(false);
+        setFirebaseList(() => {
+          const newList = doc.data().skills_list;
 
-        newList.map((e) => {
-          // console.log("input list ", inputList);
-          // setInputList([...inputList, { id: nextId++, name: e.name }]);
-          if (nextId < newList.length) {
-            inputList.push({ id: nextId++, name: e.name });
-          }
+          newList.map((e) => {
+            // console.log("input list ", inputList);
+            // setInputList([...inputList, { id: nextId++, name: e.name }]);
+            if (nextId < newList.length) {
+              inputList.push({ id: nextId++, name: e.name });
+            }
+          });
+          return newList;
         });
-        return newList;
       });
-    });
 
-    return () => {
-      unsubscribe();
-    };
+      return () => {
+        unsubscribe();
+      };
+    }
   }, []);
 
   return (
