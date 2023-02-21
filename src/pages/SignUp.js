@@ -17,6 +17,7 @@ import { auth, registerWithEmailAndPassword } from "../firebase/firebase";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { isEmailValid, isPasswordValid } from "../utils";
+import PasswordRules from "../components/PasswordRules";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -69,7 +70,7 @@ const SignUp = () => {
         }}
       >
         <Grid container spacing={2}>
-          <Grid item xs={12}>
+          <Grid item xs={8}>
             <ThemeProvider theme={theme}>
               <Container component="main" maxWidth="xs">
                 <CssBaseline />
@@ -88,12 +89,7 @@ const SignUp = () => {
                   <Typography component="h1" variant="h5">
                     Create an Account
                   </Typography>
-                  <Box
-                    component="form"
-                    noValidate
-                    // onSubmit={handleSubmit}
-                    sx={{ mt: 3 }}
-                  >
+                  <Box component="form" noValidate sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
                       <Grid item xs={12} sm={6}>
                         <TextField
@@ -170,6 +166,11 @@ const SignUp = () => {
                 </Box>
               </Container>
             </ThemeProvider>
+          </Grid>
+          <Grid item xs={4}>
+            <Box>
+              <PasswordRules />
+            </Box>
           </Grid>
         </Grid>
       </Box>

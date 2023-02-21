@@ -74,6 +74,5 @@ export const formBackground = {
   height: "auto",
   borderRadius: "1rem",
   margin: "auto",
-
   width: "90%"
 };

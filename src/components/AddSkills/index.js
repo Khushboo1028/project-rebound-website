@@ -8,7 +8,7 @@ import { updateData } from "../../firebase/firebaseReadWrite";
 import { useAuth } from "../../firebase/AuthContext";
 
 import { db } from "../../firebase/firebase";
-import { doc, onSnapshot, getDoc } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 
 let nextId = 0;
 
@@ -17,6 +17,7 @@ let nextId = 0;
 const AddSkills = () => {
   const [item, setItem] = useState("");
   const [inputList, setInputList] = useState([]);
+  // eslint-disable-next-line
   const [firebaseList, setFirebaseList] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -54,10 +55,8 @@ const AddSkills = () => {
         setLoading(false);
         setFirebaseList(() => {
           const newList = doc.data().skills_list;
-
+          // eslint-disable-next-line
           newList.map((e) => {
-            // console.log("input list ", inputList);
-            // setInputList([...inputList, { id: nextId++, name: e.name }]);
             if (nextId < newList.length) {
               inputList.push({ id: nextId++, name: e.name });
             }
@@ -70,6 +69,7 @@ const AddSkills = () => {
         unsubscribe();
       };
     }
+    // eslint-disable-next-line
   }, []);
 
   return (

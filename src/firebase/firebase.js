@@ -6,13 +6,7 @@ import {
   sendPasswordResetEmail,
   signOut
 } from "firebase/auth";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  doc,
-  Timestamp
-} from "firebase/firestore";
+import { getFirestore, doc, Timestamp } from "firebase/firestore";
 import { addData } from "./firebaseReadWrite";
 // import { getAnalytics } from "firebase/analytics";
 

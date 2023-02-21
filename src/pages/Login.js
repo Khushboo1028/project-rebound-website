@@ -32,8 +32,7 @@ const Login = () => {
   const navigate = useNavigate();
   const theme = createTheme();
 
-  //TODO: Put password data on side
-  //sign up -> to add demographic info form (Device, level of comfort with those devices) -> this should be optional
+  //TODO: sign up -> to add demographic info form (Device, level of comfort with those devices) -> this should be optional
 
   useEffect(() => {
     if (loading) {

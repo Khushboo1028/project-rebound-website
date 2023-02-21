@@ -1,4 +1,4 @@
-import { updateDoc, setDoc, onSnapshot } from "firebase/firestore";
+import { updateDoc, setDoc } from "firebase/firestore";
 
 // const docData = {
 //   stringExample: "Hello world!",
