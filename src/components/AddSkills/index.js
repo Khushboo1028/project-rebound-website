@@ -1,23 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, TextField, Grid, Fab, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Colors } from "../../constants/Colors";
 import AddIcon from "@mui/icons-material/Add";
 import DoneIcon from "@mui/icons-material/Done";
+import { updateData } from "../../firebase/firebaseReadWrite";
+import { useAuth } from "../../firebase/AuthContext";
+
+import { db } from "../../firebase/firebase";
+import { doc, onSnapshot, getDoc } from "firebase/firestore";
 
 let nextId = 0;
 
+//Todo: we set input list as per ids
+
 const AddSkills = () => {
   const [item, setItem] = useState("");
-  // let listItem = { id: nextId, name: item };
   const [inputList, setInputList] = useState([]);
+  const [firebaseList, setFirebaseList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const { currentUser } = useAuth();
+  const docRef = doc(db, "users", currentUser.uid);
 
   const onAddBtnClick = () => {
     if (item !== "") {
       setInputList([...inputList, { id: nextId++, name: item }]);
     }
     setItem("");
-    console.log("input list ", inputList);
   };
 
   const onCloseBtnClick = (id) => {
@@ -25,10 +35,38 @@ const AddSkills = () => {
     console.log("input list ", inputList);
   };
 
-  // TODO: get the data to be saved
   const onCheckBtnClick = () => {
-    console.log("input list is ", inputList);
+    const docData = {
+      skills_list: inputList
+    };
+
+    updateData(docRef, docData);
   };
+
+  //TODO: Fix this bug
+
+  useEffect(() => {
+    console.log("In use efect");
+    const unsubscribe = onSnapshot(docRef, (doc) => {
+      setLoading(false);
+      setFirebaseList(() => {
+        const newList = doc.data().skills_list;
+
+        newList.map((e) => {
+          // console.log("input list ", inputList);
+          // setInputList([...inputList, { id: nextId++, name: e.name }]);
+          if (nextId < newList.length) {
+            inputList.push({ id: nextId++, name: e.name });
+          }
+        });
+        return newList;
+      });
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <Box>
@@ -67,40 +105,44 @@ const AddSkills = () => {
             </Fab>
           </Box>
           <Box sx={{ height: "13rem", overflowY: "auto" }}>
-            {inputList.map((e, index) => {
-              return (
-                <Box sx={{ display: "flex" }} key={e.id}>
-                  <Grid container spacing={2}>
-                    <Grid item xs={10}>
-                      <Typography
-                        sx={{
-                          fontFamily: "Inria Sans",
-                          fontSize: "1.3rem",
-                          fontColor: Colors.primaryColor
-                        }}
-                      >
-                        {e.name}
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <Box
-                        sx={{ padding: "0.5rem" }}
-                        onClick={() => {
-                          onCloseBtnClick(e.id);
-                        }}
-                      >
-                        <CloseIcon
+            {loading ? (
+              <Box>Data Loading...</Box>
+            ) : (
+              inputList.map((e, index) => {
+                return (
+                  <Box sx={{ display: "flex" }} key={e.id}>
+                    <Grid container spacing={2}>
+                      <Grid item xs={10}>
+                        <Typography
                           sx={{
-                            color: Colors.primaryColor,
-                            height: "1.4rem"
+                            fontFamily: "Inria Sans",
+                            fontSize: "1.3rem",
+                            fontColor: Colors.primaryColor
                           }}
-                        />
-                      </Box>
+                        >
+                          {e.name}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={1}>
+                        <Box
+                          sx={{ padding: "0.5rem" }}
+                          onClick={() => {
+                            onCloseBtnClick(e.id);
+                          }}
+                        >
+                          <CloseIcon
+                            sx={{
+                              color: Colors.primaryColor,
+                              height: "1.4rem"
+                            }}
+                          />
+                        </Box>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                </Box>
-              );
-            })}
+                  </Box>
+                );
+              })
+            )}
           </Box>
         </Grid>
       </Grid>

@@ -1,5 +1,4 @@
-import { db } from "./firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { updateDoc, setDoc, onSnapshot } from "firebase/firestore";
 
 // const docData = {
 //   stringExample: "Hello world!",
@@ -15,8 +14,30 @@ import { doc, setDoc } from "firebase/firestore";
 //       }
 //   }
 // };
-const addData = (collectionName, documentName, docData) => {
-  let docRef = doc(db, collectionName, documentName);
 
-  setDoc(docRef, docData, { capital: true }, { merge: true });
+// let docRef = doc(db, collectionName, documentName);
+export const addData = async (docRef, docData) => {
+  await setDoc(docRef, docData, { capital: true }, { merge: true })
+    .then(console.log("Document added"))
+    .catch((e) => {
+      console.log("error is ", e);
+    });
 };
+
+export const updateData = async (docRef, docData) => {
+  await updateDoc(docRef, docData, { capital: true }, { merge: true })
+    .then(console.log("Document updated"))
+    .catch((e) => {
+      console.log("error is ", e);
+    });
+};
+
+// export const readData = async (docRef) => {
+//   const unsub = onSnapshot(docRef, (doc) => {
+//     const source = doc.metadata.hasPendingWrites ? "Local" : "Server";
+//     console.log(" data: ", doc.data());
+//     return doc.data;
+//   });
+
+//   return unsub;
+// };

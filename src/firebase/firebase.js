@@ -6,7 +6,14 @@ import {
   sendPasswordResetEmail,
   signOut
 } from "firebase/auth";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  doc,
+  Timestamp
+} from "firebase/firestore";
+import { addData } from "./firebaseReadWrite";
 // import { getAnalytics } from "firebase/analytics";
 
 // const firebaseConfig = {
@@ -37,12 +44,19 @@ const registerWithEmailAndPassword = async (name, email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    await addDoc(collection(db, "users"), {
+    let docRef = doc(db, "users", user.uid);
+    const docData = {
+      date_created: Timestamp.fromDate(new Date()),
       uid: user.uid,
-      name,
-      authProvider: "local",
-      email
-    });
+      name: name,
+      email: email
+    };
+    addData(docRef, docData);
+    // await addDoc(collection(db, "users", user, user.uid), {
+    //   uid: user.uid,
+    //   name,
+    //   email
+    // });
   } catch (err) {
     console.error(err);
     alert(err.message);
