@@ -1,11 +1,45 @@
-import React from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Colors } from "../../../../constants/Colors";
 import { Box, Grid, TextField, Icon } from "@mui/material";
 import { inputStyle } from "../styles";
 
+export const ResumeContext = createContext();
 const PersonalDetailsForm = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zipCode, setZipCode] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+
+  const [personalInfo, setPersonalInfo] = useState({
+    firstName: firstName,
+    lastName: lastName,
+    address: address,
+    city: city,
+    state: state,
+    zipCode: zipCode,
+    phone: phone,
+    email: email
+  });
+
+  useEffect(() => {
+    setPersonalInfo({
+      firstName: firstName,
+      lastName: lastName,
+      address: address,
+      city: city,
+      state: state,
+      zipCode: zipCode,
+      phone: phone,
+      email: email
+    });
+  }, [firstName, lastName, address, city, state, zipCode, phone, email]);
+
   return (
-    <div>
+    <ResumeContext.Provider value={personalInfo}>
       <Box
         sx={{
           backgroundColor: Colors.backgroundColor,
@@ -98,6 +132,8 @@ const PersonalDetailsForm = () => {
                 required
                 label="First Name"
                 variant="filled"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
                 focused
               />
             </Box>
@@ -117,6 +153,8 @@ const PersonalDetailsForm = () => {
                 required
                 label="Last Name"
                 variant="filled"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
                 focused
               />
             </Box>
@@ -147,6 +185,8 @@ const PersonalDetailsForm = () => {
                   required
                   label="Address"
                   variant="filled"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                   focused
                 />
               </Box>
@@ -167,6 +207,8 @@ const PersonalDetailsForm = () => {
                 required
                 label="City"
                 variant="filled"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
                 focused
               />
             </Box>
@@ -186,6 +228,8 @@ const PersonalDetailsForm = () => {
                 required
                 label="State"
                 variant="filled"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
                 focused
               />
             </Box>
@@ -205,6 +249,8 @@ const PersonalDetailsForm = () => {
                 required
                 label="Zip Code"
                 variant="filled"
+                value={zipCode}
+                onChange={(e) => setZipCode(e.target.value)}
                 focused
               />
             </Box>
@@ -225,6 +271,8 @@ const PersonalDetailsForm = () => {
                 required
                 label="Phone"
                 variant="filled"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 focused
               />
             </Box>
@@ -244,13 +292,15 @@ const PersonalDetailsForm = () => {
                 required
                 label="Email"
                 variant="filled"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 focused
               />
             </Box>
           </Grid>
         </Grid>
       </Box>
-    </div>
+    </ResumeContext.Provider>
   );
 };
 

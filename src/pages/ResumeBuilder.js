@@ -1,20 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import EducationForm from "../Layouts/Main/ResumeBuilder/EducationForm";
 import KeySkills from "../Layouts/Main/ResumeBuilder/KeySkills";
 import NavigationButtons from "../Layouts/Main/ResumeBuilder/NavigationButtons";
-import PersonalDetailsForm from "../Layouts/Main/ResumeBuilder/PersonalDetailsForm";
+import PersonalDetailsForm, {
+  ResumeContext
+} from "../Layouts/Main/ResumeBuilder/PersonalDetailsForm";
 import ProfessionalExperience from "../Layouts/Main/ResumeBuilder/ProfessionalExperience";
 import ResumeBuilderIntro from "../Layouts/Main/ResumeBuilder/ResumeBuilderIntro";
-
 import { useAuth } from "../firebase/AuthContext";
 import { useNavigate, createSearchParams } from "react-router-dom";
 
 const ResumeBuilder = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
+  const value = useContext(ResumeContext);
 
   useEffect(() => {
-    console.log("current user ", currentUser);
     if (currentUser) {
       navigate("/resumeBuilder");
     } else {
@@ -23,7 +24,8 @@ const ResumeBuilder = () => {
         search: createSearchParams({ fromPath: "/resumeBuilder" }).toString()
       });
     }
-  }, [currentUser, navigate]);
+    console.log("in resume builder use effect ", value);
+  }, [currentUser, navigate, value]);
   return (
     <div>
       <ResumeBuilderIntro />
