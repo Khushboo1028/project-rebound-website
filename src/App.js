@@ -7,6 +7,7 @@ import ResumeBuilder from "./pages/ResumeBuilder";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import { AuthProvider } from "./firebase/AuthContext";
+import { ResumeContext } from "./Layouts/Main/ResumeBuilder/PersonalDetailsForm";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
 
           {/* protected routes */}
           <Route path="/jobSupport" element={<JobSupport />} />
+
           <Route path="/resumeBuilder" element={<ResumeBuilder />} />
         </Routes>
 
