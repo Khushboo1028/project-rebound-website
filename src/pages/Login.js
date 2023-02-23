@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { Colors } from "../constants/Colors";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 import {
   useNavigate,
   useSearchParams,
@@ -75,96 +75,94 @@ const Login = () => {
       >
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <ThemeProvider theme={theme}>
-              <Container component="main" maxWidth="xs">
-                <CssBaseline />
+            <Container component="main" maxWidth="xs">
+              <CssBaseline />
+              <Box
+                sx={{
+                  marginTop: 3,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  marginBottom: 8
+                }}
+              >
+                <Avatar sx={{ m: 1, bgcolor: Colors.primaryColor }}>
+                  <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                  Sign in
+                </Typography>
                 <Box
-                  sx={{
-                    marginTop: 3,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    marginBottom: 8
-                  }}
+                  component="form"
+                  // onSubmit={handleSubmit}
+                  noValidate
+                  sx={{ mt: 1 }}
                 >
-                  <Avatar sx={{ m: 1, bgcolor: Colors.primaryColor }}>
-                    <LockOutlinedIcon />
-                  </Avatar>
-                  <Typography component="h1" variant="h5">
-                    Sign in
-                  </Typography>
-                  <Box
-                    component="form"
-                    // onSubmit={handleSubmit}
-                    noValidate
-                    sx={{ mt: 1 }}
-                  >
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="email"
-                      label="Email Address"
-                      name="email"
-                      autoComplete="email"
-                      autoFocus
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="password"
-                      label="Password"
-                      type="password"
-                      id="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      autoComplete="current-password"
-                    />
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="current-password"
+                  />
 
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      sx={{ mt: 3, mb: 2, bgcolor: Colors.primaryColor }}
-                      onClick={onBtnPressed}
-                    >
-                      Sign In
-                    </Button>
-                    <Grid container sx={{ marginTop: "1rem" }}>
-                      <Grid item xs>
-                        <Link
-                          href="/forgotPassword"
-                          variant="body2"
-                          sx={{ color: Colors.primaryColor }}
-                        >
-                          Forgot password?
-                        </Link>
-                      </Grid>
-                      <Grid item>
-                        <Link
-                          // href="/signUp"
-                          variant="body2"
-                          sx={{ color: Colors.primaryColor }}
-                          onClick={() => {
-                            navigate({
-                              pathname: "/signup",
-                              search: createSearchParams({
-                                fromPath: searchParams.get("fromPath")
-                              }).toString()
-                            });
-                          }}
-                        >
-                          {"Don't have an account? Sign Up"}
-                        </Link>
-                      </Grid>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2, bgcolor: Colors.primaryColor }}
+                    onClick={onBtnPressed}
+                  >
+                    Sign In
+                  </Button>
+                  <Grid container sx={{ marginTop: "1rem" }}>
+                    <Grid item xs>
+                      <Link
+                        href="/forgotPassword"
+                        variant="body2"
+                        sx={{ color: Colors.primaryColor }}
+                      >
+                        Forgot password?
+                      </Link>
                     </Grid>
-                  </Box>
+                    <Grid item>
+                      <Link
+                        // href="/signUp"
+                        variant="body2"
+                        sx={{ color: Colors.primaryColor }}
+                        onClick={() => {
+                          navigate({
+                            pathname: "/signup",
+                            search: createSearchParams({
+                              fromPath: searchParams.get("fromPath")
+                            }).toString()
+                          });
+                        }}
+                      >
+                        {"Don't have an account? Sign Up"}
+                      </Link>
+                    </Grid>
+                  </Grid>
                 </Box>
-              </Container>
-            </ThemeProvider>
+              </Box>
+            </Container>
           </Grid>
         </Grid>
       </Box>

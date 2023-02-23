@@ -56,11 +56,14 @@ const AddSkills = () => {
         setFirebaseList(() => {
           const newList = doc.data().skills_list;
           // eslint-disable-next-line
-          newList.map((e) => {
-            if (nextId < newList.length) {
-              inputList.push({ id: nextId++, name: e.name });
-            }
-          });
+          if (newList) {
+            newList.map((e) => {
+              if (nextId < newList.length) {
+                inputList.push({ id: nextId++, name: e.name });
+              }
+            });
+          }
+
           return newList;
         });
       });

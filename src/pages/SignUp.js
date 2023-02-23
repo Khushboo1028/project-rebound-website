@@ -14,7 +14,11 @@ import { Colors } from "../constants/Colors";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { auth, registerWithEmailAndPassword } from "../firebase/firebase";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import {
+  useNavigate,
+  useSearchParams,
+  createSearchParams
+} from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { isEmailValid, isPasswordValid } from "../utils";
 import PasswordRules from "../components/PasswordRules";
@@ -33,9 +37,15 @@ const SignUp = () => {
     if (loading) return;
     if (user) {
       if (searchParams.get("fromPath")) {
-        navigate(searchParams.get("fromPath"));
+        // navigate(searchParams.get("fromPath"));
+        navigate({
+          pathname: "/UserInformation",
+          search: createSearchParams({
+            fromPath: searchParams.get("fromPath")
+          }).toString()
+        });
       } else {
-        navigate("/");
+        navigate("/UserInformation");
       }
     }
   }, [user, loading, navigate, searchParams]);
