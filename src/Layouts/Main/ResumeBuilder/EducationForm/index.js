@@ -4,7 +4,13 @@ import { Colors } from "../../../../constants/Colors";
 import { inputStyle, btnClickStyle, formBackground } from "../styles";
 
 const EducationForm = () => {
-  const [inputList, setInputList] = useState([]);
+  const [schoolName, setSchoolName] = useState([]);
+  const [startDate, setStartDate] = useState([]);
+  const [endDate, setEndDate] = useState([]);
+  const [schoolLocation, setSchooLocation] = useState([]);
+  const [degree, setDegree] = useState([]);
+  const [fieldOfStudy, setFieldOfStudy] = useState([]);
+  const [educationInfo, setEducationalInfo] = useState([]);
 
   const education_list = [
     "High School",
@@ -14,14 +20,35 @@ const EducationForm = () => {
   ];
 
   const onAddBtnClick = () => {
-    setInputList(
-      inputList.concat(
-        <div style={{ marginTop: "2rem" }}>
-          <Box sx={btnClickStyle}>Education #{inputList.length + 2}</Box>
-          <EducationForm />
-        </div>
-      )
-    );
+    // setInputList(
+    //   inputList.concat(
+    // <div style={{ marginTop: "2rem" }}>
+    //   <Box sx={btnClickStyle}>
+    //     <Grid container spacing={2}>
+    //       <Grid item md={10}>
+    //         Education #{inputList.length + 2}
+    //       </Grid>
+    //       <Grid item md={2}>
+    //         <Box
+    //           sx={{
+    //             textAlign: "right",
+    //             "&:hover": {
+    //               cursor: "pointer",
+    //               textDecoration: "underline"
+    //             }
+    //           }}
+    //         >
+    //           Remove #{inputList.length + 2}
+    //         </Box>
+    //       </Grid>
+    //     </Grid>
+    //   </Box>
+    //   <EducationForm />
+    // </div>
+    //   )
+    // );
+    // setInputList;
+    setInputList(inputList.concat(""));
   };
 
   const EducationForm = () => {
@@ -148,6 +175,7 @@ const EducationForm = () => {
       </Grid>
     );
   };
+  const [inputList, setInputList] = useState([EducationForm]);
 
   const EducationBlock = () => {
     return (
@@ -227,8 +255,37 @@ const EducationForm = () => {
               </Box>
             </Grid>
           </Grid>
-          <EducationForm />
-          {inputList}
+
+          {inputList.map((e, index) => {
+            if (index !== 0) {
+              return (
+                <div style={{ marginTop: "2rem" }}>
+                  <Box sx={btnClickStyle}>
+                    <Grid container spacing={2}>
+                      <Grid item md={10}>
+                        Education #{index + 1}
+                      </Grid>
+                      <Grid item md={2}>
+                        <Box
+                          sx={{
+                            textAlign: "right",
+                            "&:hover": {
+                              cursor: "pointer",
+                              textDecoration: "underline"
+                            }
+                          }}
+                        >
+                          Remove #{index + 1}
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Box>
+                  <EducationForm />
+                </div>
+              );
+            }
+            return <EducationForm />;
+          })}
           {/* Button to add another block */}
           <Grid container spacing={2} sx={{ margin: "auto", width: "97%" }}>
             <Grid item md={6} xs={3}></Grid>

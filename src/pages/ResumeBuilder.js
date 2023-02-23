@@ -11,7 +11,6 @@ import { Button } from "@mui/material";
 
 const ResumeBuilder = () => {
   const [personalInfo, setPersonalInfo] = useState("");
-
   const { currentUser } = useAuth();
   const navigate = useNavigate();
 
