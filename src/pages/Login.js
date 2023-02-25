@@ -144,9 +144,8 @@ const Login = () => {
                     </Grid>
                     <Grid item>
                       <Link
-                        // href="/signUp"
                         variant="body2"
-                        sx={{ color: Colors.primaryColor }}
+                        sx={{ color: Colors.primaryColor, cursor: "pointer" }}
                         onClick={() => {
                           navigate({
                             pathname: "/signup",

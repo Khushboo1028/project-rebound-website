@@ -76,3 +76,39 @@ export const formBackground = {
   margin: "auto",
   width: "90%"
 };
+
+export const educationFormContainer = {
+  backgroundColor: Colors.backgroundColor,
+  height: "auto",
+  borderRadius: "1rem",
+  boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+  margin: "auto",
+  paddingBottom: "2rem",
+  width: "100%",
+  marginBottom: "2rem"
+};
+
+export const educationFormSubtitle = {
+  fontSize: {
+    md: "1rem",
+    sm: "0.8rem",
+    xs: "0.8rem",
+    fontFamily: "Inria Sans",
+    color: Colors.primaryColor
+  }
+};
+
+export const educationFormTitle = {
+  fontWeight: "700",
+  fontSize: { md: "1.3rem", sm: "1rem", xs: "1.2rem" },
+  color: Colors.primaryColor
+};
+
+export const helpButtonContainer = {
+  float: "right",
+  display: "flex",
+  bgcolor: { md: Colors.white, sm: Colors.white, xs: "None" },
+  paddingRight: { md: "1.2rem", sm: "1rem", xs: "0.5rem" },
+  paddingLeft: { md: "1.2rem", sm: "1rem", xs: "0.5rem" },
+  marginRight: "0.5rem"
+};
