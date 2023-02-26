@@ -72,8 +72,9 @@ const ProfessionalExperienceBlock = (props) => {
                 highlight!
               </Box>
               <Box sx={{ marginTop: "0.5rem" }}>
-                {experience_list.map((e) => (
+                {experience_list.map((e, index) => (
                   <Box
+                    key={index}
                     sx={{
                       marginLeft: {
                         md: "0.5rem",

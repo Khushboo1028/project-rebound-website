@@ -37,37 +37,6 @@ const KeySkillBlock = () => {
       <Box sx={{ height: "20rem", overflowY: "auto" }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            {/* {inputList.map((e) => {
-              return (
-                <div style={{ display: "flex", width: "90%" }}>
-                  <div style={{ width: "95%" }}>
-                    <TextField
-                      id="standard-basic"
-                      variant="standard"
-                      sx={{ width: "100%", marginTop: "1rem" }}
-                    />
-                  </div>
-                  <div style={{ width: "5%" }}>
-                    <Fab
-                      size="medium"
-                      aria-label="add"
-                      sx={{
-                        backgroundColor: Colors.primaryColor,
-                        color: Colors.white,
-                        marginTop: "1rem",
-                        marginLeft: "1rem",
-                        "&:hover": {
-                          backgroundColor: Colors.primaryColor
-                        }
-                      }}
-                      onClick={onAddBtnClick}
-                    >
-                      <AddIcon />
-                    </Fab>
-                  </div>
-                </div>
-              );
-            })} */}
             <AddSkills />
           </Grid>
         </Grid>
@@ -108,8 +77,8 @@ const KeySkillBlock = () => {
           </Grid>
         </Grid>
         <Grid container spacing={2} sx={{ margin: "auto", width: "97%" }}>
-          {skills_list.map((e) => (
-            <Grid item md={4} sm={6} xs={12}>
+          {skills_list.map((e, index) => (
+            <Grid item md={4} sm={6} xs={12} key={index}>
               <Box
                 sx={{
                   margin: "auto",

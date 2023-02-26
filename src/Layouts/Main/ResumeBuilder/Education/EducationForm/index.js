@@ -44,14 +44,13 @@ const EducationForm = (props) => {
     const data = [...inputList];
     data[index][event.target.name] = event.target.value;
     setInputList(data);
-    console.log(inputList);
 
     props.dataFromEducationInfo(inputList);
   };
 
   const educationFormFunction = inputList.map((input, index) => {
     return (
-      <Box>
+      <Box key={index}>
         {index === 0 ? (
           <div></div>
         ) : (

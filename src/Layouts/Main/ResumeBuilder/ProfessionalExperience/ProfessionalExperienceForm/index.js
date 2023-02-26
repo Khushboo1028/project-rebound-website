@@ -48,7 +48,7 @@ const ProfessionalExperienceForm = (props) => {
 
   const experienceFormFunction = inputList.map((input, index) => {
     return (
-      <Box>
+      <Box key={index}>
         <Grid
           container
           spacing={2}
