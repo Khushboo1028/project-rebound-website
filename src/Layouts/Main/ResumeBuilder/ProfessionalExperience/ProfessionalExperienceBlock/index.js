@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Colors } from "../../../../../constants/Colors";
 import { Box, Grid } from "@mui/material";
-import ExperienceForm from "../ExperienceForm";
+import ProfessionalExperienceForm from "../ProfessionalExperienceForm";
 
-const ProfessionalExperienceBlock = () => {
+const ProfessionalExperienceBlock = (props) => {
   const experience_list = [
     "Time Management",
     "Organizational Skills",
@@ -14,6 +14,18 @@ const ProfessionalExperienceBlock = () => {
     "Observational Skills",
     "Supervising/Management"
   ];
+
+  const [professionalExperienceInfo, setProfessionalExperienceInfo] =
+    useState();
+
+  const dataFromProfessionalExperienceInfo = (professionalExperienceInfo) => {
+    setProfessionalExperienceInfo(professionalExperienceInfo);
+    console.log(professionalExperienceInfo);
+  };
+
+  useEffect(() => {
+    props.dataFromProfessionalExperienceInfo(professionalExperienceInfo);
+  }, [professionalExperienceInfo]);
 
   return (
     <Box
@@ -27,7 +39,11 @@ const ProfessionalExperienceBlock = () => {
     >
       <Grid container spacing={2}>
         <Grid item md={9} sm={9} xs={12} order={{ xs: 2, md: 1, sm: 1 }}>
-          <ExperienceForm />
+          <ProfessionalExperienceForm
+            dataFromProfessionalExperienceInfo={
+              dataFromProfessionalExperienceInfo
+            }
+          />
         </Grid>
 
         <Grid item sm={3} xs={12} order={{ xs: 1, md: 2, sm: 2 }}>

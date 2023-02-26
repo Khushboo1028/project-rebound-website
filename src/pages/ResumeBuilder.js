@@ -10,7 +10,11 @@ import ProfessionalExperienceBlock from "../Layouts/Main/ResumeBuilder/Professio
 
 const ResumeBuilder = () => {
   // eslint-disable-next-line
-  const [personalInfo, setPersonalInfo] = useState("");
+  const [personalInfo, setPersonalInfo] = useState();
+  const [educationInfo, setEducationInfo] = useState();
+  const [professionalExperienceInfo, setProfessionalExperienceInfo] =
+    useState();
+
   const { currentUser } = useAuth();
   const navigate = useNavigate();
 
@@ -29,6 +33,14 @@ const ResumeBuilder = () => {
     setPersonalInfo(personalInfo);
   };
 
+  const dataFromEducationInfo = (educationInfo) => {
+    setEducationInfo(educationInfo);
+  };
+
+  const dataFromProfessionalExperienceInfo = (professionalExperienceInfo) => {
+    setProfessionalExperienceInfo(professionalExperienceInfo);
+    console.log("resume builder ", professionalExperienceInfo);
+  };
   return (
     <div>
       <ResumeBuilderIntro />
@@ -36,11 +48,15 @@ const ResumeBuilder = () => {
         <PersonalDetailsForm dataFromPersonalInfo={dataFromPersonalInfo} />
       </div>
       <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
-        <EducationBlock />
+        <EducationBlock dataFromEducationInfo={dataFromEducationInfo} />
       </div>
 
       <div>
-        <ProfessionalExperienceBlock />
+        <ProfessionalExperienceBlock
+          dataFromProfessionalExperienceInfo={
+            dataFromProfessionalExperienceInfo
+          }
+        />
       </div>
       <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
         <KeySkills />

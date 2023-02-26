@@ -9,7 +9,7 @@ import {
   helpButtonContainer
 } from "../../styles";
 
-const EducationForm = () => {
+const EducationForm = (props) => {
   const [inputList, setInputList] = useState([
     {
       schoolName: "",
@@ -45,6 +45,8 @@ const EducationForm = () => {
     data[index][event.target.name] = event.target.value;
     setInputList(data);
     console.log(inputList);
+
+    props.dataFromEducationInfo(inputList);
   };
 
   const educationFormFunction = inputList.map((input, index) => {

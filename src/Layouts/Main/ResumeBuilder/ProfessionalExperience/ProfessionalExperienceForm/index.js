@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { Colors } from "../../../../../constants/Colors";
 
-const ExperienceForm = () => {
+const ProfessionalExperienceForm = (props) => {
   const [inputList, setInputList] = useState([
     {
       position: "",
@@ -43,7 +43,7 @@ const ExperienceForm = () => {
     const data = [...inputList];
     data[index][event.target.name] = event.target.value;
     setInputList(data);
-    console.log(inputList);
+    props.dataFromProfessionalExperienceInfo(inputList);
   };
 
   const experienceFormFunction = inputList.map((input, index) => {
@@ -352,4 +352,4 @@ const ExperienceForm = () => {
   );
 };
 
-export default ExperienceForm;
+export default ProfessionalExperienceForm;

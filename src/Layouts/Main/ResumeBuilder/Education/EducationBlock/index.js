@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Grid } from "@mui/material";
 import { Colors } from "../../../../../constants/Colors";
 import { formBackground } from "../../styles";
 import EducationForm from "../EducationForm";
 
-const EducationBlock = () => {
+const EducationBlock = (props) => {
   const education_list = [
     "High School",
     "GED",
     "College (Courses)",
     "Vocational Training"
   ];
+  const [educationInfo, setEducationInfo] = useState();
+
+  const dataFromEducationInfo = (educationInfo) => {
+    setEducationInfo(educationInfo);
+  };
+
+  useEffect(() => {
+    props.dataFromEducationInfo(educationInfo);
+  }, [educationInfo]);
 
   return (
     <div>
@@ -18,7 +27,7 @@ const EducationBlock = () => {
         <Grid container spacing={2}>
           <Grid item sm={9} xs={12} order={{ xs: 2, md: 1, sm: 1 }}>
             <Box>
-              <EducationForm />
+              <EducationForm dataFromEducationInfo={dataFromEducationInfo} />
             </Box>
           </Grid>
 
