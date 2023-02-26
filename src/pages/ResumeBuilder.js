@@ -11,7 +11,9 @@ import ProfessionalExperienceBlock from "../Layouts/Main/ResumeBuilder/Professio
 const ResumeBuilder = () => {
   // eslint-disable-next-line
   const [personalInfo, setPersonalInfo] = useState();
+  // eslint-disable-next-line
   const [educationInfo, setEducationInfo] = useState();
+  // eslint-disable-next-line
   const [professionalExperienceInfo, setProfessionalExperienceInfo] =
     useState();
 
@@ -39,7 +41,6 @@ const ResumeBuilder = () => {
 
   const dataFromProfessionalExperienceInfo = (professionalExperienceInfo) => {
     setProfessionalExperienceInfo(professionalExperienceInfo);
-    console.log("resume builder ", professionalExperienceInfo);
   };
   return (
     <div>

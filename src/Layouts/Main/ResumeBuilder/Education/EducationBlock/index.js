@@ -19,7 +19,7 @@ const EducationBlock = (props) => {
 
   useEffect(() => {
     props.dataFromEducationInfo(educationInfo);
-  }, [educationInfo]);
+  }, [educationInfo, props]);
 
   return (
     <div>

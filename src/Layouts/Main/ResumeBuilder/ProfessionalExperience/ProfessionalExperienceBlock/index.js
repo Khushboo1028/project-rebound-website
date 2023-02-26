@@ -25,7 +25,7 @@ const ProfessionalExperienceBlock = (props) => {
 
   useEffect(() => {
     props.dataFromProfessionalExperienceInfo(professionalExperienceInfo);
-  }, [professionalExperienceInfo]);
+  }, [professionalExperienceInfo, props]);
 
   return (
     <Box
