@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { Box, Grid, Icon, TextField } from "@mui/material";
-import { Colors } from "../../../../constants/Colors";
+import { Colors } from "../../../../../constants/Colors";
 import {
   inputStyle,
-  formBackground,
   educationFormContainer,
   educationFormSubtitle,
   educationFormTitle,
   helpButtonContainer
-} from "../styles";
+} from "../../styles";
 
 const EducationForm = () => {
   const [inputList, setInputList] = useState([
@@ -41,9 +40,16 @@ const EducationForm = () => {
     setInputList(data);
   };
 
+  const handleFormChange = (index, event) => {
+    const data = [...inputList];
+    data[index][event.target.name] = event.target.value;
+    setInputList(data);
+    console.log(inputList);
+  };
+
   const educationFormFunction = inputList.map((input, index) => {
     return (
-      <div>
+      <Box>
         {index === 0 ? (
           <div></div>
         ) : (
@@ -115,6 +121,9 @@ const EducationForm = () => {
                 onChange={(e) => {
                   handleFormChange(index, e);
                 }}
+                InputProps={{
+                  disableUnderline: true
+                }}
               />
             </Box>
           </Grid>
@@ -139,6 +148,9 @@ const EducationForm = () => {
                 name="startDate"
                 onChange={(e) => {
                   handleFormChange(index, e);
+                }}
+                InputProps={{
+                  disableUnderline: true
                 }}
               />
             </Box>
@@ -165,6 +177,9 @@ const EducationForm = () => {
                   handleFormChange(index, e);
                 }}
                 id={`schoolLocation-${index}`}
+                InputProps={{
+                  disableUnderline: true
+                }}
               />
             </Box>
           </Grid>
@@ -190,6 +205,9 @@ const EducationForm = () => {
                   handleFormChange(index, e);
                 }}
                 id={`endDate-${index}`}
+                InputProps={{
+                  disableUnderline: true
+                }}
               />
             </Box>
           </Grid>
@@ -215,6 +233,9 @@ const EducationForm = () => {
                   handleFormChange(index, e);
                 }}
                 id={`degree-${index}`}
+                InputProps={{
+                  disableUnderline: true
+                }}
               />
             </Box>
           </Grid>
@@ -240,20 +261,16 @@ const EducationForm = () => {
                   handleFormChange(index, e);
                 }}
                 id={`fieldOfStudy-${index}`}
+                InputProps={{
+                  disableUnderline: true
+                }}
               />
             </Box>
           </Grid>
         </Grid>
-      </div>
+      </Box>
     );
   });
-
-  const handleFormChange = (index, event) => {
-    const data = [...inputList];
-    data[index][event.target.name] = event.target.value;
-    setInputList(data);
-    console.log(inputList);
-  };
 
   return (
     <Box sx={educationFormContainer}>
@@ -320,74 +337,4 @@ const EducationForm = () => {
   );
 };
 
-const EducationBlock = () => {
-  const education_list = [
-    "High School",
-    "GED",
-    "College (Courses)",
-    "Vocational Training"
-  ];
-
-  return (
-    <div>
-      <Box sx={formBackground}>
-        <Grid container spacing={2}>
-          <Grid item sm={9} xs={12} order={{ xs: 2, md: 1, sm: 1 }}>
-            <Box>
-              <EducationForm />
-            </Box>
-          </Grid>
-
-          <Grid item sm={3} xs={12} order={{ xs: 1, md: 2, sm: 2 }}>
-            {/* Notes Block */}
-            <Box
-              sx={{
-                backgroundColor: Colors.backgroundColor,
-                height: "auto",
-                borderRadius: "1rem",
-                boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-                margin: "auto",
-                padding: "0.5rem"
-              }}
-            >
-              <Grid container spacing={2} sx={{ margin: "auto" }}>
-                <Box
-                  sx={{
-                    fontFamily: "Inria Sans",
-                    fontSize: { md: "1.3rem", sm: "1rem", xs: "1.2rem" },
-                    color: Colors.primaryColor,
-                    fontWeight: 700
-                  }}
-                >
-                  Remember to list your different degrees!
-                </Box>
-                <Box sx={{ marginTop: "0.5rem" }}>
-                  {education_list.map((e, index) => (
-                    <Box
-                      sx={{
-                        marginLeft: {
-                          md: "0.5rem",
-                          sm: "0.5rem",
-                          xs: "1.1rem"
-                        },
-                        fontFamily: "Inria Sans",
-                        color: Colors.primaryColor,
-                        marginBottom: "0.5",
-                        fontSize: { md: "1.1rem", sm: "1rem", xs: "1.1rem" }
-                      }}
-                      key={`education-list-${index}`}
-                    >
-                      - {e}
-                    </Box>
-                  ))}
-                </Box>
-              </Grid>
-            </Box>
-          </Grid>
-        </Grid>
-      </Box>
-    </div>
-  );
-};
-
-export default EducationBlock;
+export default EducationForm;

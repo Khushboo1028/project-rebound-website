@@ -35,6 +35,8 @@ const DialogElement = (props) => {
         onClick={() => {
           if (props.index === "1") {
             navigate("/jobSupport");
+          } else if (props.index === "2") {
+            navigate("/resumeBuilder");
           }
         }}
       >
