@@ -42,6 +42,48 @@ const MyResume = () => {
                 " " +
                 resumeData.personal_info.zipCode}
             </div>
+
+            <div id="heading">Education</div>
+            <hr></hr>
+            <div>
+              {resumeData.education_info.map((e, index) => {
+                return (
+                  <div style={{ marginBottom: "1rem" }} key={index}>
+                    <div id="educationContainer">
+                      <div id="subHeading">{e.schoolName}</div>
+                      <div id="location">{e.schoolLocation}</div>
+                    </div>
+                    <div id="educationContainer">
+                      <div id="info">{e.degree}</div>
+                      <div id="date">{e.startDate + " - " + e.endDate}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div id="heading">Experience</div>
+            <hr></hr>
+            {resumeData.professional_experience_nfo.map((e, index) => {
+              return (
+                <div style={{ marginBottom: "1rem" }} key={index}>
+                  <div id="educationContainer">
+                    <div id="subHeading">{e.companyName}</div>
+                    <div id="date">{e.startDate + " - " + e.endDate}</div>
+                  </div>
+                  <div id="info">{e.position}</div>
+                  <div id="info">{e.description}</div>
+                </div>
+              );
+            })}
+            <div id="heading">Skills</div>
+            <hr></hr>
+            {resumeData.skills_info.map((e, index) => {
+              return (
+                <div style={{ marginBottom: "0.3rem" }} key={index}>
+                  <div id="subHeading">{e}</div>
+                </div>
+              );
+            })}
           </div>
         ) : (
           <div></div>

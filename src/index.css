@@ -34,3 +34,33 @@ code {
   font-size: 1rem;
   padding-top: 0.5rem;
 }
+
+#heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+#subHeading {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+#location {
+  margin-left: auto;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+#educationContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+#info {
+  font-size: 1rem;
+}
+
+#date {
+  margin-left: auto;
+  font-size: 1rem;
+}
