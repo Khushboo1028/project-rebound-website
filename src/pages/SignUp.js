@@ -22,6 +22,8 @@ import {
 import { useAuthState } from "react-firebase-hooks/auth";
 import { isEmailValid, isPasswordValid } from "../utils";
 import PasswordRules from "../components/PasswordRules";
+import Navbar from "../Layouts/Navbar";
+import Footer from "../Layouts/Footer";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -66,124 +68,128 @@ const SignUp = () => {
   };
 
   return (
-    <div style={{ marginTop: "5rem" }}>
-      <Box
-        sx={{
-          backgroundColor: Colors.backgroundColor,
-          height: "89%",
-          margin: "auto",
-          width: "50%",
-          borderRadius: "1rem",
-          padding: "1rem",
-          boxShadow: 2,
-          position: "relative"
-        }}
-      >
-        <Grid container spacing={2}>
-          <Grid item xs={8}>
-            <ThemeProvider theme={theme}>
-              <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                  sx={{
-                    marginTop: 3,
-                    marginBottom: 3,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center"
-                  }}
-                >
-                  <Avatar sx={{ m: 1, bgcolor: Colors.primaryColor }}>
-                    <LockOutlinedIcon />
-                  </Avatar>
-                  <Typography component="h1" variant="h5">
-                    Create an Account
-                  </Typography>
-                  <Box component="form" noValidate sx={{ mt: 3 }}>
-                    <Grid container spacing={2}>
-                      <Grid item xs={12} sm={6}>
-                        <TextField
-                          autoComplete="given-name"
-                          name="firstName"
-                          required
-                          fullWidth
-                          id="firstName"
-                          value={firstName}
-                          onChange={(e) => setFirstName(e.target.value)}
-                          label="First Name"
-                          autoFocus
-                        />
+    <div>
+      <Navbar />
+      <div style={{ marginTop: "5rem" }}>
+        <Box
+          sx={{
+            backgroundColor: Colors.backgroundColor,
+            height: "89%",
+            margin: "auto",
+            width: "50%",
+            borderRadius: "1rem",
+            padding: "1rem",
+            boxShadow: 2,
+            position: "relative"
+          }}
+        >
+          <Grid container spacing={2}>
+            <Grid item xs={8}>
+              <ThemeProvider theme={theme}>
+                <Container component="main" maxWidth="xs">
+                  <CssBaseline />
+                  <Box
+                    sx={{
+                      marginTop: 3,
+                      marginBottom: 3,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center"
+                    }}
+                  >
+                    <Avatar sx={{ m: 1, bgcolor: Colors.primaryColor }}>
+                      <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                      Create an Account
+                    </Typography>
+                    <Box component="form" noValidate sx={{ mt: 3 }}>
+                      <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                          <TextField
+                            autoComplete="given-name"
+                            name="firstName"
+                            required
+                            fullWidth
+                            id="firstName"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            label="First Name"
+                            autoFocus
+                          />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                          <TextField
+                            required
+                            fullWidth
+                            id="lastName"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            label="Last Name"
+                            name="lastName"
+                            autoComplete="family-name"
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            required
+                            fullWidth
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            label="Email Address"
+                            name="email"
+                            autoComplete="email"
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            autoComplete="new-password"
+                          />
+                        </Grid>
                       </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <TextField
-                          required
-                          fullWidth
-                          id="lastName"
-                          value={lastName}
-                          onChange={(e) => setLastName(e.target.value)}
-                          label="Last Name"
-                          name="lastName"
-                          autoComplete="family-name"
-                        />
+                      <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2, bgcolor: Colors.primaryColor }}
+                        onClick={register}
+                      >
+                        Sign Up
+                      </Button>
+                      <Grid container justifyContent="flex-end">
+                        <Grid item>
+                          <Link
+                            href="/login"
+                            variant="body2"
+                            sx={{ color: Colors.primaryColor }}
+                          >
+                            Already have an account? Sign in
+                          </Link>
+                        </Grid>
                       </Grid>
-                      <Grid item xs={12}>
-                        <TextField
-                          required
-                          fullWidth
-                          id="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          label="Email Address"
-                          name="email"
-                          autoComplete="email"
-                        />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <TextField
-                          required
-                          fullWidth
-                          name="password"
-                          label="Password"
-                          type="password"
-                          id="password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          autoComplete="new-password"
-                        />
-                      </Grid>
-                    </Grid>
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      sx={{ mt: 3, mb: 2, bgcolor: Colors.primaryColor }}
-                      onClick={register}
-                    >
-                      Sign Up
-                    </Button>
-                    <Grid container justifyContent="flex-end">
-                      <Grid item>
-                        <Link
-                          href="/login"
-                          variant="body2"
-                          sx={{ color: Colors.primaryColor }}
-                        >
-                          Already have an account? Sign in
-                        </Link>
-                      </Grid>
-                    </Grid>
+                    </Box>
                   </Box>
-                </Box>
-              </Container>
-            </ThemeProvider>
+                </Container>
+              </ThemeProvider>
+            </Grid>
+            <Grid item xs={4}>
+              <Box>
+                <PasswordRules />
+              </Box>
+            </Grid>
           </Grid>
-          <Grid item xs={4}>
-            <Box>
-              <PasswordRules />
-            </Box>
-          </Grid>
-        </Grid>
-      </Box>
+        </Box>
+      </div>
+      <Footer />
     </div>
   );
 };

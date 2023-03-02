@@ -7,18 +7,26 @@ import { useAuth } from "../firebase/AuthContext";
 import { useNavigate, createSearchParams } from "react-router-dom";
 import EducationBlock from "../Layouts/Main/ResumeBuilder/Education/EducationBlock";
 import ProfessionalExperienceBlock from "../Layouts/Main/ResumeBuilder/ProfessionalExperience/ProfessionalExperienceBlock";
+import { Timestamp } from "firebase/firestore";
+import Navbar from "../Layouts/Navbar";
+import Footer from "../Layouts/Footer";
 
 const ResumeBuilder = () => {
-  // eslint-disable-next-line
-  const [personalInfo, setPersonalInfo] = useState();
-  // eslint-disable-next-line
-  const [educationInfo, setEducationInfo] = useState();
-  // eslint-disable-next-line
-  const [professionalExperienceInfo, setProfessionalExperienceInfo] =
-    useState();
-
   const { currentUser } = useAuth();
   const navigate = useNavigate();
+  const [personalInfo, setPersonalInfo] = useState();
+  const [educationInfo, setEducationInfo] = useState();
+  const [professionalExperienceInfo, setProfessionalExperienceInfo] =
+    useState();
+  const [skillsInfo, setSkillsInfo] = useState();
+
+  const resumeData = {
+    date_created: Timestamp.fromDate(new Date()),
+    personal_info: personalInfo,
+    education_info: educationInfo,
+    professional_experience_nfo: professionalExperienceInfo,
+    skills_info: skillsInfo
+  };
 
   useEffect(() => {
     if (currentUser) {
@@ -42,30 +50,40 @@ const ResumeBuilder = () => {
   const dataFromProfessionalExperienceInfo = (professionalExperienceInfo) => {
     setProfessionalExperienceInfo(professionalExperienceInfo);
   };
+
+  const dataFromSkillsInfo = (skillsInfo) => {
+    setSkillsInfo(skillsInfo);
+    console.log("skills are ", skillsInfo);
+  };
+
   return (
     <div>
-      <ResumeBuilderIntro />
-      <div style={{ padding: "1rem", marginTop: "3rem" }}>
-        <PersonalDetailsForm dataFromPersonalInfo={dataFromPersonalInfo} />
-      </div>
-      <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
-        <EducationBlock dataFromEducationInfo={dataFromEducationInfo} />
-      </div>
-
+      <Navbar />
       <div>
-        <ProfessionalExperienceBlock
-          dataFromProfessionalExperienceInfo={
-            dataFromProfessionalExperienceInfo
-          }
-        />
-      </div>
-      <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
-        <KeySkills />
-      </div>
+        <ResumeBuilderIntro />
+        <div style={{ padding: "1rem", marginTop: "3rem" }}>
+          <PersonalDetailsForm dataFromPersonalInfo={dataFromPersonalInfo} />
+        </div>
+        <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
+          <EducationBlock dataFromEducationInfo={dataFromEducationInfo} />
+        </div>
 
-      <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
-        <NavigationButtons />
+        <div>
+          <ProfessionalExperienceBlock
+            dataFromProfessionalExperienceInfo={
+              dataFromProfessionalExperienceInfo
+            }
+          />
+        </div>
+        <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
+          <KeySkills dataFromSkillsInfo={dataFromSkillsInfo} />
+        </div>
+
+        <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
+          <NavigationButtons resumeData={resumeData} />
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Grid, Button } from "@mui/material";
 import { formBackground } from "../styles";
 import { Colors } from "../../../../constants/Colors";
+import { updateData } from "../../../../firebase/firebaseReadWrite";
+import { useAuth } from "../../../../firebase/AuthContext";
+import { db } from "../../../../firebase/firebase";
+import { doc } from "firebase/firestore";
+import { useNavigate, createSearchParams } from "react-router-dom";
 
-const NavigationButtons = () => {
+const NavigationButtons = ({ resumeData }) => {
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
+  let docRef;
+  if (currentUser !== null) {
+    docRef = doc(db, "users", currentUser.uid);
+  }
+
+  const generatePdf = () => {
+    updateData(docRef, resumeData);
+    navigate({
+      pathname: "/myResume",
+      search: createSearchParams({
+        resumeData: JSON.stringify(resumeData)
+      }).toString()
+    });
+  };
+
   return (
     <Box sx={formBackground}>
       <Grid container spacing={2}>
@@ -27,7 +49,6 @@ const NavigationButtons = () => {
         <Grid item sm={6} xs={12}>
           <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Box>
-              {" "}
               <Button
                 variant="contained"
                 sx={{
@@ -48,6 +69,7 @@ const NavigationButtons = () => {
                   marginLeft: "1rem",
                   "&:hover": { backgroundColor: Colors.primaryColor }
                 }}
+                onClick={generatePdf}
               >
                 Generate PDF
               </Button>

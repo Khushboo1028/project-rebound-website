@@ -4,6 +4,8 @@ import ResumeSection from "../Layouts/Main/JobSupport/ResumeSection";
 
 import { useAuth } from "../firebase/AuthContext";
 import { createSearchParams, useNavigate } from "react-router-dom";
+import Navbar from "../Layouts/Navbar";
+import Footer from "../Layouts/Footer";
 
 const JobSupport = () => {
   const { currentUser } = useAuth();
@@ -23,8 +25,10 @@ const JobSupport = () => {
 
   return (
     <div>
+      <Navbar />
       <JobSupportIntro />
       <ResumeSection />
+      <Footer />
     </div>
   );
 };

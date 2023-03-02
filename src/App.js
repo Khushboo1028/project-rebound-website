@@ -9,12 +9,12 @@ import SignUp from "./pages/SignUp";
 import { AuthProvider } from "./firebase/AuthContext";
 import { ResumeContext } from "./Layouts/Main/ResumeBuilder/PersonalDetailsForm";
 import UserInformation from "./pages/UserInformation";
+import MyResume from "./pages/MyResume";
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -25,9 +25,9 @@ function App() {
           <Route path="/jobSupport" element={<JobSupport />} />
           <Route path="/resumeBuilder" element={<ResumeBuilder />} />
           <Route path="/userInformation" element={<UserInformation />} />
-        </Routes>
 
-        <Footer />
+          <Route path="/myResume" element={<MyResume />} />
+        </Routes>
       </Router>
     </AuthProvider>
   );
