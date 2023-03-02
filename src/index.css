@@ -10,14 +10,27 @@ code {
     monospace;
 }
 
+/* resume css here */
+
 #pdf {
   height: 1056px;
   width: 816px;
   background-color: white;
 }
 
-body {
+#background {
   background-color: gray;
   padding: 0px;
   margin: 0px;
+}
+
+#name {
+  text-align: center;
+  font-size: 2rem;
+}
+
+#desc {
+  text-align: center;
+  font-size: 1rem;
+  padding-top: 0.5rem;
 }

@@ -13,20 +13,41 @@ const MyResume = () => {
       if (!searchParams.get("resumeData")) {
         navigate("/");
       } else {
-        setResumeData(JSON.parse(searchParams.get("resumeData")));
-        console.log("resume data ", resumeData);
+        let data = JSON.parse(searchParams.get("resumeData"));
+        setResumeData(data);
       }
     } else {
       navigate("/login");
     }
+
+    console.log("resume data ", resumeData);
   }, []);
 
   return (
-    <body>
-      <div style={{ width: "50%", margin: "auto" }}>
-        <div id="pdf">hello</div>
+    <div id="background">
+      <div id="pdf">
+        {resumeData !== undefined ? (
+          <div>
+            <div id="name">
+              {resumeData.personal_info.firstName +
+                " " +
+                resumeData.personal_info.lastName}
+            </div>
+            <div id="desc">
+              {resumeData.personal_info.address +
+                ", " +
+                resumeData.personal_info.city +
+                ", " +
+                resumeData.personal_info.state +
+                " " +
+                resumeData.personal_info.zipCode}
+            </div>
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
-    </body>
+    </div>
   );
 };
 
