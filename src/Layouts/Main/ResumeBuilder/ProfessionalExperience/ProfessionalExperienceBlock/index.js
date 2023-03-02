@@ -2,21 +2,31 @@ import React, { useState, useEffect } from "react";
 import { Colors } from "../../../../../constants/Colors";
 import { Box, Grid } from "@mui/material";
 import ProfessionalExperienceForm from "../ProfessionalExperienceForm";
+import { db } from "../../../../../firebase/firebase";
+import { useAuth } from "../../../../../firebase/AuthContext";
+import { doc, onSnapshot } from "firebase/firestore";
 
 const ProfessionalExperienceBlock = (props) => {
-  const experience_list = [
-    "Time Management",
-    "Organizational Skills",
-    "Technical Skills",
-    "Attention to Detail",
-    "Identifying Problems",
-    "Planning",
-    "Observational Skills",
-    "Supervising/Management"
-  ];
+  // const experience_list = [
+  //   "Time Management",
+  //   "Organizational Skills",
+  //   "Technical Skills",
+  //   "Attention to Detail",
+  //   "Identifying Problems",
+  //   "Planning",
+  //   "Observational Skills",
+  //   "Supervising/Management"
+  // ];
 
+  const { currentUser } = useAuth();
+  let docRef;
+  if (currentUser !== null) {
+    docRef = doc(db, "users", currentUser.uid);
+  }
   const [professionalExperienceInfo, setProfessionalExperienceInfo] =
     useState();
+
+  const [experience_list, setExperienceList] = useState([]);
 
   const dataFromProfessionalExperienceInfo = (professionalExperienceInfo) => {
     setProfessionalExperienceInfo(professionalExperienceInfo);
@@ -25,6 +35,25 @@ const ProfessionalExperienceBlock = (props) => {
 
   useEffect(() => {
     props.dataFromProfessionalExperienceInfo(professionalExperienceInfo);
+    const unsubscribe = onSnapshot(docRef, (doc) => {
+      setExperienceList(() => {
+        const newList = doc.data().skills_list;
+        // eslint-disable-next-line
+        if (newList) {
+          newList.map((e, index) => {
+            if (index < newList.length) {
+              experience_list.push(e.name);
+            }
+          });
+        }
+
+        return newList;
+      });
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, [professionalExperienceInfo, props]);
 
   return (
@@ -87,7 +116,7 @@ const ProfessionalExperienceBlock = (props) => {
                       fontSize: { md: "1.1rem", sm: "0.8rem", xs: "0.8rem" }
                     }}
                   >
-                    - {e}
+                    - {e.name}
                   </Box>
                 ))}
               </Box>

@@ -24,7 +24,7 @@ const ResumeBuilder = () => {
     date_created: Timestamp.fromDate(new Date()),
     personal_info: personalInfo,
     education_info: educationInfo,
-    professional_experience_nfo: professionalExperienceInfo,
+    professional_experience_info: professionalExperienceInfo,
     skills_info: skillsInfo
   };
 
@@ -53,7 +53,6 @@ const ResumeBuilder = () => {
 
   const dataFromSkillsInfo = (skillsInfo) => {
     setSkillsInfo(skillsInfo);
-    console.log("skills are ", skillsInfo);
   };
 
   return (

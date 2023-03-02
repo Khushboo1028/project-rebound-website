@@ -27,6 +27,7 @@ code {
 #name {
   text-align: center;
   font-size: 2rem;
+  margin-left: center;
 }
 
 #desc {
