@@ -41,6 +41,7 @@ const ProfessionalExperienceBlock = (props) => {
           const newList = doc.data().skills_list;
           // eslint-disable-next-line
           if (newList) {
+            // eslint-disable-next-line
             newList.map((e, index) => {
               if (index < newList.length) {
                 experience_list.push(e.name);
@@ -56,6 +57,7 @@ const ProfessionalExperienceBlock = (props) => {
         unsubscribe();
       };
     }
+    // eslint-disable-next-line
   }, [professionalExperienceInfo, props]);
 
   return (

@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Modal } from "@mui/material/";
+import { Modal, Box } from "@mui/material/";
 import { Colors } from "../../constants/Colors";
 import JobApplicationModal from "../JobApplicationModal";
 
@@ -34,7 +34,7 @@ const HomeCard = (props) => {
   };
 
   return (
-    <div>
+    <Box>
       <Card
         sx={{
           maxWidth: 345,
@@ -75,8 +75,9 @@ const HomeCard = (props) => {
             {props.heading}
           </Typography>
 
-          {props.list.map((e) => (
+          {props.list.map((e, index) => (
             <Typography
+              key={index}
               variant="body2"
               sx={{
                 color: Colors.primaryColor,
@@ -91,7 +92,7 @@ const HomeCard = (props) => {
       </Card>
 
       <div>{openJobApplicationModal()}</div>
-    </div>
+    </Box>
   );
 };
 

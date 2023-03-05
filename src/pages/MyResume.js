@@ -30,6 +30,7 @@ const MyResume = () => {
       window.print();
       setShowPrintButton(true);
     }
+    // eslint-disable-next-line
   }, [showPrintButton]);
 
   const printResume = () => {

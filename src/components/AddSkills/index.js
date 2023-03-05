@@ -57,6 +57,7 @@ const AddSkills = () => {
           const newList = doc.data().skills_list;
           // eslint-disable-next-line
           if (newList) {
+            // eslint-disable-next-line
             newList.map((e) => {
               if (nextId < newList.length) {
                 inputList.push({ id: nextId++, name: e.name });

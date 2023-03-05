@@ -36,7 +36,18 @@ const PersonalDetailsForm = (props) => {
       email: email
     });
     props.dataFromPersonalInfo(personalInfo);
-  }, [firstName, lastName, address, city, state, zipCode, phone, email]);
+  }, [
+    firstName,
+    lastName,
+    address,
+    city,
+    state,
+    zipCode,
+    phone,
+    email,
+    personalInfo,
+    props
+  ]);
 
   return (
     <Box

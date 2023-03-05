@@ -1,24 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Grid,
-  Icon,
-  Autocomplete,
-  TextField,
-  Typography
-} from "@mui/material";
+import { Box, Grid, Icon, TextField, Typography } from "@mui/material";
 import { formBackground, inputStyleAutoComplete } from "../styles";
 import { Colors } from "../../../../constants/Colors";
-import {
-  technicalSkills
-  // occupations,
-  // verbalSkills,
-  // greenSkills,
-  // traversalSkills
-} from "./autocompleteSkills";
 import CloseIcon from "@mui/icons-material/Close";
-import { ReactSearchAutocomplete } from "react-search-autocomplete";
-import { width } from "@mui/system";
 
 // const SuggestedSkills = () => {
 //   let skills_list = [
@@ -104,8 +88,6 @@ import { width } from "@mui/system";
 
 const KeySkillBlock = (props) => {
   const [autoCompleteValue, setAutoCompleteValue] = useState("");
-  const [selectedSkillsList, setSelectedSkillsList] = useState([]);
-  const [autoCompleteObjectSkills, setAutoCompleteObjectSkills] = useState([]);
   const [skills, setSkills] = useState([]);
   //can put all lists in one list instead of separating it out to avoid warnings
   // const autoCompleteSkills = [
@@ -222,31 +204,6 @@ const KeySkillBlock = (props) => {
       <Grid container spacing={2} sx={{ margin: "auto", width: "97%" }}>
         <Grid item sm={12}>
           {/* Adding component here */}
-          {/* <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={autoCompleteObjectSkills}
-            autoComplete
-            onChange={(e) => handleOnChange(e)}
-            renderInput={(e) => (
-              <TextField
-                {...e}
-                label="Skills"
-                onKeyPress={(e) => {
-                  if (e.key === "Enter") {
-                    // onAddBtnClick();
-                  }
-                }}
-              />
-            )}
-          /> */}
-
-          {/* <ReactSearchAutocomplete
-            items={autoCompleteObjectSkills}
-            onSearch={handleOnSearch}
-            onSelect={handleOnSelect}
-            // autoFocus
-          /> */}
 
           <TextField
             sx={inputStyleAutoComplete}
@@ -255,7 +212,7 @@ const KeySkillBlock = (props) => {
             value={autoCompleteValue}
             onChange={(e) => setAutoCompleteValue(e.target.value)}
             onKeyPress={(e) => {
-              if (e.key == "Enter") {
+              if (e.key === "Enter") {
                 onAddBtnClick();
               }
             }}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Box, Grid, Button } from "@mui/material";
 import { formBackground } from "../styles";
 import { Colors } from "../../../../constants/Colors";

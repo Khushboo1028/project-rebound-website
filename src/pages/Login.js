@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import { Colors } from "../constants/Colors";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { createTheme } from "@mui/material/styles";
 import {
   useNavigate,
   useSearchParams,
@@ -32,7 +31,6 @@ const Login = () => {
   const [searchParams] = useSearchParams();
 
   const navigate = useNavigate();
-  const theme = createTheme();
 
   //TODO: sign up -> to add demographic info form (Device, level of comfort with those devices) -> this should be optional
 

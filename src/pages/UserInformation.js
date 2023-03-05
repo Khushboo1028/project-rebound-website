@@ -9,7 +9,6 @@ import {
   Box,
   Grid,
   CssBaseline,
-  TextField,
   Container,
   Link,
   FormControl,
@@ -19,7 +18,6 @@ import {
   Typography,
   Button
 } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 import { Colors } from "../constants/Colors";
 import Navbar from "../Layouts/Navbar";
