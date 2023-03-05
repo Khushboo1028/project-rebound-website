@@ -35,25 +35,27 @@ const ProfessionalExperienceBlock = (props) => {
 
   useEffect(() => {
     props.dataFromProfessionalExperienceInfo(professionalExperienceInfo);
-    const unsubscribe = onSnapshot(docRef, (doc) => {
-      setExperienceList(() => {
-        const newList = doc.data().skills_list;
-        // eslint-disable-next-line
-        if (newList) {
-          newList.map((e, index) => {
-            if (index < newList.length) {
-              experience_list.push(e.name);
-            }
-          });
-        }
+    if (currentUser !== null) {
+      const unsubscribe = onSnapshot(docRef, (doc) => {
+        setExperienceList(() => {
+          const newList = doc.data().skills_list;
+          // eslint-disable-next-line
+          if (newList) {
+            newList.map((e, index) => {
+              if (index < newList.length) {
+                experience_list.push(e.name);
+              }
+            });
+          }
 
-        return newList;
+          return newList;
+        });
       });
-    });
 
-    return () => {
-      unsubscribe();
-    };
+      return () => {
+        unsubscribe();
+      };
+    }
   }, [professionalExperienceInfo, props]);
 
   return (
