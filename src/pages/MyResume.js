@@ -10,6 +10,7 @@ const MyResume = () => {
   const [resumeData, setResumeData] = useState();
   const [searchParams] = useSearchParams();
   const [showPrintButton, setShowPrintButton] = useState(true);
+  // const [pdfStyle, setpdfStyle] = useState(true);
 
   useEffect(() => {
     if (currentUser) {

@@ -21,7 +21,7 @@ const ResumeBuilder = () => {
   const [skillsInfo, setSkillsInfo] = useState();
 
   const resumeData = {
-    date_created: Timestamp.fromDate(new Date()),
+    date_resume_updated: Timestamp.fromDate(new Date()),
     personal_info: personalInfo,
     education_info: educationInfo,
     professional_experience_info: professionalExperienceInfo,
@@ -44,15 +44,27 @@ const ResumeBuilder = () => {
   };
 
   const dataFromEducationInfo = (educationInfo) => {
-    setEducationInfo(educationInfo);
+    if (educationInfo === undefined) {
+      setEducationInfo([]);
+    } else {
+      setEducationInfo(educationInfo);
+    }
   };
 
   const dataFromProfessionalExperienceInfo = (professionalExperienceInfo) => {
-    setProfessionalExperienceInfo(professionalExperienceInfo);
+    if (professionalExperienceInfo === undefined) {
+      setProfessionalExperienceInfo([]);
+    } else {
+      setProfessionalExperienceInfo(professionalExperienceInfo);
+    }
   };
 
   const dataFromSkillsInfo = (skillsInfo) => {
-    setSkillsInfo(skillsInfo);
+    if (skillsInfo === undefined) {
+      setSkillsInfo([]);
+    } else {
+      setSkillsInfo(skillsInfo);
+    }
   };
 
   return (

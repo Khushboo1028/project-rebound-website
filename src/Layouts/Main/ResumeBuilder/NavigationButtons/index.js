@@ -17,9 +17,11 @@ const NavigationButtons = ({ resumeData }) => {
   }
 
   const generatePdf = () => {
+    console.log(resumeData);
     updateData(docRef, resumeData);
+
     navigate({
-      pathname: "/myResume",
+      pathname: "/generateResume",
       search: createSearchParams({
         resumeData: JSON.stringify(resumeData)
       }).toString()
