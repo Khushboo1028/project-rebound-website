@@ -11,10 +11,18 @@ import { Timestamp } from "firebase/firestore";
 import Navbar from "../Layouts/Navbar";
 import Footer from "../Layouts/Footer";
 import ObjectiveForm from "../Layouts/Main/ResumeBuilder/ObjectiveForm";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "../firebase/firebase";
 
 const ResumeBuilder = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
+
+  let docRef;
+  if (currentUser !== null) {
+    docRef = doc(db, "users", currentUser.uid);
+  }
+
   const [personalInfo, setPersonalInfo] = useState();
   const [educationInfo, setEducationInfo] = useState();
   const [professionalExperienceInfo, setProfessionalExperienceInfo] =
@@ -22,18 +30,30 @@ const ResumeBuilder = () => {
   const [skillsInfo, setSkillsInfo] = useState();
   const [objective, setObjective] = useState();
 
+  const [dataFromFirebase, setDatafromFirebase] = useState();
+
   const resumeData = {
     date_resume_updated: Timestamp.fromDate(new Date()),
     personal_info: personalInfo,
     education_info: educationInfo,
     professional_experience_info: professionalExperienceInfo,
-    skills_info: skillsInfo,
-    objective: objective
+    skills_info: skillsInfo
+    // objective: objective
   };
 
   useEffect(() => {
     if (currentUser) {
       navigate("/resumeBuilder");
+
+      const unsubscribe = onSnapshot(docRef, (doc) => {
+        const newList = doc.data();
+        console.log("firebase data is ", newList);
+        setDatafromFirebase(newList);
+      });
+
+      return () => {
+        unsubscribe();
+      };
     } else {
       navigate({
         pathname: "/login",
@@ -44,34 +64,26 @@ const ResumeBuilder = () => {
 
   const dataFromPersonalInfo = (personalInfo) => {
     if (personalInfo === undefined) {
-      setPersonalInfo([]);
+      setPersonalInfo({});
     } else {
       setPersonalInfo(personalInfo);
     }
   };
 
+  const dataFromEducationInfo = (educationInfo) => {
+    setEducationInfo(educationInfo);
+  };
+
   const dataFromObjective = (objectiveInfo) => {
     if (personalInfo === undefined) {
-      setObjective([]);
+      setObjective({});
     } else {
       setObjective(objectiveInfo);
     }
   };
 
-  const dataFromEducationInfo = (educationInfo) => {
-    if (educationInfo === undefined) {
-      setEducationInfo([]);
-    } else {
-      setEducationInfo(educationInfo);
-    }
-  };
-
   const dataFromProfessionalExperienceInfo = (professionalExperienceInfo) => {
-    if (professionalExperienceInfo === undefined) {
-      setProfessionalExperienceInfo([]);
-    } else {
-      setProfessionalExperienceInfo(professionalExperienceInfo);
-    }
+    setProfessionalExperienceInfo(professionalExperienceInfo);
   };
 
   const dataFromSkillsInfo = (skillsInfo) => {
@@ -95,14 +107,18 @@ const ResumeBuilder = () => {
           <PersonalDetailsForm dataFromPersonalInfo={dataFromPersonalInfo} />
         </div>
         <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
-          <EducationBlock dataFromEducationInfo={dataFromEducationInfo} />
+          <EducationBlock
+            dataFromEducationInfoFromProps={dataFromEducationInfo}
+            dataFromFirebase={dataFromFirebase}
+          />
         </div>
 
         <div>
           <ProfessionalExperienceBlock
-            dataFromProfessionalExperienceInfo={
+            dataFromProfessionalExperienceInfoProps={
               dataFromProfessionalExperienceInfo
             }
+            dataFromFirebase={dataFromFirebase}
           />
         </div>
         <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
@@ -110,7 +126,10 @@ const ResumeBuilder = () => {
         </div>
 
         <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
-          <NavigationButtons resumeData={resumeData} />
+          <NavigationButtons
+            resumeData={resumeData}
+            dataFromFirebase={dataFromFirebase}
+          />
         </div>
       </div>
       <Footer />

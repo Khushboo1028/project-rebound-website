@@ -13,7 +13,10 @@ import { db } from "../../../../../firebase/firebase";
 import { useAuth } from "../../../../../firebase/AuthContext";
 import { doc, onSnapshot } from "firebase/firestore";
 
-const ProfessionalExperienceForm = (props) => {
+const ProfessionalExperienceForm = ({
+  dataFromProfessionalExperienceInfo,
+  dataFromFirebase
+}) => {
   const { currentUser } = useAuth();
   let docRef;
   if (currentUser !== null) {
@@ -32,29 +35,13 @@ const ProfessionalExperienceForm = (props) => {
 
   useEffect(() => {
     if (currentUser !== null) {
-      const unsubscribe = onSnapshot(docRef, (doc) => {
-        setInputList(() => {
-          const newList = doc.data().professional_experience_info;
-          // eslint-disable-next-line
-          if (newList) {
-            // eslint-disable-next-line
-            newList.map((e, index) => {
-              if (index < inputList.length) {
-                inputList.push(e);
-              }
-            });
-          }
-
-          return newList;
-        });
-      });
-
-      return () => {
-        unsubscribe();
-      };
+      if (dataFromFirebase !== undefined) {
+        setInputList(dataFromFirebase.professional_experience_info);
+      }
     }
+
     // eslint-disable-next-line
-  }, []);
+  }, [dataFromFirebase]);
 
   const onAddBtnClick = () => {
     let newField = {
@@ -78,7 +65,7 @@ const ProfessionalExperienceForm = (props) => {
     const data = [...inputList];
     data[index][event.target.name] = event.target.value;
     setInputList(data);
-    props.dataFromProfessionalExperienceInfo(inputList);
+    dataFromProfessionalExperienceInfo(inputList);
   };
 
   const experienceFormFunction = inputList.map((input, index) => {
@@ -388,3 +375,5 @@ const ProfessionalExperienceForm = (props) => {
 };
 
 export default ProfessionalExperienceForm;
+
+//TODO: Fix props for data from firebase to send to main page

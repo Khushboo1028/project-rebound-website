@@ -13,7 +13,7 @@ import { db } from "../../../../../firebase/firebase";
 import { useAuth } from "../../../../../firebase/AuthContext";
 import { doc, onSnapshot } from "firebase/firestore";
 
-const EducationForm = (props) => {
+const EducationForm = ({ dataFromEducationInfo, dataFromFirebase }) => {
   const { currentUser } = useAuth();
   let docRef;
   if (currentUser !== null) {
@@ -33,29 +33,13 @@ const EducationForm = (props) => {
 
   useEffect(() => {
     if (currentUser !== null) {
-      const unsubscribe = onSnapshot(docRef, (doc) => {
-        setInputList(() => {
-          const newList = doc.data().education_info;
-          // eslint-disable-next-line
-          if (newList) {
-            // eslint-disable-next-line
-            newList.map((e, index) => {
-              if (index < inputList.length) {
-                inputList.push(e);
-              }
-            });
-          }
-
-          return newList;
-        });
-      });
-
-      return () => {
-        unsubscribe();
-      };
+      if (dataFromFirebase !== undefined) {
+        setInputList(dataFromFirebase.education_info);
+      }
     }
+
     // eslint-disable-next-line
-  }, []);
+  }, [dataFromFirebase]);
 
   const onAddBtnClick = () => {
     let newField = {
@@ -81,7 +65,7 @@ const EducationForm = (props) => {
     data[index][event.target.name] = event.target.value;
     setInputList(data);
 
-    props.dataFromEducationInfo(inputList);
+    dataFromEducationInfo(inputList);
   };
 
   const educationFormFunction = inputList.map((input, index) => {

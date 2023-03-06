@@ -6,7 +6,10 @@ import { db } from "../../../../../firebase/firebase";
 import { useAuth } from "../../../../../firebase/AuthContext";
 import { doc, onSnapshot } from "firebase/firestore";
 
-const ProfessionalExperienceBlock = (props) => {
+const ProfessionalExperienceBlock = ({
+  dataFromProfessionalExperienceInfoProps,
+  dataFromFirebase
+}) => {
   const { currentUser } = useAuth();
   let docRef;
   if (currentUser !== null) {
@@ -19,11 +22,10 @@ const ProfessionalExperienceBlock = (props) => {
 
   const dataFromProfessionalExperienceInfo = (professionalExperienceInfo) => {
     setProfessionalExperienceInfo(professionalExperienceInfo);
-    console.log(professionalExperienceInfo);
   };
 
   useEffect(() => {
-    props.dataFromProfessionalExperienceInfo(professionalExperienceInfo);
+    dataFromProfessionalExperienceInfoProps(professionalExperienceInfo);
     if (currentUser !== null) {
       const unsubscribe = onSnapshot(docRef, (doc) => {
         setExperienceList(() => {
@@ -47,7 +49,7 @@ const ProfessionalExperienceBlock = (props) => {
       };
     }
     // eslint-disable-next-line
-  }, []);
+  }, [dataFromProfessionalExperienceInfoProps]);
 
   return (
     <Box
@@ -65,6 +67,7 @@ const ProfessionalExperienceBlock = (props) => {
             dataFromProfessionalExperienceInfo={
               dataFromProfessionalExperienceInfo
             }
+            dataFromFirebase={dataFromFirebase}
           />
         </Grid>
 

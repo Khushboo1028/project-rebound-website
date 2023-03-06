@@ -4,7 +4,10 @@ import { Colors } from "../../../../../constants/Colors";
 import { formBackground } from "../../styles";
 import EducationForm from "../EducationForm";
 
-const EducationBlock = (props) => {
+const EducationBlock = ({
+  dataFromEducationInfoFromProps,
+  dataFromFirebase
+}) => {
   const education_list = [
     "High School",
     "GED",
@@ -18,8 +21,10 @@ const EducationBlock = (props) => {
   };
 
   useEffect(() => {
-    props.dataFromEducationInfo(educationInfo);
-  }, [educationInfo, props]);
+    dataFromEducationInfoFromProps(educationInfo);
+
+    // eslint-disable-next-line
+  }, [dataFromEducationInfoFromProps]);
 
   return (
     <div>
@@ -27,7 +32,10 @@ const EducationBlock = (props) => {
         <Grid container spacing={2}>
           <Grid item sm={9} xs={12} order={{ xs: 2, md: 1, sm: 1 }}>
             <Box>
-              <EducationForm dataFromEducationInfo={dataFromEducationInfo} />
+              <EducationForm
+                dataFromEducationInfo={dataFromEducationInfo}
+                dataFromFirebase={dataFromFirebase}
+              />
             </Box>
           </Grid>
 

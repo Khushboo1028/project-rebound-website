@@ -8,7 +8,7 @@ import { db } from "../../../../firebase/firebase";
 import { doc } from "firebase/firestore";
 import { useNavigate, createSearchParams } from "react-router-dom";
 
-const NavigationButtons = ({ resumeData }) => {
+const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   let docRef;
@@ -17,15 +17,23 @@ const NavigationButtons = ({ resumeData }) => {
   }
 
   const generatePdf = () => {
+    if (resumeData.education_info === undefined) {
+      resumeData.education_info = dataFromFirebase.education_info;
+    }
+    if (resumeData.professional_experience_info === undefined) {
+      resumeData.professional_experience_info =
+        dataFromFirebase.professional_experience_info;
+    }
     console.log(resumeData);
-    updateData(docRef, resumeData);
+    //TODO: After fixing resume data, send it to firebase
+    // updateData(docRef, resumeData);
 
-    navigate({
-      pathname: "/generateResume",
-      search: createSearchParams({
-        resumeData: JSON.stringify(resumeData)
-      }).toString()
-    });
+    // navigate({
+    //   pathname: "/generateResume",
+    //   search: createSearchParams({
+    //     resumeData: JSON.stringify(resumeData)
+    //   }).toString()
+    // });
   };
 
   return (
