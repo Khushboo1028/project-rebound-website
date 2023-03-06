@@ -25,8 +25,7 @@ const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
         dataFromFirebase.professional_experience_info;
     }
     console.log(resumeData);
-    //TODO: After fixing resume data, send it to firebase
-    // updateData(docRef, resumeData);
+    updateData(docRef, resumeData);
 
     // navigate({
     //   pathname: "/generateResume",

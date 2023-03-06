@@ -6,7 +6,7 @@ import { db } from "../../../../firebase/firebase";
 import { useAuth } from "../../../../firebase/AuthContext";
 import { doc, onSnapshot } from "firebase/firestore";
 
-const PersonalDetailsForm = (props) => {
+const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
   const { currentUser } = useAuth();
   let docRef;
   if (currentUser !== null) {
@@ -35,25 +35,37 @@ const PersonalDetailsForm = (props) => {
 
   useEffect(() => {
     if (currentUser !== null) {
-      props.dataFromPersonalInfo(personalInfo);
-      const unsubscribe = onSnapshot(docRef, (doc) => {
-        const personal_info = doc.data().personal_info;
-        if (personal_info !== undefined) {
-          setFirstName(personal_info.firstName);
-          setLastName(personal_info.lastName);
-          setAddress(personal_info.address);
-          setCity(personal_info.city);
-          setState(personal_info.state);
-          setZipCode(personal_info.state);
-          setPhone(personal_info.phone);
-          setEmail(personal_info.setEmail);
-        }
-      });
-      return () => {
-        unsubscribe();
-      };
+      dataFromPersonalInfo(personalInfo);
+      // const unsubscribe = onSnapshot(docRef, (doc) => {
+      //   const personal_info = doc.data().personal_info;
+      //   if (personal_info !== undefined) {
+      //     setFirstName(personal_info.firstName);
+      //     setLastName(personal_info.lastName);
+      //     setAddress(personal_info.address);
+      //     setCity(personal_info.city);
+      //     setState(personal_info.state);
+      //     setZipCode(personal_info.state);
+      //     setPhone(personal_info.phone);
+      //     setEmail(personal_info.setEmail);
+      //   }
+      // });
+      // return () => {
+      //   unsubscribe();
+      // };
+
+      if (dataFromFirebase !== undefined) {
+        const personal_info = dataFromFirebase.personal_info;
+        setFirstName(personal_info.firstName);
+        setLastName(personal_info.lastName);
+        setAddress(personal_info.address);
+        setCity(personal_info.city);
+        setState(personal_info.state);
+        setZipCode(personal_info.state);
+        setPhone(personal_info.phone);
+        setEmail(personal_info.email);
+      }
     }
-  }, [firstName, lastName, address, city, state, zipCode, phone, email]);
+  }, [dataFromFirebase]);
 
   return (
     <Box>

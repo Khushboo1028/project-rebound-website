@@ -104,7 +104,10 @@ const ResumeBuilder = () => {
         </div>
 
         <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
-          <PersonalDetailsForm dataFromPersonalInfo={dataFromPersonalInfo} />
+          <PersonalDetailsForm
+            dataFromPersonalInfo={dataFromPersonalInfo}
+            dataFromFirebase={dataFromFirebase}
+          />
         </div>
         <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
           <EducationBlock
