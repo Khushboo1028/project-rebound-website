@@ -123,7 +123,7 @@ your skills."
         <Box sx={innerComponentStyle}>
           <DialogElement
             image={listIcon3}
-            heading="Ask for Help!"
+            heading="Ask for Help"
             desc="Post a question to seek help from our community!"
             index="3"
           />

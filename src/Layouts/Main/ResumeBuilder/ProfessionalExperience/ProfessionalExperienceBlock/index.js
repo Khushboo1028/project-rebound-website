@@ -7,17 +7,6 @@ import { useAuth } from "../../../../../firebase/AuthContext";
 import { doc, onSnapshot } from "firebase/firestore";
 
 const ProfessionalExperienceBlock = (props) => {
-  // const experience_list = [
-  //   "Time Management",
-  //   "Organizational Skills",
-  //   "Technical Skills",
-  //   "Attention to Detail",
-  //   "Identifying Problems",
-  //   "Planning",
-  //   "Observational Skills",
-  //   "Supervising/Management"
-  // ];
-
   const { currentUser } = useAuth();
   let docRef;
   if (currentUser !== null) {
@@ -58,7 +47,7 @@ const ProfessionalExperienceBlock = (props) => {
       };
     }
     // eslint-disable-next-line
-  }, [professionalExperienceInfo, props]);
+  }, []);
 
   return (
     <Box

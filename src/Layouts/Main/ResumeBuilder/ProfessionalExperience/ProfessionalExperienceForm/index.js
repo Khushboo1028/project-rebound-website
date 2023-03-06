@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { inputStyle, multiLineInputStyle } from "../../styles";
 import {
   Box,
@@ -9,8 +9,17 @@ import {
   Checkbox
 } from "@mui/material";
 import { Colors } from "../../../../../constants/Colors";
+import { db } from "../../../../../firebase/firebase";
+import { useAuth } from "../../../../../firebase/AuthContext";
+import { doc, onSnapshot } from "firebase/firestore";
 
 const ProfessionalExperienceForm = (props) => {
+  const { currentUser } = useAuth();
+  let docRef;
+  if (currentUser !== null) {
+    docRef = doc(db, "users", currentUser.uid);
+  }
+
   const [inputList, setInputList] = useState([
     {
       position: "",
@@ -20,6 +29,32 @@ const ProfessionalExperienceForm = (props) => {
       description: ""
     }
   ]);
+
+  useEffect(() => {
+    if (currentUser !== null) {
+      const unsubscribe = onSnapshot(docRef, (doc) => {
+        setInputList(() => {
+          const newList = doc.data().professional_experience_info;
+          // eslint-disable-next-line
+          if (newList) {
+            // eslint-disable-next-line
+            newList.map((e, index) => {
+              if (index < inputList.length) {
+                inputList.push(e);
+              }
+            });
+          }
+
+          return newList;
+        });
+      });
+
+      return () => {
+        unsubscribe();
+      };
+    }
+    // eslint-disable-next-line
+  }, []);
 
   const onAddBtnClick = () => {
     let newField = {

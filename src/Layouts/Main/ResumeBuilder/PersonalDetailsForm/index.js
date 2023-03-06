@@ -2,52 +2,49 @@ import React, { useEffect, useState } from "react";
 import { Colors } from "../../../../constants/Colors";
 import { Box, Grid, TextField, Icon } from "@mui/material";
 import { inputStyle } from "../styles";
+import { db } from "../../../../firebase/firebase";
+import { useAuth } from "../../../../firebase/AuthContext";
+import { doc, onSnapshot } from "firebase/firestore";
 
 const PersonalDetailsForm = (props) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zipCode, setZipCode] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
+  const { currentUser } = useAuth();
+  let docRef;
+  if (currentUser !== null) {
+    docRef = doc(db, "users", currentUser.uid);
+  }
 
-  const [personalInfo, setPersonalInfo] = useState({
-    firstName: firstName,
-    lastName: lastName,
-    address: address,
-    city: city,
-    state: state,
-    zipCode: zipCode,
-    phone: phone,
-    email: email
-  });
+  const [personalInfo, setPersonalInfo] = useState([
+    {
+      firstName: "",
+      lastName: "",
+      address: "",
+      city: "",
+      state: "",
+      zipCode: "",
+      phone: "",
+      email: ""
+    }
+  ]);
 
   useEffect(() => {
-    setPersonalInfo({
-      firstName: firstName,
-      lastName: lastName,
-      address: address,
-      city: city,
-      state: state,
-      zipCode: zipCode,
-      phone: phone,
-      email: email
-    });
+    if (currentUser !== null) {
+      const unsubscribe = onSnapshot(docRef, (doc) => {
+        const personal_info = doc.data().personal_info;
+        setPersonalInfo(personal_info);
+      });
+
+      return () => {
+        unsubscribe();
+      };
+    }
+  }, []);
+
+  const handleFormChange = (e) => {
+    const data = [...personalInfo];
+    data[0][e.target.name] = e.target.value;
+    setPersonalInfo(data);
     props.dataFromPersonalInfo(personalInfo);
-  }, [
-    firstName,
-    lastName,
-    address,
-    city,
-    state,
-    zipCode,
-    phone,
-    email,
-    personalInfo,
-    props
-  ]);
+  };
 
   return (
     <Box
@@ -142,8 +139,11 @@ const PersonalDetailsForm = (props) => {
               required
               label="First Name"
               variant="filled"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              value={personalInfo.firstName}
+              name="firstname"
+              onChange={(e) => {
+                handleFormChange(e);
+              }}
               focused
             />
           </Box>
@@ -163,8 +163,11 @@ const PersonalDetailsForm = (props) => {
               required
               label="Last Name"
               variant="filled"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              value={personalInfo.lastName}
+              name="lastName"
+              onChange={(e) => {
+                handleFormChange(e);
+              }}
               focused
             />
           </Box>
@@ -180,23 +183,16 @@ const PersonalDetailsForm = (props) => {
               }}
               autoComplete="off"
             >
-              {/* <TextField
-                  sx={inputStyle}
-                  required
-                  id="filled-multiline-static"
-                  label="Address"
-                  multiline
-                  rows={4}
-                  defaultValue="Default Valueeeee"
-                  variant="filled"
-                /> */}
               <TextField
                 sx={inputStyle}
                 required
                 label="Address"
                 variant="filled"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                value={personalInfo.address}
+                name="address"
+                onChange={(e) => {
+                  handleFormChange(e);
+                }}
                 focused
               />
             </Box>
@@ -217,8 +213,11 @@ const PersonalDetailsForm = (props) => {
               required
               label="City"
               variant="filled"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
+              value={personalInfo.city}
+              name="city"
+              onChange={(e) => {
+                handleFormChange(e);
+              }}
               focused
             />
           </Box>
@@ -238,8 +237,11 @@ const PersonalDetailsForm = (props) => {
               required
               label="State"
               variant="filled"
-              value={state}
-              onChange={(e) => setState(e.target.value)}
+              value={personalInfo.state}
+              name="state"
+              onChange={(e) => {
+                handleFormChange(e);
+              }}
               focused
             />
           </Box>
@@ -259,8 +261,11 @@ const PersonalDetailsForm = (props) => {
               required
               label="Zip Code"
               variant="filled"
-              value={zipCode}
-              onChange={(e) => setZipCode(e.target.value)}
+              value={personalInfo.zipCode}
+              name="zipCode"
+              onChange={(e) => {
+                handleFormChange(e);
+              }}
               focused
             />
           </Box>
@@ -281,8 +286,11 @@ const PersonalDetailsForm = (props) => {
               required
               label="Phone"
               variant="filled"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              value={personalInfo.phone}
+              name="phone"
+              onChange={(e) => {
+                handleFormChange(e);
+              }}
               focused
             />
           </Box>
@@ -302,8 +310,11 @@ const PersonalDetailsForm = (props) => {
               required
               label="Email"
               variant="filled"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={personalInfo.email}
+              name="email"
+              onChange={(e) => {
+                handleFormChange(e);
+              }}
               focused
             />
           </Box>

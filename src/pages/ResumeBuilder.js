@@ -10,6 +10,7 @@ import ProfessionalExperienceBlock from "../Layouts/Main/ResumeBuilder/Professio
 import { Timestamp } from "firebase/firestore";
 import Navbar from "../Layouts/Navbar";
 import Footer from "../Layouts/Footer";
+import ObjectiveForm from "../Layouts/Main/ResumeBuilder/ObjectiveForm";
 
 const ResumeBuilder = () => {
   const { currentUser } = useAuth();
@@ -19,13 +20,15 @@ const ResumeBuilder = () => {
   const [professionalExperienceInfo, setProfessionalExperienceInfo] =
     useState();
   const [skillsInfo, setSkillsInfo] = useState();
+  const [objective, setObjective] = useState();
 
   const resumeData = {
     date_resume_updated: Timestamp.fromDate(new Date()),
     personal_info: personalInfo,
     education_info: educationInfo,
     professional_experience_info: professionalExperienceInfo,
-    skills_info: skillsInfo
+    skills_info: skillsInfo,
+    objective: objective
   };
 
   useEffect(() => {
@@ -40,7 +43,19 @@ const ResumeBuilder = () => {
   }, [currentUser, navigate]);
 
   const dataFromPersonalInfo = (personalInfo) => {
-    setPersonalInfo(personalInfo);
+    if (personalInfo === undefined) {
+      setPersonalInfo([]);
+    } else {
+      setPersonalInfo(personalInfo);
+    }
+  };
+
+  const dataFromObjective = (objectiveInfo) => {
+    if (personalInfo === undefined) {
+      setObjective([]);
+    } else {
+      setObjective(objectiveInfo);
+    }
   };
 
   const dataFromEducationInfo = (educationInfo) => {
@@ -73,6 +88,10 @@ const ResumeBuilder = () => {
       <div>
         <ResumeBuilderIntro />
         <div style={{ padding: "1rem", marginTop: "3rem" }}>
+          <ObjectiveForm dataFromObjective={dataFromObjective} />
+        </div>
+
+        <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
           <PersonalDetailsForm dataFromPersonalInfo={dataFromPersonalInfo} />
         </div>
         <div style={{ padding: "1rem", marginTop: "0.5rem" }}>

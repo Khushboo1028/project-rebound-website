@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Grid, Icon, TextField } from "@mui/material";
 import { Colors } from "../../../../../constants/Colors";
 import {
@@ -9,7 +9,17 @@ import {
   helpButtonContainer
 } from "../../styles";
 
+import { db } from "../../../../../firebase/firebase";
+import { useAuth } from "../../../../../firebase/AuthContext";
+import { doc, onSnapshot } from "firebase/firestore";
+
 const EducationForm = (props) => {
+  const { currentUser } = useAuth();
+  let docRef;
+  if (currentUser !== null) {
+    docRef = doc(db, "users", currentUser.uid);
+  }
+
   const [inputList, setInputList] = useState([
     {
       schoolName: "",
@@ -20,6 +30,32 @@ const EducationForm = (props) => {
       fieldOfStudy: ""
     }
   ]);
+
+  useEffect(() => {
+    if (currentUser !== null) {
+      const unsubscribe = onSnapshot(docRef, (doc) => {
+        setInputList(() => {
+          const newList = doc.data().education_info;
+          // eslint-disable-next-line
+          if (newList) {
+            // eslint-disable-next-line
+            newList.map((e, index) => {
+              if (index < inputList.length) {
+                inputList.push(e);
+              }
+            });
+          }
+
+          return newList;
+        });
+      });
+
+      return () => {
+        unsubscribe();
+      };
+    }
+    // eslint-disable-next-line
+  }, []);
 
   const onAddBtnClick = () => {
     let newField = {
