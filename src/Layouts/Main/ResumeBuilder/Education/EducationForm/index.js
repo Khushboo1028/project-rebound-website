@@ -9,16 +9,10 @@ import {
   helpButtonContainer
 } from "../../styles";
 
-import { db } from "../../../../../firebase/firebase";
 import { useAuth } from "../../../../../firebase/AuthContext";
-import { doc, onSnapshot } from "firebase/firestore";
 
 const EducationForm = ({ dataFromEducationInfo, dataFromFirebase }) => {
   const { currentUser } = useAuth();
-  let docRef;
-  if (currentUser !== null) {
-    docRef = doc(db, "users", currentUser.uid);
-  }
 
   const [inputList, setInputList] = useState([
     {
@@ -58,6 +52,7 @@ const EducationForm = ({ dataFromEducationInfo, dataFromFirebase }) => {
     let data = [...inputList];
     data.splice(index, 1);
     setInputList(data);
+    dataFromEducationInfo(data);
   };
 
   const handleFormChange = (index, event) => {

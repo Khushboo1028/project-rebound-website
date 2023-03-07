@@ -9,19 +9,14 @@ import {
   Checkbox
 } from "@mui/material";
 import { Colors } from "../../../../../constants/Colors";
-import { db } from "../../../../../firebase/firebase";
+
 import { useAuth } from "../../../../../firebase/AuthContext";
-import { doc, onSnapshot } from "firebase/firestore";
 
 const ProfessionalExperienceForm = ({
   dataFromProfessionalExperienceInfo,
   dataFromFirebase
 }) => {
   const { currentUser } = useAuth();
-  let docRef;
-  if (currentUser !== null) {
-    docRef = doc(db, "users", currentUser.uid);
-  }
 
   const [inputList, setInputList] = useState([
     {
@@ -59,6 +54,7 @@ const ProfessionalExperienceForm = ({
     let data = [...inputList];
     data.splice(index, 1);
     setInputList(data);
+    dataFromProfessionalExperienceInfo(data);
   };
 
   const handleFormChange = (index, event) => {

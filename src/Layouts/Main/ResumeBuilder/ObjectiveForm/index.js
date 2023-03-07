@@ -1,29 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Colors } from "../../../../constants/Colors";
 import { Box, Grid, TextField, Icon } from "@mui/material";
 import { multiLineInputStyle } from "../styles";
-import { db } from "../../../../firebase/firebase";
 import { useAuth } from "../../../../firebase/AuthContext";
-import { doc, onSnapshot } from "firebase/firestore";
 
-const ObjectiveForm = (props) => {
+const ObjectiveForm = ({ dataFromObjective, dataFromFirebase }) => {
   const { currentUser } = useAuth();
-  let docRef;
-  if (currentUser !== null) {
-    docRef = doc(db, "users", currentUser.uid);
-  }
 
-  const [objective, setObjective] = useState([
-    {
-      description: ""
+  const [description, setDescription] = useState();
+  const [objective, setObjective] = useState({
+    description: description
+  });
+
+  useEffect(() => {
+    if (currentUser !== null) {
+      dataFromObjective(objective);
+
+      if (dataFromFirebase !== undefined) {
+        const objectiveFirebase = dataFromFirebase.objective;
+
+        if (objectiveFirebase !== undefined) {
+          setObjective(objectiveFirebase);
+        }
+      }
     }
-  ]);
+    // eslint-disable-next-line
+  }, [dataFromFirebase]);
 
   const handleFormChange = (e) => {
-    const data = [...objective];
-    data[0][e.target.name] = e.target.value;
-    setObjective(data);
-    props.dataFromObjective(objective);
+    setDescription(e.target.value);
+    dataFromObjective(description);
   };
 
   return (
@@ -124,7 +130,7 @@ const ObjectiveForm = (props) => {
                 label="Objective / Summary"
                 variant="standard"
                 multiline
-                value={objective.description}
+                value={description}
                 name="description"
                 onChange={(e) => {
                   handleFormChange(e);

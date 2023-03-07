@@ -24,15 +24,15 @@ const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
       resumeData.professional_experience_info =
         dataFromFirebase.professional_experience_info;
     }
-    console.log(resumeData);
+    console.log("data to send: ", resumeData);
     updateData(docRef, resumeData);
 
-    // navigate({
-    //   pathname: "/generateResume",
-    //   search: createSearchParams({
-    //     resumeData: JSON.stringify(resumeData)
-    //   }).toString()
-    // });
+    navigate({
+      pathname: "/generateResume",
+      search: createSearchParams({
+        resumeData: JSON.stringify(resumeData)
+      }).toString()
+    });
   };
 
   return (

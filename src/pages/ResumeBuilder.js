@@ -37,8 +37,8 @@ const ResumeBuilder = () => {
     personal_info: personalInfo,
     education_info: educationInfo,
     professional_experience_info: professionalExperienceInfo,
-    skills_info: skillsInfo
-    // objective: objective
+    skills_info: skillsInfo,
+    objective: objective
   };
 
   useEffect(() => {
@@ -60,10 +60,11 @@ const ResumeBuilder = () => {
         search: createSearchParams({ fromPath: "/resumeBuilder" }).toString()
       });
     }
+    // eslint-disable-next-line
   }, [currentUser, navigate]);
 
   const dataFromPersonalInfo = (personalInfo) => {
-    if (personalInfo === undefined) {
+    if (personalInfo.firstName === "") {
       setPersonalInfo({});
     } else {
       setPersonalInfo(personalInfo);
@@ -75,7 +76,7 @@ const ResumeBuilder = () => {
   };
 
   const dataFromObjective = (objectiveInfo) => {
-    if (personalInfo === undefined) {
+    if (objectiveInfo.description === "") {
       setObjective({});
     } else {
       setObjective(objectiveInfo);
@@ -100,7 +101,10 @@ const ResumeBuilder = () => {
       <div>
         <ResumeBuilderIntro />
         <div style={{ padding: "1rem", marginTop: "3rem" }}>
-          <ObjectiveForm dataFromObjective={dataFromObjective} />
+          <ObjectiveForm
+            dataFromObjective={dataFromObjective}
+            dataFromFirebase={dataFromFirebase}
+          />
         </div>
 
         <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
