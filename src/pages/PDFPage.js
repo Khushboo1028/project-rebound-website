@@ -156,10 +156,23 @@ const MyDoc = () => {
       {resumeData !== undefined ? (
         <Page size="A4">
           <View style={styles.section}>
-            <Text style={styles.name}>Khushboo Gandhi</Text>
+            <Text style={styles.name}>
+              {resumeData.personal_info.firstName +
+                " " +
+                resumeData.personal_info.lastName}
+            </Text>
             <Text style={styles.desc}>
-              50 Chumasero Dr, San Francisco, CA 94132 | kgandhi1@mail.sfsu.edu
-              | 4153162467
+              {resumeData.personal_info.address +
+                ", " +
+                resumeData.personal_info.city +
+                ", " +
+                resumeData.personal_info.state +
+                ", " +
+                resumeData.personal_info.zipCode +
+                " | " +
+                resumeData.personal_info.email +
+                " | " +
+                resumeData.personal_info.phone}
             </Text>
 
             {/* //TODO: Check This empty thing is correct*/}

@@ -138,6 +138,7 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 onChange={(e) => {
                   // setFirstName(e.target.value);
                   personalInfo["firstName"] = e.target.value;
+                  dataFromPersonalInfo(personalInfo);
                 }}
                 focused
               />
@@ -162,6 +163,8 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 name="lastName"
                 onChange={(e) => {
                   personalInfo["lastName"] = e.target.value;
+
+                  dataFromPersonalInfo(personalInfo);
                 }}
                 focused
               />
@@ -187,6 +190,7 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                   name="address"
                   onChange={(e) => {
                     personalInfo["address"] = e.target.value;
+                    dataFromPersonalInfo(personalInfo);
                   }}
                   focused
                 />
@@ -212,6 +216,7 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 name="city"
                 onChange={(e) => {
                   personalInfo["city"] = e.target.value;
+                  dataFromPersonalInfo(personalInfo);
                 }}
                 focused
               />
@@ -236,6 +241,7 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 name="state"
                 onChange={(e) => {
                   personalInfo["state"] = e.target.value;
+                  dataFromPersonalInfo(personalInfo);
                 }}
                 focused
               />
@@ -260,6 +266,7 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 name="zipCode"
                 onChange={(e) => {
                   personalInfo["zipCode"] = e.target.value;
+                  dataFromPersonalInfo(personalInfo);
                 }}
                 focused
               />
@@ -285,6 +292,7 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 name="phone"
                 onChange={(e) => {
                   personalInfo["phone"] = e.target.value;
+                  dataFromPersonalInfo(personalInfo);
                 }}
                 focused
               />
@@ -309,6 +317,7 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 name="email"
                 onChange={(e) => {
                   personalInfo["email"] = e.target.value;
+                  dataFromPersonalInfo(personalInfo);
                 }}
                 focused
               />

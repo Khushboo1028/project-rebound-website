@@ -64,6 +64,7 @@ const ResumeBuilder = () => {
   }, [currentUser, navigate]);
 
   const dataFromPersonalInfo = (personalInfo) => {
+    console.log("personal info is ", personalInfo);
     if (personalInfo.firstName === "") {
       setPersonalInfo({});
     } else {
@@ -77,9 +78,11 @@ const ResumeBuilder = () => {
 
   const dataFromObjective = (objectiveInfo) => {
     console.log("objective info ", objectiveInfo);
-    if (objectiveInfo.description === "") {
-      setObjective({});
+    if (objectiveInfo === undefined || objective === "") {
+      //setting from firebase
+      setObjective(objective);
     } else {
+      //setting from props
       setObjective(objectiveInfo);
     }
   };
