@@ -96,7 +96,7 @@ const MyDoc = () => {
       } else {
         let data = JSON.parse(searchParams.get("resumeData"));
         setResumeData(data);
-        console.log(data);
+        console.log("resume data in pdf page: ", data);
       }
     } else {
       navigate("/login");
@@ -104,52 +104,52 @@ const MyDoc = () => {
     // eslint-disable-next-line
   }, []);
 
-  const educationList = [
-    {
-      schoolName: "San Francisco State University",
-      startDate: "Fall 2021",
-      endDate: "Spring 2023",
-      schoolLocation: "San Francisco, CA",
-      degree: "MSc",
-      fieldOfStudy: "Computer Science"
-    },
-    {
-      schoolName: "San Francisco State University",
-      startDate: "Fall 2021",
-      endDate: "Spring 2023",
-      schoolLocation: "San Francisco, CA",
-      degree: "MSc",
-      fieldOfStudy: "Computer Science"
-    }
-  ];
+  // const educationList = [
+  //   {
+  //     schoolName: "San Francisco State University",
+  //     startDate: "Fall 2021",
+  //     endDate: "Spring 2023",
+  //     schoolLocation: "San Francisco, CA",
+  //     degree: "MSc",
+  //     fieldOfStudy: "Computer Science"
+  //   },
+  //   {
+  //     schoolName: "San Francisco State University",
+  //     startDate: "Fall 2021",
+  //     endDate: "Spring 2023",
+  //     schoolLocation: "San Francisco, CA",
+  //     degree: "MSc",
+  //     fieldOfStudy: "Computer Science"
+  //   }
+  // ];
 
-  const experience_list = [
-    {
-      position: "Accessible Media Student Developer",
-      startDate: "Sep 2019",
-      endDate: "June 2023",
-      companyName: "San Francisco State University",
-      description:
-        "– Developed 8+ web pages (tabs) in caption management website using JavaScript (React.js, Redux, HTML, CSS)\n– Developed 10+ features and fixed bugs in the existing components\n– Fetched data using API calls and presented on the web page\n– Processed books using Accessible Technology like Adobe Accessibility features, Kurzweil, Abby Fine Reader"
-    },
-    {
-      position: "Accessible Media Student Developer",
-      startDate: "Sep 2019",
-      endDate: "June 2023",
-      companyName: "San Francisco State University",
-      description:
-        "– Developed 8+ web pages (tabs) in caption management website using JavaScript (React.js, Redux, HTML, CSS)\n– Developed 10+ features and fixed bugs in the existing components\n– Fetched data using API calls and presented on the web page\n– Processed books using Accessible Technology like Adobe Accessibility features, Kurzweil, Abby Fine Reader"
-    }
-  ];
+  // const experience_list = [
+  //   {
+  //     position: "Accessible Media Student Developer",
+  //     startDate: "Sep 2019",
+  //     endDate: "June 2023",
+  //     companyName: "San Francisco State University",
+  //     description:
+  //       "– Developed 8+ web pages (tabs) in caption management website using JavaScript (React.js, Redux, HTML, CSS)\n– Developed 10+ features and fixed bugs in the existing components\n– Fetched data using API calls and presented on the web page\n– Processed books using Accessible Technology like Adobe Accessibility features, Kurzweil, Abby Fine Reader"
+  //   },
+  //   {
+  //     position: "Accessible Media Student Developer",
+  //     startDate: "Sep 2019",
+  //     endDate: "June 2023",
+  //     companyName: "San Francisco State University",
+  //     description:
+  //       "– Developed 8+ web pages (tabs) in caption management website using JavaScript (React.js, Redux, HTML, CSS)\n– Developed 10+ features and fixed bugs in the existing components\n– Fetched data using API calls and presented on the web page\n– Processed books using Accessible Technology like Adobe Accessibility features, Kurzweil, Abby Fine Reader"
+  //   }
+  // ];
 
-  const skills = [
-    "Web Development",
-    "Mobile Development",
-    "UI/UX",
-    "Adobe Photoshop",
-    "Adobe Illustrator",
-    "Microsoft Suite"
-  ];
+  // const skills = [
+  //   "Web Development",
+  //   "Mobile Development",
+  //   "UI/UX",
+  //   "Adobe Photoshop",
+  //   "Adobe Illustrator",
+  //   "Microsoft Suite"
+  // ];
 
   return (
     <Document>
@@ -161,18 +161,21 @@ const MyDoc = () => {
               50 Chumasero Dr, San Francisco, CA 94132 | kgandhi1@mail.sfsu.edu
               | 4153162467
             </Text>
-            <Text style={styles.heading}>Objective</Text>
-            <Text style={styles.line} />
-            <Text style={styles.summary}>
-              Computer Science graduate student with experience in web and
-              mobile application development with a thorough understanding of
-              object oriented programming. Delivery-driven, committed to problem
-              solving with expertise in JavaScript, Java and Python. Looking for
-              a full time role in a software engineering position.
-            </Text>
+
+            {/* //TODO: Check This empty thing is correct*/}
+            {JSON.stringify(resumeData.objective) !== "{}" ? (
+              <View>
+                <Text style={styles.heading}>Objective</Text>
+                <Text style={styles.line} />
+                <Text style={styles.summary}>{resumeData.objective}</Text>
+              </View>
+            ) : (
+              <Text></Text>
+            )}
+
             <Text style={styles.heading}>Education</Text>
             <Text style={styles.line} />
-            {educationList.map((e, index) => {
+            {resumeData.education_info.map((e, index) => {
               return (
                 <View style={styles.viewContainer} key={index}>
                   <View styles={styles.educationContainer}>
@@ -195,7 +198,7 @@ const MyDoc = () => {
             {/* experience */}
             <Text style={styles.heading}>Experience</Text>
             <Text style={styles.line} />
-            {experience_list.map((e, index) => {
+            {resumeData.professional_experience_info.map((e, index) => {
               return (
                 <View style={styles.viewContainer} key={index}>
                   <View styles={styles.educationContainer}>
@@ -217,7 +220,7 @@ const MyDoc = () => {
             <Text style={styles.heading}>Skills</Text>
             <Text style={styles.line} />
 
-            {skills.map((e, index) => {
+            {resumeData.skills_info.map((e, index) => {
               return (
                 <View key={index}>
                   <Text style={styles.skill}>{e}</Text>
@@ -233,7 +236,7 @@ const MyDoc = () => {
   );
 };
 
-const TestPage = () => {
+const PDFPage = () => {
   const [instance, updateInstance] = usePDF({ document: MyDoc() });
   const [download, setDownload] = useState(false);
 
@@ -257,4 +260,4 @@ const TestPage = () => {
   );
 };
 
-export default TestPage;
+export default PDFPage;

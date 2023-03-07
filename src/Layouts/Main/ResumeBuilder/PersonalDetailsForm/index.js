@@ -16,7 +16,7 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
 
-  const personalInfo = {
+  const [personalInfo, setPersonalInfo] = useState({
     firstName: firstName,
     lastName: lastName,
     address: address,
@@ -25,23 +25,17 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
     zipCode: zipCode,
     phone: phone,
     email: email
-  };
+  });
 
   useEffect(() => {
-    dataFromPersonalInfo(personalInfo);
     if (currentUser !== null) {
       if (dataFromFirebase !== undefined) {
-        const personal_info = dataFromFirebase.personal_info;
-        setFirstName(personal_info.firstName);
-        setLastName(personal_info.lastName);
-        setAddress(personal_info.address);
-        setCity(personal_info.city);
-        setState(personal_info.state);
-        setZipCode(personal_info.state);
-        setPhone(personal_info.phone);
-        setEmail(personal_info.email);
+        const personal_info_firebase = dataFromFirebase.personal_info;
+        setPersonalInfo(personal_info_firebase);
+        dataFromPersonalInfo(personalInfo);
       }
     }
+
     // eslint-disable-next-line
   }, [dataFromFirebase]);
 
@@ -139,10 +133,11 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 required
                 label="First Name"
                 variant="filled"
-                value={firstName}
+                value={personalInfo["firstName"]}
                 name="firstname"
                 onChange={(e) => {
-                  setFirstName(e.target.value);
+                  // setFirstName(e.target.value);
+                  personalInfo["firstName"] = e.target.value;
                 }}
                 focused
               />
@@ -163,10 +158,10 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 required
                 label="Last Name"
                 variant="filled"
-                value={lastName}
+                value={personalInfo["lastName"]}
                 name="lastName"
                 onChange={(e) => {
-                  setLastName(e.target.value);
+                  personalInfo["lastName"] = e.target.value;
                 }}
                 focused
               />
@@ -188,10 +183,10 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                   required
                   label="Address"
                   variant="filled"
-                  value={address}
+                  value={personalInfo["address"]}
                   name="address"
                   onChange={(e) => {
-                    setAddress(e.target.value);
+                    personalInfo["address"] = e.target.value;
                   }}
                   focused
                 />
@@ -213,10 +208,10 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 required
                 label="City"
                 variant="filled"
-                value={city}
+                value={personalInfo["city"]}
                 name="city"
                 onChange={(e) => {
-                  setCity(e.target.value);
+                  personalInfo["city"] = e.target.value;
                 }}
                 focused
               />
@@ -237,10 +232,10 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 required
                 label="State"
                 variant="filled"
-                value={state}
+                value={personalInfo["state"]}
                 name="state"
                 onChange={(e) => {
-                  setState(e.target.value);
+                  personalInfo["state"] = e.target.value;
                 }}
                 focused
               />
@@ -261,10 +256,10 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 required
                 label="Zip Code"
                 variant="filled"
-                value={zipCode}
+                value={personalInfo["zipCode"]}
                 name="zipCode"
                 onChange={(e) => {
-                  setZipCode(e.target.value);
+                  personalInfo["zipCode"] = e.target.value;
                 }}
                 focused
               />
@@ -286,10 +281,10 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 required
                 label="Phone"
                 variant="filled"
-                value={phone}
+                value={personalInfo["phone"]}
                 name="phone"
                 onChange={(e) => {
-                  setPhone(e.target.value);
+                  personalInfo["phone"] = e.target.value;
                 }}
                 focused
               />
@@ -310,10 +305,10 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 required
                 label="Email"
                 variant="filled"
-                value={email}
+                value={personalInfo["email"]}
                 name="email"
                 onChange={(e) => {
-                  setEmail(e.target.value);
+                  personalInfo["email"] = e.target.value;
                 }}
                 focused
               />

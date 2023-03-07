@@ -7,8 +7,7 @@ import SignUp from "./pages/SignUp";
 import { AuthProvider } from "./firebase/AuthContext";
 import UserInformation from "./pages/UserInformation";
 import MyResume from "./pages/MyResume";
-
-import TestPage from "./pages/TestPage";
+import PDFPage from "./pages/PDFPage";
 
 function App() {
   return (
@@ -27,7 +26,7 @@ function App() {
 
           <Route path="/myResume" element={<MyResume />} />
 
-          <Route path="/generateResume" element={<TestPage />} />
+          <Route path="/generateResume" element={<PDFPage />} />
         </Routes>
       </Router>
     </AuthProvider>

@@ -8,19 +8,16 @@ const ObjectiveForm = ({ dataFromObjective, dataFromFirebase }) => {
   const { currentUser } = useAuth();
 
   const [description, setDescription] = useState();
-  const [objective, setObjective] = useState({
-    description: description
-  });
+  const [objective, setObjective] = useState("");
 
   useEffect(() => {
     if (currentUser !== null) {
-      dataFromObjective(objective);
-
       if (dataFromFirebase !== undefined) {
         const objectiveFirebase = dataFromFirebase.objective;
 
         if (objectiveFirebase !== undefined) {
           setObjective(objectiveFirebase);
+          dataFromObjective(objective);
         }
       }
     }
@@ -28,8 +25,8 @@ const ObjectiveForm = ({ dataFromObjective, dataFromFirebase }) => {
   }, [dataFromFirebase]);
 
   const handleFormChange = (e) => {
-    setDescription(e.target.value);
-    dataFromObjective(description);
+    setObjective(e.target.value);
+    dataFromObjective(objective);
   };
 
   return (
@@ -130,7 +127,7 @@ const ObjectiveForm = ({ dataFromObjective, dataFromFirebase }) => {
                 label="Objective / Summary"
                 variant="standard"
                 multiline
-                value={description}
+                value={objective}
                 name="description"
                 onChange={(e) => {
                   handleFormChange(e);

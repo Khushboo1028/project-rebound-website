@@ -76,6 +76,7 @@ const ResumeBuilder = () => {
   };
 
   const dataFromObjective = (objectiveInfo) => {
+    console.log("objective info ", objectiveInfo);
     if (objectiveInfo.description === "") {
       setObjective({});
     } else {

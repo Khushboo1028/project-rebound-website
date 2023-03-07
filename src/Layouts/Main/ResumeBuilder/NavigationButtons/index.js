@@ -24,6 +24,11 @@ const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
       resumeData.professional_experience_info =
         dataFromFirebase.professional_experience_info;
     }
+
+    if (JSON.stringify(resumeData.personal_info) === "{}") {
+      resumeData.personal_info = dataFromFirebase.personal_info;
+    }
+
     console.log("data to send: ", resumeData);
     updateData(docRef, resumeData);
 
