@@ -83,21 +83,23 @@ const styles = StyleSheet.create({
   }
 });
 
-const MyDoc = () => {
+const MyDoc = (data) => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
-  const [resumeData, setResumeData] = useState();
+  const [resumeData, setResumeData] = useState(data);
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
     if (currentUser) {
-      if (!searchParams.get("resumeData")) {
-        navigate("/");
-      } else {
-        let data = JSON.parse(searchParams.get("resumeData"));
-        setResumeData(data);
-        console.log("resume data in pdf page: ", data);
-      }
+      // if (!searchParams.get("resumeData")) {
+      //   navigate("/");
+      // } else {
+      //   let data = JSON.parse(searchParams.get("resumeData"));
+      //   setResumeData(data);
+      //   console.log("resume data in pdf page: ", data);
+      // }
+
+      console.log("resume doc area ", data);
     } else {
       navigate("/login");
     }
@@ -249,9 +251,13 @@ const MyDoc = () => {
   );
 };
 
-const PDFPage = () => {
-  const [instance, updateInstance] = usePDF({ document: MyDoc() });
+const PDFPage = ({ resumeData }) => {
+  const [instance, updateInstance] = usePDF({ document: MyDoc(resumeData) });
   const [download, setDownload] = useState(false);
+
+  useEffect(() => {
+    console.log("in pdf page ", resumeData);
+  }, []);
 
   const clickPdf = () => {
     updateInstance(MyDoc);

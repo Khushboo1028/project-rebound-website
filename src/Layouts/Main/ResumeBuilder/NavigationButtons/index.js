@@ -1,5 +1,5 @@
-import React from "react";
-import { Box, Grid, Button } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Grid, Button, Modal } from "@mui/material";
 import { formBackground } from "../styles";
 import { Colors } from "../../../../constants/Colors";
 import { updateData } from "../../../../firebase/firebaseReadWrite";
@@ -7,6 +7,7 @@ import { useAuth } from "../../../../firebase/AuthContext";
 import { db } from "../../../../firebase/firebase";
 import { doc } from "firebase/firestore";
 import { useNavigate, createSearchParams } from "react-router-dom";
+import PDFPage from "../../../../pages/PDFPage";
 
 const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
   const { currentUser } = useAuth();
@@ -15,6 +16,8 @@ const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
   if (currentUser !== null) {
     docRef = doc(db, "users", currentUser.uid);
   }
+
+  const [isResumeBtnClicked, setResumeBtnClicked] = useState(false);
 
   const generatePdf = () => {
     if (resumeData.education_info === undefined) {
@@ -30,14 +33,32 @@ const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
     }
 
     console.log("data to send: ", resumeData);
-    updateData(docRef, resumeData);
+    // updateData(docRef, resumeData);
 
-    navigate({
-      pathname: "/generateResume",
-      search: createSearchParams({
-        resumeData: JSON.stringify(resumeData)
-      }).toString()
-    });
+    // navigate({
+    //   pathname: "/generateResume",
+    //   search: createSearchParams({
+    //     resumeData: JSON.stringify(resumeData)
+    //   }).toString()
+    // });
+
+    setResumeBtnClicked(true);
+  };
+
+  const openResumeDownloadModel = () => {
+    const handleClose = () => setResumeBtnClicked(false);
+
+    return (
+      <Modal
+        open={isResumeBtnClicked}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        closeAfterTransition
+      >
+        <PDFPage resumeData={resumeData} />
+      </Modal>
+    );
   };
 
   return (
@@ -91,6 +112,7 @@ const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
           </Box>
         </Grid>
       </Grid>
+      <div>{openResumeDownloadModel()}</div>
     </Box>
   );
 };
