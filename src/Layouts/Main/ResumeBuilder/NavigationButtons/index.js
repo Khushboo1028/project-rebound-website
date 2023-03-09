@@ -6,7 +6,7 @@ import { updateData } from "../../../../firebase/firebaseReadWrite";
 import { useAuth } from "../../../../firebase/AuthContext";
 import { db } from "../../../../firebase/firebase";
 import { doc } from "firebase/firestore";
-import { useNavigate, createSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PDFPage from "../../../../pages/PDFPage";
 
 const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
@@ -33,14 +33,7 @@ const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
     }
 
     console.log("data to send: ", resumeData);
-    // updateData(docRef, resumeData);
-
-    // navigate({
-    //   pathname: "/generateResume",
-    //   search: createSearchParams({
-    //     resumeData: JSON.stringify(resumeData)
-    //   }).toString()
-    // });
+    updateData(docRef, resumeData);
 
     setResumeBtnClicked(true);
   };

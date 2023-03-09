@@ -9,7 +9,8 @@ import {
   Document,
   StyleSheet
 } from "@react-pdf/renderer";
-import { Button } from "@mui/material";
+import { Button, Box, Grid } from "@mui/material";
+import { Colors } from "../constants/Colors";
 
 const styles = StyleSheet.create({
   section: {
@@ -87,18 +88,9 @@ const MyDoc = (data) => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   const [resumeData, setResumeData] = useState(data);
-  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     if (currentUser) {
-      // if (!searchParams.get("resumeData")) {
-      //   navigate("/");
-      // } else {
-      //   let data = JSON.parse(searchParams.get("resumeData"));
-      //   setResumeData(data);
-      //   console.log("resume data in pdf page: ", data);
-      // }
-
       console.log("resume doc area ", data);
     } else {
       navigate("/login");
@@ -253,28 +245,64 @@ const MyDoc = (data) => {
 
 const PDFPage = ({ resumeData }) => {
   const [instance, updateInstance] = usePDF({ document: MyDoc(resumeData) });
-  const [download, setDownload] = useState(false);
 
   useEffect(() => {
     console.log("in pdf page ", resumeData);
-  }, []);
-
-  const clickPdf = () => {
     updateInstance(MyDoc);
-    setDownload(true);
-  };
+  }, []);
 
   return (
     <div>
-      {download ? (
-        <Button>
-          <a href={instance.url} download="resume.pdf">
-            Download Resume
-          </a>
-        </Button>
-      ) : (
-        <Button onClick={clickPdf}>Click to Load</Button>
-      )}
+      <Box
+        sx={{
+          margin: "auto",
+          width: { md: "30%", sm: "30%", xs: "50%" },
+          mt: 10,
+          bgcolor: Colors.white,
+          borderRadius: "0.5rem",
+          boxShadow: 24,
+          p: 4
+        }}
+      >
+        <Grid container spacing={2}>
+          <Grid item md={6} xs={12}>
+            <Button
+              sx={{
+                backgroundColor: Colors.primaryColor,
+                margin: "auto",
+                width: "90%",
+                "&:hover": { backgroundColor: Colors.primaryColor }
+              }}
+            >
+              <a
+                href={instance.url}
+                download="resume.pdf"
+                style={{ textDecoration: "None", color: Colors.white }}
+              >
+                Download Resume
+              </a>
+            </Button>
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <Button
+              sx={{
+                margin: "auto",
+                width: "90%",
+                backgroundColor: Colors.primaryColor,
+                "&:hover": { backgroundColor: Colors.primaryColor }
+              }}
+            >
+              <a
+                href={instance.url}
+                target="_blank"
+                style={{ textDecoration: "None", color: Colors.white }}
+              >
+                View Resume
+              </a>
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
     </div>
   );
 };
