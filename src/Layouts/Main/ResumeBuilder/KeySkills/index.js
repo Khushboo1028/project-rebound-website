@@ -90,32 +90,17 @@ const KeySkillBlock = (props) => {
   const [autoCompleteValue, setAutoCompleteValue] = useState("");
   const [skills, setSkills] = useState([]);
   //can put all lists in one list instead of separating it out to avoid warnings
-  // const autoCompleteSkills = [
-  //   ...technicalSkills,
-  //   ...occupations,
-  //   ...verbalSkills,
-  //   ...greenSkills,
-  //   ...traversalSkills
-  // ];
 
-  // const autoCompleteSkills = ["skill 1", "skill 2", "skill 3"];
-
-  // useEffect(() => {
-  //   // eslint-disable-next-line
-
-  //   autoCompleteSkills.map((skill, index) => {
-  //     if (autoCompleteObjectSkills.length < autoCompleteSkills.length) {
-  //       autoCompleteObjectSkills.push({ id: index, label: skill });
-  //     }
-
-  //     console.log("here");
-  //   });
-  // }, [autoCompleteObjectSkills]);
+  useEffect(() => {
+    console.log("skill after adding is ", skills);
+    props.dataFromKeySkillsBlock(skills);
+    // eslint-disable-next-line
+  }, [skills]);
 
   const onAddBtnClick = (e) => {
     setSkills([...skills, autoCompleteValue]);
+
     setAutoCompleteValue("");
-    props.dataFromKeySkillsBlock(skills);
   };
 
   const onRemoveBtnClick = (index) => {
@@ -213,7 +198,7 @@ const KeySkillBlock = (props) => {
             onChange={(e) => setAutoCompleteValue(e.target.value)}
             onKeyPress={(e) => {
               if (e.key === "Enter") {
-                onAddBtnClick();
+                onAddBtnClick(e);
               }
             }}
             focused
@@ -222,40 +207,44 @@ const KeySkillBlock = (props) => {
 
         <Grid item sm={12} sx={{ margin: "auto", width: "100%" }}>
           {/* Adding component here */}
-          {skills.map((e, index) => {
-            return (
-              <Box sx={{ display: "flex", marginLeft: "0.4rem" }} key={index}>
-                <Grid container spacing={2}>
-                  <Grid item xs={11}>
-                    <Typography
-                      sx={{
-                        fontFamily: "Inria Sans",
-                        fontSize: "1.3rem",
-                        fontColor: Colors.primaryColor
-                      }}
-                    >
-                      {e}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <Box
-                      sx={{ padding: "0.5rem" }}
-                      onClick={() => {
-                        onRemoveBtnClick(index);
-                      }}
-                    >
-                      <CloseIcon
+          {skills !== undefined ? (
+            skills.map((e, index) => {
+              return (
+                <Box sx={{ display: "flex", marginLeft: "0.4rem" }} key={index}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={11}>
+                      <Typography
                         sx={{
-                          color: Colors.primaryColor,
-                          height: "1.4rem"
+                          fontFamily: "Inria Sans",
+                          fontSize: "1.3rem",
+                          fontColor: Colors.primaryColor
                         }}
-                      />
-                    </Box>
+                      >
+                        {e}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={1}>
+                      <Box
+                        sx={{ padding: "0.5rem" }}
+                        onClick={() => {
+                          onRemoveBtnClick(index);
+                        }}
+                      >
+                        <CloseIcon
+                          sx={{
+                            color: Colors.primaryColor,
+                            height: "1.4rem"
+                          }}
+                        />
+                      </Box>
+                    </Grid>
                   </Grid>
-                </Grid>
-              </Box>
-            );
-          })}
+                </Box>
+              );
+            })
+          ) : (
+            <Box></Box>
+          )}
         </Grid>
 
         <Grid item sm={4} sx={{ margin: "auto", width: "100%" }}></Grid>
