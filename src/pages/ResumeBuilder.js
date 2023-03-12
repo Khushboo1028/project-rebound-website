@@ -79,7 +79,7 @@ const ResumeBuilder = () => {
   const dataFromObjective = (objectiveInfo) => {
     console.log(objectiveInfo);
     if (objectiveInfo.isSkipped) {
-      setObjective(undefined);
+      setObjective(null);
     } else {
       if (
         objectiveInfo.objective === undefined ||

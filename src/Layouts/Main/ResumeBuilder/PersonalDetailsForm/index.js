@@ -7,14 +7,15 @@ import { useAuth } from "../../../../firebase/AuthContext";
 const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
   const { currentUser } = useAuth();
 
-  const [firstName] = useState("");
-  const [lastName] = useState("");
-  const [address] = useState("");
-  const [city] = useState("");
-  const [state] = useState("");
-  const [zipCode] = useState("");
-  const [phone] = useState("");
-  const [email] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zipCode, setZipCode] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [count, setCount] = useState(0);
 
   const [personalInfo, setPersonalInfo] = useState({
     firstName: firstName,
@@ -29,15 +30,38 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
 
   useEffect(() => {
     if (currentUser !== null) {
-      if (dataFromFirebase !== undefined) {
-        const personal_info_firebase = dataFromFirebase.personal_info;
-        setPersonalInfo(personal_info_firebase);
+      if (count < 1) {
+        if (dataFromFirebase !== undefined) {
+          const personal_info_firebase = dataFromFirebase.personal_info;
+          setPersonalInfo(personal_info_firebase);
+          setFirstName(personal_info_firebase.firstName);
+          setLastName(personal_info_firebase.lastName);
+          setAddress(personal_info_firebase.address);
+          setCity(personal_info_firebase.city);
+          setState(personal_info_firebase.state);
+          setZipCode(personal_info_firebase.zipCode);
+          setPhone(personal_info_firebase.phone);
+          setEmail(personal_info_firebase.email);
+
+          dataFromPersonalInfo(personalInfo);
+        }
+      } else {
+        setPersonalInfo({
+          firstName: firstName,
+          lastName: lastName,
+          address: address,
+          city: city,
+          state: state,
+          zipCode: zipCode,
+          phone: phone,
+          email: email
+        });
         dataFromPersonalInfo(personalInfo);
       }
     }
 
     // eslint-disable-next-line
-  }, [dataFromFirebase]);
+  }, [dataFromFirebase, count]);
 
   return (
     <Box>
@@ -133,15 +157,14 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 required
                 label="First Name"
                 variant="filled"
-                value={personalInfo["firstName"]}
+                value={firstName}
                 name="firstname"
                 InputProps={{
                   disableUnderline: true
                 }}
                 onChange={(e) => {
-                  // setFirstName(e.target.value);
-                  personalInfo["firstName"] = e.target.value;
-                  dataFromPersonalInfo(personalInfo);
+                  setFirstName(e.target.value);
+                  setCount(count + 1);
                 }}
                 focused
               />
@@ -162,12 +185,11 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 required
                 label="Last Name"
                 variant="filled"
-                value={personalInfo["lastName"]}
+                value={lastName}
                 name="lastName"
                 onChange={(e) => {
-                  personalInfo["lastName"] = e.target.value;
-
-                  dataFromPersonalInfo(personalInfo);
+                  setLastName(e.target.value);
+                  setCount(count + 1);
                 }}
                 InputProps={{
                   disableUnderline: true
@@ -192,11 +214,11 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                   required
                   label="Address"
                   variant="filled"
-                  value={personalInfo["address"]}
+                  value={address}
                   name="address"
                   onChange={(e) => {
-                    personalInfo["address"] = e.target.value;
-                    dataFromPersonalInfo(personalInfo);
+                    setAddress(e.target.value);
+                    setCount(count + 1);
                   }}
                   focused
                   InputProps={{
@@ -221,11 +243,11 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 required
                 label="City"
                 variant="filled"
-                value={personalInfo["city"]}
+                value={city}
                 name="city"
                 onChange={(e) => {
-                  personalInfo["city"] = e.target.value;
-                  dataFromPersonalInfo(personalInfo);
+                  setCity(e.target.value);
+                  setCount(count + 1);
                 }}
                 focused
                 InputProps={{
@@ -249,11 +271,11 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 required
                 label="State"
                 variant="filled"
-                value={personalInfo["state"]}
+                value={state}
                 name="state"
                 onChange={(e) => {
-                  personalInfo["state"] = e.target.value;
-                  dataFromPersonalInfo(personalInfo);
+                  setState(e.target.value);
+                  setCount(count + 1);
                 }}
                 focused
                 InputProps={{
@@ -277,11 +299,11 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 required
                 label="Zip Code"
                 variant="filled"
-                value={personalInfo["zipCode"]}
+                value={zipCode}
                 name="zipCode"
                 onChange={(e) => {
-                  personalInfo["zipCode"] = e.target.value;
-                  dataFromPersonalInfo(personalInfo);
+                  setZipCode(e.target.value);
+                  setCount(count + 1);
                 }}
                 focused
                 InputProps={{
@@ -306,16 +328,13 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 required
                 label="Phone"
                 variant="filled"
-                value={personalInfo["phone"]}
+                value={phone}
                 name="phone"
                 onChange={(e) => {
-                  personalInfo["phone"] = e.target.value;
-                  dataFromPersonalInfo(personalInfo);
+                  setPhone(e.target.value);
+                  setCount(count + 1);
                 }}
                 focused
-                InputProps={{
-                  disableUnderline: true
-                }}
               />
             </Box>
           </Grid>
@@ -334,16 +353,13 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 required
                 label="Email"
                 variant="filled"
-                value={personalInfo["email"]}
+                value={email}
                 name="email"
                 onChange={(e) => {
-                  personalInfo["email"] = e.target.value;
-                  dataFromPersonalInfo(personalInfo);
+                  setEmail(e.target.value);
+                  setCount(count + 1);
                 }}
                 focused
-                InputProps={{
-                  disableUnderline: true
-                }}
               />
             </Box>
           </Grid>
