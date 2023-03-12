@@ -6,12 +6,12 @@ import { updateData } from "../../../../firebase/firebaseReadWrite";
 import { useAuth } from "../../../../firebase/AuthContext";
 import { db } from "../../../../firebase/firebase";
 import { doc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+
 import PDFPage from "../../../../pages/PDFPage";
 
 const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
   const { currentUser } = useAuth();
-  const navigate = useNavigate();
+
   let docRef;
   if (currentUser !== null) {
     docRef = doc(db, "users", currentUser.uid);

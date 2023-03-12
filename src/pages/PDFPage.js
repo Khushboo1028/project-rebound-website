@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../firebase/AuthContext";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Page,
   usePDF,
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
 const MyDoc = (data) => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
-  const [resumeData, setResumeData] = useState(data);
+  const [resumeData] = useState(data);
 
   useEffect(() => {
     if (currentUser) {
@@ -249,6 +249,7 @@ const PDFPage = ({ resumeData }) => {
   useEffect(() => {
     console.log("in pdf page ", resumeData);
     updateInstance(MyDoc);
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -295,6 +296,7 @@ const PDFPage = ({ resumeData }) => {
               <a
                 href={instance.url}
                 target="_blank"
+                rel="noreferrer"
                 style={{ textDecoration: "None", color: Colors.white }}
               >
                 View Resume

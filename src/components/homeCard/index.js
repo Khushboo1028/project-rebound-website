@@ -11,9 +11,14 @@ const HomeCard = (props) => {
   const [isJobApplicationModalOpen, setJobApplicationModalOpen] =
     useState(false);
 
+  const [isComingSoon, setComingSoon] = useState(false);
+
   const cardClicked = () => {
     if (props.index === 4) {
       setJobApplicationModalOpen(true);
+    } else {
+      //put coming soon
+      setComingSoon(true);
     }
   };
 
@@ -33,65 +38,98 @@ const HomeCard = (props) => {
     );
   };
 
-  return (
-    <Box>
-      <Card
-        sx={{
-          maxWidth: 345,
-          background: Colors.backgroundColor,
-          cursor: "pointer"
-        }}
-        onClick={cardClicked}
+  const showModalForComingSoon = () => {
+    const handleComingSoonClose = () => setComingSoon(false);
+
+    return (
+      <Modal
+        open={isComingSoon}
+        onClose={handleComingSoonClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        closeAfterTransition
       >
-        <CardMedia
-          component="img"
+        <Box
           sx={{
-            height: "130px",
             margin: "auto",
-            marginBottom: "2rem",
-            marginTop: "2rem"
-          }}
-          image={props.image}
-          alt={props.alt}
-        />
-        <CardContent
-          sx={{
-            background: Colors.white,
-            borderTopLeftRadius: "1rem",
-            borderTopRightRadius: "1rem"
+            width: { md: "30%", sm: "30%", xs: "50%" },
+            mt: 10,
+            bgcolor: Colors.primaryColor,
+            borderRadius: "0.5rem",
+            boxShadow: 24,
+            p: 4
           }}
         >
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="div"
+          <Box sx={{ color: Colors.white, textAlign: "center" }}>
+            Hold on Tight! We are coming Soon!
+          </Box>
+        </Box>
+      </Modal>
+    );
+  };
+
+  return (
+    <Box>
+      <Box>
+        <Card
+          sx={{
+            maxWidth: 345,
+            background: Colors.backgroundColor,
+            cursor: "pointer"
+          }}
+          onClick={cardClicked}
+        >
+          <CardMedia
+            component="img"
             sx={{
-              color: Colors.primaryColor,
-              fontWeight: "700",
-              fontFamily: "Inria Sans",
-              fontSize: "1rem"
+              height: "130px",
+              margin: "auto",
+              marginBottom: "2rem",
+              marginTop: "2rem"
+            }}
+            image={props.image}
+            alt={props.alt}
+          />
+          <CardContent
+            sx={{
+              background: Colors.white,
+              borderTopLeftRadius: "1rem",
+              borderTopRightRadius: "1rem",
+              backgroundColor: Colors.white
             }}
           >
-            {props.heading}
-          </Typography>
-
-          {props.list.map((e, index) => (
             <Typography
-              key={index}
-              variant="body2"
+              gutterBottom
+              variant="h5"
+              component="div"
               sx={{
                 color: Colors.primaryColor,
+                fontWeight: "700",
                 fontFamily: "Inria Sans",
                 fontSize: "1rem"
               }}
             >
-              - {e}
+              {props.heading}
             </Typography>
-          ))}
-        </CardContent>
-      </Card>
 
+            {props.list.map((e, index) => (
+              <Typography
+                key={index}
+                variant="body2"
+                sx={{
+                  color: Colors.primaryColor,
+                  fontFamily: "Inria Sans",
+                  fontSize: "1rem"
+                }}
+              >
+                - {e}
+              </Typography>
+            ))}
+          </CardContent>
+        </Card>
+      </Box>
       <div>{openJobApplicationModal()}</div>
+      <div>{showModalForComingSoon()}</div>
     </Box>
   );
 };
