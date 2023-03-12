@@ -20,21 +20,25 @@ const styles = StyleSheet.create({
   },
   name: {
     textAlign: "center",
-    fontSize: "25"
+    fontSize: "25",
+    fontFamily: "Helvetica"
   },
   desc: {
     textAlign: "center",
     fontSize: "11",
-    paddingTop: 4
+    paddingTop: 4,
+    fontFamily: "Helvetica"
   },
   heading: {
     fontSize: "18",
-    marginTop: "10"
+    marginTop: "10",
+    fontFamily: "Helvetica"
   },
   summary: {
     textAlign: "left",
     fontSize: "11",
-    paddingTop: 4
+    paddingTop: 4,
+    fontFamily: "Helvetica"
   },
   line: {
     marginTop: 3,
@@ -50,37 +54,42 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: "11",
-    fontWeight: "bold",
-    marginTop: 4
+    marginTop: 4,
+    fontFamily: "Helvetica-Bold"
   },
   rightInfo: {
     marginLeft: "auto",
-    fontWeight: "bold",
     fontSize: "11",
-    marginTop: "-10"
+    marginTop: "-10",
+    fontFamily: "Helvetica-Bold"
   },
 
   subTitle: {
     fontSize: "10",
-    marginTop: 4
+    marginTop: 4,
+    fontFamily: "Helvetica"
   },
   lowerRightInfo: {
     marginLeft: "auto",
     fontSize: "10",
-    marginTop: "-10"
+    marginTop: "-10",
+    fontFamily: "Helvetica"
   },
   description: {
     fontSize: "10",
     marginTop: "5",
-    lineHeight: "1.5"
+    lineHeight: "1.5",
+    fontFamily: "Helvetica"
   },
   position: {
     fontSize: "10",
-    marginTop: 1
+    marginTop: 1,
+    fontFamily: "Helvetica"
   },
   skill: {
     fontSize: "10",
-    marginTop: "4"
+    marginTop: "4",
+    fontFamily: "Helvetica"
   }
 });
 
