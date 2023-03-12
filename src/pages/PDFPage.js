@@ -178,8 +178,7 @@ const MyDoc = (data) => {
                 resumeData.personal_info.phone}
             </Text>
 
-            {/* //TODO: Check This empty thing is correct*/}
-            {JSON.stringify(resumeData.objective) !== "{}" ? (
+            {resumeData.objective !== null ? (
               <View>
                 <Text style={styles.heading}>Objective</Text>
                 <Text style={styles.line} />

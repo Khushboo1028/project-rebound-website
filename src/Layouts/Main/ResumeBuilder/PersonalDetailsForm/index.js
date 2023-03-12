@@ -7,14 +7,14 @@ import { useAuth } from "../../../../firebase/AuthContext";
 const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
   const { currentUser } = useAuth();
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zipCode, setZipCode] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
+  const [firstName] = useState("");
+  const [lastName] = useState("");
+  const [address] = useState("");
+  const [city] = useState("");
+  const [state] = useState("");
+  const [zipCode] = useState("");
+  const [phone] = useState("");
+  const [email] = useState("");
 
   const [personalInfo, setPersonalInfo] = useState({
     firstName: firstName,
@@ -135,6 +135,9 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                 variant="filled"
                 value={personalInfo["firstName"]}
                 name="firstname"
+                InputProps={{
+                  disableUnderline: true
+                }}
                 onChange={(e) => {
                   // setFirstName(e.target.value);
                   personalInfo["firstName"] = e.target.value;
@@ -166,6 +169,9 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
 
                   dataFromPersonalInfo(personalInfo);
                 }}
+                InputProps={{
+                  disableUnderline: true
+                }}
                 focused
               />
             </Box>
@@ -193,6 +199,9 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                     dataFromPersonalInfo(personalInfo);
                   }}
                   focused
+                  InputProps={{
+                    disableUnderline: true
+                  }}
                 />
               </Box>
             </Grid>
@@ -219,6 +228,9 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                   dataFromPersonalInfo(personalInfo);
                 }}
                 focused
+                InputProps={{
+                  disableUnderline: true
+                }}
               />
             </Box>
           </Grid>
@@ -244,6 +256,9 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                   dataFromPersonalInfo(personalInfo);
                 }}
                 focused
+                InputProps={{
+                  disableUnderline: true
+                }}
               />
             </Box>
           </Grid>
@@ -269,6 +284,9 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                   dataFromPersonalInfo(personalInfo);
                 }}
                 focused
+                InputProps={{
+                  disableUnderline: true
+                }}
               />
             </Box>
           </Grid>
@@ -295,6 +313,9 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                   dataFromPersonalInfo(personalInfo);
                 }}
                 focused
+                InputProps={{
+                  disableUnderline: true
+                }}
               />
             </Box>
           </Grid>
@@ -320,6 +341,9 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                   dataFromPersonalInfo(personalInfo);
                 }}
                 focused
+                InputProps={{
+                  disableUnderline: true
+                }}
               />
             </Box>
           </Grid>

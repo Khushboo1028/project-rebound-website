@@ -24,7 +24,8 @@ const ProfessionalExperienceForm = ({
       startDate: "",
       endDate: "",
       companyName: "",
-      description: ""
+      description: "",
+      isEndDate: false
     }
   ]);
 
@@ -44,7 +45,8 @@ const ProfessionalExperienceForm = ({
       startDate: "",
       endDate: "",
       companyName: "",
-      description: ""
+      description: "",
+      isEndDate: false
     };
 
     setInputList([...inputList, newField]);
@@ -232,7 +234,6 @@ const ProfessionalExperienceForm = ({
               }}
               autoComplete="off"
             >
-              {/* TODO: get this data on object */}
               <FormControlLabel
                 sx={inputStyle}
                 control={<Checkbox sx={inputStyle} />}

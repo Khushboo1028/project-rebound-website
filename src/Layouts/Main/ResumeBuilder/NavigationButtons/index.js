@@ -37,8 +37,12 @@ const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
       resumeData.personal_info = dataFromFirebase.personal_info;
     }
 
-    if (resumeData.objective === "") {
-      resumeData.objective = dataFromFirebase.objective;
+    if (resumeData.objective !== undefined) {
+      if (resumeData.objective === "") {
+        resumeData.objective = dataFromFirebase.objective;
+      }
+    } else {
+      resumeData.objective = null;
     }
 
     console.log("data to send: ", resumeData);

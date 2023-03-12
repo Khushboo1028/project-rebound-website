@@ -29,6 +29,7 @@ const ResumeBuilder = () => {
     useState();
   const [skillsInfo, setSkillsInfo] = useState();
   const [objective, setObjective] = useState();
+
   const [dataFromFirebase, setDatafromFirebase] = useState();
 
   const resumeData = {
@@ -76,12 +77,19 @@ const ResumeBuilder = () => {
   };
 
   const dataFromObjective = (objectiveInfo) => {
-    console.log("objective info in resume builder is", objectiveInfo);
-    if (objectiveInfo === undefined || objectiveInfo === "") {
-      setObjective("");
+    console.log(objectiveInfo);
+    if (objectiveInfo.isSkipped) {
+      setObjective(undefined);
     } else {
-      //setting from props
-      setObjective(objectiveInfo);
+      if (
+        objectiveInfo.objective === undefined ||
+        objectiveInfo.objective === ""
+      ) {
+        setObjective("");
+      } else {
+        //setting from props
+        setObjective(objectiveInfo.objective);
+      }
     }
   };
 

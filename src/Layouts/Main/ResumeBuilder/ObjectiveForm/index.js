@@ -1,30 +1,46 @@
 import React, { useState, useEffect } from "react";
 import { Colors } from "../../../../constants/Colors";
-import { Box, Grid, TextField, Icon } from "@mui/material";
-import { multiLineInputStyle } from "../styles";
+import {
+  Box,
+  Grid,
+  TextField,
+  Icon,
+  FormControlLabel,
+  Checkbox
+} from "@mui/material";
+import { multiLineInputStyle, inputStyle } from "../styles";
 import { useAuth } from "../../../../firebase/AuthContext";
 
 const ObjectiveForm = ({ dataFromObjective, dataFromFirebase }) => {
   const { currentUser } = useAuth();
   const [objective, setObjective] = useState("");
+  const [isSkipped, setSkipped] = useState(false);
+  const [valueChanged, setValueChanged] = useState(0);
 
   useEffect(() => {
     if (currentUser !== null) {
-      if (dataFromFirebase !== undefined) {
-        const objectiveFirebase = dataFromFirebase.objective;
+      if (valueChanged < 1) {
+        if (dataFromFirebase !== undefined) {
+          const objectiveFirebase = dataFromFirebase.objective;
 
-        if (objectiveFirebase !== undefined) {
-          setObjective(objectiveFirebase);
-          dataFromObjective(objective);
+          if (objectiveFirebase !== null) {
+            setObjective(objectiveFirebase);
+          } else {
+            setObjective("");
+          }
+          dataFromObjective({ objective: "objective", isSkipped: isSkipped });
         }
+      } else {
+        dataFromObjective({ objective: objective, isSkipped: isSkipped });
       }
     }
+
     // eslint-disable-next-line
-  }, [dataFromFirebase]);
+  }, [dataFromFirebase, valueChanged]);
 
   const handleFormChange = (e) => {
     setObjective(e.target.value);
-    dataFromObjective(objective);
+    setValueChanged(valueChanged + 1);
   };
 
   return (
@@ -125,6 +141,7 @@ const ObjectiveForm = ({ dataFromObjective, dataFromFirebase }) => {
                 label="Objective / Summary"
                 variant="standard"
                 multiline
+                disabled={isSkipped}
                 value={objective}
                 name="description"
                 onChange={(e) => {
@@ -134,6 +151,19 @@ const ObjectiveForm = ({ dataFromObjective, dataFromFirebase }) => {
               />
             </Box>
           </Grid>
+        </Grid>
+
+        {/* This is the isSkipped row */}
+        <Grid item xs={12}>
+          <FormControlLabel
+            sx={inputStyle}
+            checked={isSkipped}
+            control={<Checkbox sx={inputStyle} />}
+            label="Skip Objective"
+            onChange={() => {
+              setSkipped(!isSkipped);
+            }}
+          />
         </Grid>
       </Grid>
     </Box>
