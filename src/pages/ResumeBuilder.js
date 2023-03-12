@@ -29,7 +29,6 @@ const ResumeBuilder = () => {
     useState();
   const [skillsInfo, setSkillsInfo] = useState();
   const [objective, setObjective] = useState();
-
   const [dataFromFirebase, setDatafromFirebase] = useState();
 
   const resumeData = {
@@ -77,10 +76,9 @@ const ResumeBuilder = () => {
   };
 
   const dataFromObjective = (objectiveInfo) => {
-    console.log("objective info ", objectiveInfo);
-    if (objectiveInfo === undefined || objective === "") {
-      //setting from firebase
-      setObjective(objective);
+    console.log("objective info in resume builder is", objectiveInfo);
+    if (objectiveInfo === undefined || objectiveInfo === "") {
+      setObjective("");
     } else {
       //setting from props
       setObjective(objectiveInfo);

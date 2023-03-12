@@ -20,6 +20,11 @@ const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
   const [isResumeBtnClicked, setResumeBtnClicked] = useState(false);
 
   const generatePdf = () => {
+    saveData();
+    setResumeBtnClicked(true);
+  };
+
+  const saveData = () => {
     if (resumeData.education_info === undefined) {
       resumeData.education_info = dataFromFirebase.education_info;
     }
@@ -32,10 +37,12 @@ const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
       resumeData.personal_info = dataFromFirebase.personal_info;
     }
 
+    if (resumeData.objective === "") {
+      resumeData.objective = dataFromFirebase.objective;
+    }
+
     console.log("data to send: ", resumeData);
     updateData(docRef, resumeData);
-
-    setResumeBtnClicked(true);
   };
 
   const openResumeDownloadModel = () => {
@@ -84,8 +91,9 @@ const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
                   fontSize: { md: "1rem", sm: "0.7rem", xs: "0.5rem" },
                   "&:hover": { backgroundColor: Colors.primaryColor }
                 }}
+                onClick={saveData}
               >
-                Share For Feedback
+                Save Data
               </Button>
             </Box>
             <Box>

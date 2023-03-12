@@ -6,8 +6,6 @@ import { useAuth } from "../../../../firebase/AuthContext";
 
 const ObjectiveForm = ({ dataFromObjective, dataFromFirebase }) => {
   const { currentUser } = useAuth();
-
-  const [description, setDescription] = useState();
   const [objective, setObjective] = useState("");
 
   useEffect(() => {
