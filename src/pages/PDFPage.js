@@ -88,8 +88,9 @@ const styles = StyleSheet.create({
   },
   skill: {
     fontSize: "10",
-    marginTop: "4",
-    fontFamily: "Helvetica"
+    fontFamily: "Helvetica",
+    marginLeft: "3",
+    marginTop: "5"
   }
 });
 
@@ -232,16 +233,96 @@ const MyDoc = (data) => {
             })}
 
             {/* Skills */}
+
             <Text style={styles.heading}>Skills</Text>
             <Text style={styles.line} />
 
-            {resumeData.skills_info.map((e, index) => {
-              return (
-                <View key={index}>
-                  <Text style={styles.skill}>{e}</Text>
-                </View>
-              );
-            })}
+            {resumeData.skills_info.technicalSkills.length > 0 ? (
+              <View style={{ display: "flex", flexDirection: "row" }}>
+                <Text style={styles.title}>Technical Skills: </Text>
+                {resumeData.skills_info.technicalSkills.map((e, index) => {
+                  if (
+                    index !==
+                    resumeData.skills_info.technicalSkills.length - 1
+                  ) {
+                    return (
+                      <Text key={index} style={styles.skill}>
+                        {e + ","}
+                      </Text>
+                    );
+                  } else {
+                    return (
+                      <Text key={index} style={styles.skill}>
+                        {e}
+                      </Text>
+                    );
+                  }
+                })}
+              </View>
+            ) : (
+              <Text></Text>
+            )}
+
+            {resumeData.skills_info.personalSkills.length > 0 ? (
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  marginTop: "5"
+                }}
+              >
+                <Text style={styles.title}>Personal Skills: </Text>
+                {resumeData.skills_info.personalSkills.map((e, index) => {
+                  if (
+                    index !==
+                    resumeData.skills_info.personalSkills.length - 1
+                  ) {
+                    return (
+                      <Text key={index} style={styles.skill}>
+                        {e + ","}
+                      </Text>
+                    );
+                  } else {
+                    return (
+                      <Text key={index} style={styles.skill}>
+                        {e}
+                      </Text>
+                    );
+                  }
+                })}
+              </View>
+            ) : (
+              <Text></Text>
+            )}
+
+            {resumeData.skills_info.otherSkills.length > 0 ? (
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  marginTop: "5"
+                }}
+              >
+                <Text style={styles.title}>Other Skills: </Text>
+                {resumeData.skills_info.otherSkills.map((e, index) => {
+                  if (index !== resumeData.skills_info.otherSkills.length - 1) {
+                    return (
+                      <Text key={index} style={styles.skill}>
+                        {e + ","}
+                      </Text>
+                    );
+                  } else {
+                    return (
+                      <Text key={index} style={styles.skill}>
+                        {e}
+                      </Text>
+                    );
+                  }
+                })}
+              </View>
+            ) : (
+              <Text></Text>
+            )}
           </View>
         </Page>
       ) : (

@@ -98,11 +98,7 @@ const ResumeBuilder = () => {
   };
 
   const dataFromSkillsInfo = (skillsInfo) => {
-    if (skillsInfo === undefined) {
-      setSkillsInfo([]);
-    } else {
-      setSkillsInfo(skillsInfo);
-    }
+    setSkillsInfo(skillsInfo);
   };
 
   return (
