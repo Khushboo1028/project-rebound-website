@@ -87,25 +87,49 @@ import CloseIcon from "@mui/icons-material/Close";
 // };
 
 const KeySkillBlock = (props) => {
-  const [autoCompleteValue, setAutoCompleteValue] = useState("");
-  const [skills, setSkills] = useState([]);
-  //can put all lists in one list instead of separating it out to avoid warnings
+  const [technicalSkillValue, setTechnicalSkillValue] = useState("");
+  const [technicalSkills, setTechnicalSkills] = useState([]);
+
+  const [personalSkillValue, setPersonalSkillValue] = useState("");
+  const [personalSkills, setPersonalSkills] = useState([]);
+
+  const [otherSkillValue, setOtherSkillValue] = useState("");
+  const [otherSkills, setOtherSkills] = useState([]);
 
   useEffect(() => {
-    console.log("skill after adding is ", skills);
-    props.dataFromKeySkillsBlock(skills);
+    props.dataFromKeySkillsBlock({
+      technicalSkills: technicalSkills,
+      personalSkills: personalSkills,
+      otherSkills: otherSkills
+    });
     // eslint-disable-next-line
-  }, [skills]);
+  }, [technicalSkills, personalSkills, otherSkills]);
 
-  const onAddBtnClick = (e) => {
-    setSkills([...skills, autoCompleteValue]);
-
-    setAutoCompleteValue("");
+  const onAddTechnicalSkillBtnClick = (e) => {
+    setTechnicalSkills([...technicalSkills, technicalSkillValue]);
+    setTechnicalSkillValue("");
   };
 
-  const onRemoveBtnClick = (index) => {
-    setSkills(skills.filter((_, id) => id !== index));
-    props.dataFromKeySkillsBlock(skills);
+  const onRemoveTechnicalSkillBtnClick = (index) => {
+    setTechnicalSkills(technicalSkills.filter((_, id) => id !== index));
+  };
+
+  const onAddPersonalSkillBtnClick = (e) => {
+    setPersonalSkills([...personalSkills, personalSkillValue]);
+    setPersonalSkillValue("");
+  };
+
+  const onRemovePersonalSkillBtnClick = (index) => {
+    setPersonalSkills(personalSkills.filter((_, id) => id !== index));
+  };
+
+  const onAddOtherSkillBtnClick = (e) => {
+    setOtherSkills([...otherSkills, otherSkillValue]);
+    setOtherSkillValue("");
+  };
+
+  const onRemoveOtherSkillBtnClick = (index) => {
+    setOtherSkills(otherSkills.filter((_, id) => id !== index));
   };
 
   return (
@@ -186,68 +210,258 @@ const KeySkillBlock = (props) => {
         </Grid>
       </Grid>
 
-      <Grid container spacing={2} sx={{ margin: "auto", width: "97%" }}>
-        <Grid item sm={12}>
-          {/* Adding component here */}
-
-          <TextField
-            sx={inputStyleAutoComplete}
-            label="Enter Skills Here"
-            variant="filled"
-            value={autoCompleteValue}
-            onChange={(e) => setAutoCompleteValue(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key === "Enter") {
-                onAddBtnClick(e);
-              }
+      <Grid container spacing={2}>
+        {/* Technical Skills Block */}
+        <Grid item sm={4}>
+          <Grid
+            container
+            spacing={2}
+            sx={{
+              margin: "auto",
+              width: "97%"
             }}
-            focused
-          />
+          >
+            <Grid item sm={12}>
+              {/* Adding component here */}
+
+              <TextField
+                sx={inputStyleAutoComplete}
+                label="Enter Technical Skills Here"
+                variant="filled"
+                value={technicalSkillValue}
+                onChange={(e) => setTechnicalSkillValue(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    onAddTechnicalSkillBtnClick(e);
+                  }
+                }}
+                focused
+              />
+            </Grid>
+
+            <Grid
+              item
+              sm={12}
+              sx={{
+                margin: "auto",
+                width: "100%",
+                height: "20rem",
+                overflowY: "auto"
+              }}
+            >
+              {/* viewing skills component here */}
+              {technicalSkills !== undefined ? (
+                technicalSkills.map((e, index) => {
+                  return (
+                    <Box
+                      sx={{ display: "flex", marginLeft: "0.4rem" }}
+                      key={index}
+                    >
+                      <Grid container spacing={2}>
+                        <Grid item xs={10}>
+                          <Typography
+                            sx={{
+                              fontFamily: "Inria Sans",
+                              fontSize: "1.3rem",
+                              fontColor: Colors.primaryColor
+                            }}
+                          >
+                            {e}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                          <Box
+                            sx={{ padding: "0.5rem" }}
+                            onClick={() => {
+                              onRemoveTechnicalSkillBtnClick(index);
+                            }}
+                          >
+                            <CloseIcon
+                              sx={{
+                                color: Colors.primaryColor,
+                                height: "1.4rem"
+                              }}
+                            />
+                          </Box>
+                        </Grid>
+                      </Grid>
+                    </Box>
+                  );
+                })
+              ) : (
+                <Box></Box>
+              )}
+            </Grid>
+          </Grid>
         </Grid>
 
-        <Grid item sm={12} sx={{ margin: "auto", width: "100%" }}>
-          {/* Adding component here */}
-          {skills !== undefined ? (
-            skills.map((e, index) => {
-              return (
-                <Box sx={{ display: "flex", marginLeft: "0.4rem" }} key={index}>
-                  <Grid container spacing={2}>
-                    <Grid item xs={11}>
-                      <Typography
-                        sx={{
-                          fontFamily: "Inria Sans",
-                          fontSize: "1.3rem",
-                          fontColor: Colors.primaryColor
-                        }}
-                      >
-                        {e}
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <Box
-                        sx={{ padding: "0.5rem" }}
-                        onClick={() => {
-                          onRemoveBtnClick(index);
-                        }}
-                      >
-                        <CloseIcon
-                          sx={{
-                            color: Colors.primaryColor,
-                            height: "1.4rem"
-                          }}
-                        />
-                      </Box>
-                    </Grid>
-                  </Grid>
-                </Box>
-              );
-            })
-          ) : (
-            <Box></Box>
-          )}
+        {/* Personal Arrtributes Skills Block */}
+        <Grid item sm={4}>
+          <Grid
+            container
+            spacing={2}
+            sx={{
+              margin: "auto",
+              width: "97%"
+            }}
+          >
+            <Grid item sm={12}>
+              {/* Adding component here */}
+
+              <TextField
+                sx={inputStyleAutoComplete}
+                label="Enter Personal Attributes Here"
+                variant="filled"
+                value={personalSkillValue}
+                onChange={(e) => setPersonalSkillValue(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    onAddPersonalSkillBtnClick(e);
+                  }
+                }}
+                focused
+              />
+            </Grid>
+
+            <Grid
+              item
+              sm={12}
+              sx={{
+                margin: "auto",
+                width: "100%",
+                height: "20rem",
+                overflowY: "auto"
+              }}
+            >
+              {/* viewing skills component here */}
+              {personalSkills !== undefined ? (
+                personalSkills.map((e, index) => {
+                  return (
+                    <Box
+                      sx={{ display: "flex", marginLeft: "0.4rem" }}
+                      key={index}
+                    >
+                      <Grid container spacing={2}>
+                        <Grid item xs={10}>
+                          <Typography
+                            sx={{
+                              fontFamily: "Inria Sans",
+                              fontSize: "1.3rem",
+                              fontColor: Colors.primaryColor
+                            }}
+                          >
+                            {e}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                          <Box
+                            sx={{ padding: "0.5rem" }}
+                            onClick={() => {
+                              onRemovePersonalSkillBtnClick(index);
+                            }}
+                          >
+                            <CloseIcon
+                              sx={{
+                                color: Colors.primaryColor,
+                                height: "1.4rem"
+                              }}
+                            />
+                          </Box>
+                        </Grid>
+                      </Grid>
+                    </Box>
+                  );
+                })
+              ) : (
+                <Box></Box>
+              )}
+            </Grid>
+          </Grid>
         </Grid>
 
-        <Grid item sm={4} sx={{ margin: "auto", width: "100%" }}></Grid>
+        {/* Other Skills Block */}
+        <Grid item sm={4}>
+          <Grid
+            container
+            spacing={2}
+            sx={{
+              margin: "auto",
+              width: "97%"
+            }}
+          >
+            <Grid item sm={12}>
+              {/* Adding component here */}
+
+              <TextField
+                sx={inputStyleAutoComplete}
+                label="Enter Other Skills Here"
+                variant="filled"
+                value={otherSkillValue}
+                onChange={(e) => setOtherSkillValue(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    onAddOtherSkillBtnClick(e);
+                  }
+                }}
+                focused
+              />
+            </Grid>
+
+            <Grid
+              item
+              sm={12}
+              sx={{
+                margin: "auto",
+                width: "100%",
+                height: "20rem",
+                overflowY: "auto"
+              }}
+            >
+              {/* viewing skills component here */}
+              {otherSkills !== undefined ? (
+                otherSkills.map((e, index) => {
+                  return (
+                    <Box
+                      sx={{ display: "flex", marginLeft: "0.4rem" }}
+                      key={index}
+                    >
+                      <Grid container spacing={2}>
+                        <Grid item xs={10}>
+                          <Typography
+                            sx={{
+                              fontFamily: "Inria Sans",
+                              fontSize: "1.3rem",
+                              fontColor: Colors.primaryColor
+                            }}
+                          >
+                            {e}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={2}>
+                          <Box
+                            sx={{ padding: "0.5rem" }}
+                            onClick={() => {
+                              onRemoveOtherSkillBtnClick(index);
+                            }}
+                          >
+                            <CloseIcon
+                              sx={{
+                                color: Colors.primaryColor,
+                                height: "1.4rem"
+                              }}
+                            />
+                          </Box>
+                        </Grid>
+                      </Grid>
+                    </Box>
+                  );
+                })
+              ) : (
+                <Box></Box>
+              )}
+            </Grid>
+          </Grid>
+        </Grid>
       </Grid>
     </Box>
   );
