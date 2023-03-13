@@ -28,7 +28,11 @@ const EducationForm = ({ dataFromEducationInfo, dataFromFirebase }) => {
   useEffect(() => {
     if (currentUser !== null) {
       if (dataFromFirebase !== undefined) {
-        setInputList(dataFromFirebase.education_info);
+        const educationInfoFromFirebase = dataFromFirebase.education_info;
+
+        if (educationInfoFromFirebase !== undefined) {
+          setInputList(educationInfoFromFirebase);
+        }
       }
     }
 
@@ -128,7 +132,6 @@ const EducationForm = ({ dataFromEducationInfo, dataFromFirebase }) => {
             >
               <TextField
                 sx={inputStyle}
-                required
                 label="School Name"
                 variant="filled"
                 value={input.schoolName}
@@ -156,7 +159,6 @@ const EducationForm = ({ dataFromEducationInfo, dataFromFirebase }) => {
             >
               <TextField
                 sx={inputStyle}
-                required
                 label="Start Date"
                 variant="filled"
                 value={input.startDate}
@@ -183,7 +185,6 @@ const EducationForm = ({ dataFromEducationInfo, dataFromFirebase }) => {
             >
               <TextField
                 sx={inputStyle}
-                required
                 label="School Location"
                 variant="filled"
                 value={input.schoolLocation}
@@ -211,7 +212,6 @@ const EducationForm = ({ dataFromEducationInfo, dataFromFirebase }) => {
             >
               <TextField
                 sx={inputStyle}
-                required
                 label="End Date"
                 variant="filled"
                 focused
@@ -239,7 +239,6 @@ const EducationForm = ({ dataFromEducationInfo, dataFromFirebase }) => {
             >
               <TextField
                 sx={inputStyle}
-                required
                 label="Degree"
                 focused
                 variant="filled"
@@ -267,7 +266,6 @@ const EducationForm = ({ dataFromEducationInfo, dataFromFirebase }) => {
             >
               <TextField
                 sx={inputStyle}
-                required
                 label="Field Of Study"
                 focused
                 variant="filled"

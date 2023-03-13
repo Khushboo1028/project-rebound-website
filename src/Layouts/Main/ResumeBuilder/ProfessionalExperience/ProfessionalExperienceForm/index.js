@@ -32,7 +32,11 @@ const ProfessionalExperienceForm = ({
   useEffect(() => {
     if (currentUser !== null) {
       if (dataFromFirebase !== undefined) {
-        setInputList(dataFromFirebase.professional_experience_info);
+        const professionalExperienceFirebaseData =
+          dataFromFirebase.professional_experience_info;
+        if (professionalExperienceFirebaseData !== undefined) {
+          setInputList(professionalExperienceFirebaseData);
+        }
       }
     }
 
@@ -127,7 +131,6 @@ const ProfessionalExperienceForm = ({
             >
               <TextField
                 sx={inputStyle}
-                required
                 label="Position"
                 variant="filled"
                 focused
@@ -154,7 +157,6 @@ const ProfessionalExperienceForm = ({
             >
               <TextField
                 sx={inputStyle}
-                required
                 label="Start Date"
                 variant="filled"
                 focused
@@ -181,7 +183,6 @@ const ProfessionalExperienceForm = ({
             >
               <TextField
                 sx={inputStyle}
-                required
                 label="Company Name"
                 variant="filled"
                 value={input.companyName}
@@ -208,7 +209,6 @@ const ProfessionalExperienceForm = ({
             >
               <TextField
                 sx={inputStyle}
-                required
                 label="End Date"
                 variant="filled"
                 focused
@@ -257,7 +257,6 @@ const ProfessionalExperienceForm = ({
                   InputProps={{
                     disableUnderline: true
                   }}
-                  required
                   label="Description"
                   variant="standard"
                   multiline

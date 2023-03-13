@@ -135,7 +135,10 @@ const ResumeBuilder = () => {
           />
         </div>
         <div style={{ padding: "1rem", marginTop: "0.5rem" }}>
-          <KeySkills dataFromSkillsInfo={dataFromSkillsInfo} />
+          <KeySkills
+            dataFromSkillsInfo={dataFromSkillsInfo}
+            dataFromFirebase={dataFromFirebase}
+          />
         </div>
 
         <div style={{ padding: "1rem", marginTop: "0.5rem" }}>

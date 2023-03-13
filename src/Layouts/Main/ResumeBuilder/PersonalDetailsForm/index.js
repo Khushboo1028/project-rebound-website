@@ -33,17 +33,18 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
       if (count < 1) {
         if (dataFromFirebase !== undefined) {
           const personal_info_firebase = dataFromFirebase.personal_info;
-          setPersonalInfo(personal_info_firebase);
-          setFirstName(personal_info_firebase.firstName);
-          setLastName(personal_info_firebase.lastName);
-          setAddress(personal_info_firebase.address);
-          setCity(personal_info_firebase.city);
-          setState(personal_info_firebase.state);
-          setZipCode(personal_info_firebase.zipCode);
-          setPhone(personal_info_firebase.phone);
-          setEmail(personal_info_firebase.email);
 
-          dataFromPersonalInfo(personalInfo);
+          if (personal_info_firebase !== undefined) {
+            setPersonalInfo(personal_info_firebase);
+            setFirstName(personal_info_firebase.firstName);
+            setLastName(personal_info_firebase.lastName);
+            setAddress(personal_info_firebase.address);
+            setCity(personal_info_firebase.city);
+            setState(personal_info_firebase.state);
+            setZipCode(personal_info_firebase.zipCode);
+            setPhone(personal_info_firebase.phone);
+            setEmail(personal_info_firebase.email);
+          }
         }
       } else {
         setPersonalInfo({
@@ -56,8 +57,8 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
           phone: phone,
           email: email
         });
-        dataFromPersonalInfo(personalInfo);
       }
+      dataFromPersonalInfo(personalInfo);
     }
 
     // eslint-disable-next-line
@@ -154,7 +155,6 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
             >
               <TextField
                 sx={inputStyle}
-                required
                 label="First Name"
                 variant="filled"
                 value={firstName}
@@ -182,7 +182,6 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
             >
               <TextField
                 sx={inputStyle}
-                required
                 label="Last Name"
                 variant="filled"
                 value={lastName}
@@ -211,7 +210,6 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
               >
                 <TextField
                   sx={inputStyle}
-                  required
                   label="Address"
                   variant="filled"
                   value={address}
@@ -240,7 +238,6 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
             >
               <TextField
                 sx={inputStyle}
-                required
                 label="City"
                 variant="filled"
                 value={city}
@@ -268,7 +265,6 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
             >
               <TextField
                 sx={inputStyle}
-                required
                 label="State"
                 variant="filled"
                 value={state}
@@ -296,7 +292,6 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
             >
               <TextField
                 sx={inputStyle}
-                required
                 label="Zip Code"
                 variant="filled"
                 value={zipCode}
@@ -325,7 +320,6 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
             >
               <TextField
                 sx={inputStyle}
-                required
                 label="Phone"
                 variant="filled"
                 value={phone}
@@ -353,7 +347,6 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
             >
               <TextField
                 sx={inputStyle}
-                required
                 label="Email"
                 variant="filled"
                 value={email}

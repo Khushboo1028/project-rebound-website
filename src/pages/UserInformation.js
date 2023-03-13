@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../firebase/AuthContext";
 import {
   createSearchParams,
@@ -22,11 +22,21 @@ import {
 import { Colors } from "../constants/Colors";
 import Navbar from "../Layouts/Navbar";
 import Footer from "../Layouts/Footer";
+import { doc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
+import { updateData } from "../firebase/firebaseReadWrite";
 
 const UserInformation = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const [techComfortLevel, setTechComfortLevel] = useState("");
+  const [operatingSystemUsed, setOperatingSystemUsed] = useState("");
+
+  let docRef;
+  if (currentUser !== null) {
+    docRef = doc(db, "users", currentUser.uid);
+  }
 
   useEffect(() => {
     if (!currentUser) {
@@ -40,6 +50,13 @@ const UserInformation = () => {
   }, [currentUser, navigate]);
 
   const btnContinuePressed = () => {
+    const data = {
+      tech_comfort_level: techComfortLevel,
+      operating_system_used: operatingSystemUsed
+    };
+
+    updateData(docRef, data);
+
     if (searchParams.get("fromPath")) {
       navigate(searchParams.get("fromPath"));
     } else {
@@ -97,7 +114,9 @@ const UserInformation = () => {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         label="Your comfort level with technology"
-                        //   onChange={handleChange}
+                        onChange={(e) => {
+                          setOperatingSystemUsed(e.target.value);
+                        }}
                       >
                         <MenuItem value={10}>Mac</MenuItem>
                         <MenuItem value={20}>Windows</MenuItem>
@@ -113,7 +132,9 @@ const UserInformation = () => {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         label="Your comfort level with technology"
-                        //   onChange={handleChange}
+                        onChange={(e) => {
+                          setTechComfortLevel(e.target.value);
+                        }}
                       >
                         <MenuItem value={10}>None</MenuItem>
                         <MenuItem value={15}>Low</MenuItem>

@@ -70,7 +70,7 @@ const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
       <Grid container spacing={2}>
         <Grid item sm={6} xs={12}>
           <Box>
-            <Button
+            {/* <Button
               variant="contained"
               sx={{
                 backgroundColor: Colors.primaryColor,
@@ -80,9 +80,10 @@ const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
 
                 "&:hover": { backgroundColor: Colors.primaryColor }
               }}
+              onClick={() => navigate("/")}
             >
               Back
-            </Button>
+            </Button> */}
           </Box>
         </Grid>
         <Grid item sm={6} xs={12}>
@@ -97,7 +98,7 @@ const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
                 }}
                 onClick={saveData}
               >
-                Save Data
+                Save Progress
               </Button>
             </Box>
             <Box>

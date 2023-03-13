@@ -27,6 +27,7 @@ const ObjectiveForm = ({ dataFromObjective, dataFromFirebase }) => {
             setObjective(objectiveFirebase);
           } else {
             setObjective("");
+            setSkipped(true);
           }
           dataFromObjective({ objective: "objective", isSkipped: isSkipped });
         }
@@ -137,7 +138,6 @@ const ObjectiveForm = ({ dataFromObjective, dataFromFirebase }) => {
                 InputProps={{
                   disableUnderline: true
                 }}
-                required
                 label="Objective / Summary"
                 variant="standard"
                 multiline

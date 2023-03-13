@@ -3,6 +3,7 @@ import { Box, Grid, Icon, TextField, Typography } from "@mui/material";
 import { formBackground, inputStyleAutoComplete } from "../styles";
 import { Colors } from "../../../../constants/Colors";
 import CloseIcon from "@mui/icons-material/Close";
+import { useAuth } from "../../../../firebase/AuthContext";
 
 // const SuggestedSkills = () => {
 //   let skills_list = [
@@ -86,7 +87,7 @@ import CloseIcon from "@mui/icons-material/Close";
 //   );
 // };
 
-const KeySkillBlock = (props) => {
+const KeySkillBlock = ({ dataFromKeySkillsBlock, dataFromFirebase }) => {
   const [technicalSkillValue, setTechnicalSkillValue] = useState("");
   const [technicalSkills, setTechnicalSkills] = useState([]);
 
@@ -95,41 +96,65 @@ const KeySkillBlock = (props) => {
 
   const [otherSkillValue, setOtherSkillValue] = useState("");
   const [otherSkills, setOtherSkills] = useState([]);
+  const [valueChanged, setValueChanged] = useState(0);
+
+  const { currentUser } = useAuth();
 
   useEffect(() => {
-    props.dataFromKeySkillsBlock({
-      technicalSkills: technicalSkills,
-      personalSkills: personalSkills,
-      otherSkills: otherSkills
-    });
+    if (currentUser !== null) {
+      if (valueChanged < 1) {
+        if (dataFromFirebase !== undefined) {
+          const skillFirebase = dataFromFirebase.skills_info;
+
+          if (skillFirebase !== undefined) {
+            setOtherSkills(skillFirebase.otherSkills);
+            setPersonalSkills(skillFirebase.personalSkills);
+            setTechnicalSkills(skillFirebase.technicalSkills);
+          }
+        }
+      }
+
+      dataFromKeySkillsBlock({
+        technicalSkills: technicalSkills,
+        personalSkills: personalSkills,
+        otherSkills: otherSkills
+      });
+    }
+
     // eslint-disable-next-line
-  }, [technicalSkills, personalSkills, otherSkills]);
+  }, [technicalSkills, personalSkills, otherSkills, dataFromFirebase]);
 
   const onAddTechnicalSkillBtnClick = (e) => {
     setTechnicalSkills([...technicalSkills, technicalSkillValue]);
     setTechnicalSkillValue("");
+    setValueChanged(valueChanged + 1);
   };
 
   const onRemoveTechnicalSkillBtnClick = (index) => {
     setTechnicalSkills(technicalSkills.filter((_, id) => id !== index));
+    setValueChanged(valueChanged + 1);
   };
 
   const onAddPersonalSkillBtnClick = (e) => {
     setPersonalSkills([...personalSkills, personalSkillValue]);
     setPersonalSkillValue("");
+    setValueChanged(valueChanged + 1);
   };
 
   const onRemovePersonalSkillBtnClick = (index) => {
     setPersonalSkills(personalSkills.filter((_, id) => id !== index));
+    setValueChanged(valueChanged + 1);
   };
 
   const onAddOtherSkillBtnClick = (e) => {
     setOtherSkills([...otherSkills, otherSkillValue]);
     setOtherSkillValue("");
+    setValueChanged(valueChanged + 1);
   };
 
   const onRemoveOtherSkillBtnClick = (index) => {
     setOtherSkills(otherSkills.filter((_, id) => id !== index));
+    setValueChanged(valueChanged + 1);
   };
 
   return (
@@ -485,7 +510,10 @@ const KeySkills = (props) => {
         <Grid container spacing={2}>
           <Grid item sm={12} xs={12}>
             <Box>
-              <KeySkillBlock dataFromKeySkillsBlock={dataFromKeySkillsBlock} />
+              <KeySkillBlock
+                dataFromKeySkillsBlock={dataFromKeySkillsBlock}
+                dataFromFirebase={props.dataFromFirebase}
+              />
             </Box>
           </Grid>
         </Grid>
