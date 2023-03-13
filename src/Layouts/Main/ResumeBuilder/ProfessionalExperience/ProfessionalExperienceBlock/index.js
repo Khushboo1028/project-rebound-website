@@ -5,6 +5,7 @@ import ProfessionalExperienceForm from "../ProfessionalExperienceForm";
 import { db } from "../../../../../firebase/firebase";
 import { useAuth } from "../../../../../firebase/AuthContext";
 import { doc, onSnapshot } from "firebase/firestore";
+import { list_style } from "./styles";
 
 const ProfessionalExperienceBlock = ({
   dataFromProfessionalExperienceInfoProps,
@@ -31,7 +32,7 @@ const ProfessionalExperienceBlock = ({
         setExperienceList(() => {
           const newList = doc.data().skills_list;
           // eslint-disable-next-line
-          if (newList) {
+          if (newList !== undefined) {
             // eslint-disable-next-line
             newList.map((e, index) => {
               if (index < newList.length) {
@@ -85,36 +86,49 @@ const ProfessionalExperienceBlock = ({
             }}
           >
             <Grid container spacing={2} sx={{ margin: "auto" }}>
-              <Box
-                sx={{
-                  fontFamily: "Inria Sans",
-                  fontSize: { md: "1.2rem", sm: "1rem", xs: "1rem" },
-                  color: Colors.primaryColor,
-                  fontWeight: 700
-                }}
-              >
-                You had previously listed these skills that you wanted to
-                highlight!
-              </Box>
-              <Box sx={{ marginTop: "0.5rem" }}>
-                {experience_list.map((e, index) => (
+              {experience_list !== undefined ? (
+                <Box
+                  sx={{
+                    fontFamily: "Inria Sans",
+                    fontSize: { md: "1.2rem", sm: "1rem", xs: "1rem" },
+                    color: Colors.primaryColor,
+                    fontWeight: 700
+                  }}
+                >
+                  You had previously listed these skills that you wanted to
+                  highlight!
+                </Box>
+              ) : (
+                <Box>
                   <Box
-                    key={index}
                     sx={{
-                      marginLeft: {
-                        md: "0.5rem",
-                        sm: "0.5rem",
-                        xs: "1.1rem"
-                      },
                       fontFamily: "Inria Sans",
+                      fontSize: { md: "1.2rem", sm: "1rem", xs: "1rem" },
                       color: Colors.primaryColor,
-                      marginBottom: "0.5rem",
-                      fontSize: { md: "1.1rem", sm: "0.8rem", xs: "0.8rem" }
+                      fontWeight: 700
                     }}
                   >
-                    - {e.name}
+                    Suggested Skills that you can share with your experience.
                   </Box>
-                ))}
+                  <Box style={{ marginTop: "1rem" }}>
+                    <Box sx={list_style}>- Communication</Box>
+                    <Box sx={list_style}>- Time Management</Box>
+                    <Box sx={list_style}>- Counseling</Box>
+                    <Box sx={list_style}>- Go Getter</Box>
+                  </Box>
+                </Box>
+              )}
+
+              <Box sx={{ marginTop: "0.5rem" }}>
+                {experience_list !== undefined ? (
+                  experience_list.map((e, index) => (
+                    <Box key={index} sx={list_style}>
+                      - {e.name}
+                    </Box>
+                  ))
+                ) : (
+                  <Box></Box>
+                )}
               </Box>
             </Grid>
           </Box>

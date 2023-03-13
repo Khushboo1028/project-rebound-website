@@ -46,7 +46,7 @@ const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
     }
 
     console.log("data to send: ", resumeData);
-    // updateData(docRef, resumeData);
+    updateData(docRef, resumeData);
   };
 
   const openResumeDownloadModel = () => {
