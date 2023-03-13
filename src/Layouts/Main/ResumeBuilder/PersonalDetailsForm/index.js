@@ -335,6 +335,9 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                   setCount(count + 1);
                 }}
                 focused
+                InputProps={{
+                  disableUnderline: true
+                }}
               />
             </Box>
           </Grid>
@@ -360,6 +363,9 @@ const PersonalDetailsForm = ({ dataFromPersonalInfo, dataFromFirebase }) => {
                   setCount(count + 1);
                 }}
                 focused
+                InputProps={{
+                  disableUnderline: true
+                }}
               />
             </Box>
           </Grid>
