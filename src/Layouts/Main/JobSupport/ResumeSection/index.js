@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const ResumeSection = () => {
   let navigate = useNavigate();
   let step_list = [
-    "Step 1: Go to indeed.com",
+    "Step 1: Go to honestjobs.com",
     "Step 2: Search for the positions you want",
     "Step 3: Read the job descriptions carefully",
     "Step 4: Identify the skills they are asking for",
@@ -59,8 +59,26 @@ const ResumeSection = () => {
       <Box sx={{ margin: "auto", width: "90%" }}>
         <Grid container spacing={2}>
           <Grid item sm={6} md={6} xs={12}>
-            {step_list.map((e) => (
-              <Box sx={stepContainer}>{e}</Box>
+            {step_list.map((e, index) => (
+              <Box sx={stepContainer}>
+                {index !== 0 ? (
+                  e
+                ) : (
+                  <Box style={{ cursor: "pointer" }}>
+                    Step 1: Go to &nbsp;
+                    <a
+                      style={{
+                        color: Colors.primaryColor
+                      }}
+                      href="https://www.honestjobs.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      honestjobs.com
+                    </a>
+                  </Box>
+                )}
+              </Box>
             ))}
           </Grid>
           <Grid item sm={6} md={6} xs={12}>

@@ -3,7 +3,6 @@ import { Box, TextField, Grid, Fab, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Colors } from "../../constants/Colors";
 import AddIcon from "@mui/icons-material/Add";
-import DoneIcon from "@mui/icons-material/Done";
 import { updateData } from "../../firebase/firebaseReadWrite";
 import { useAuth } from "../../firebase/AuthContext";
 
@@ -20,6 +19,7 @@ const AddSkills = () => {
   // eslint-disable-next-line
   const [firebaseList, setFirebaseList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [count, setCount] = useState(0);
 
   const { currentUser } = useAuth();
   let docRef;
@@ -32,14 +32,15 @@ const AddSkills = () => {
       setInputList([...inputList, { id: nextId++, name: item }]);
     }
     setItem("");
+    setCount(count + 1);
   };
 
   const onCloseBtnClick = (id) => {
     setInputList(inputList.filter((a) => a.id !== id));
-    console.log("input list ", inputList);
+    setCount(count + 1);
   };
 
-  const onCheckBtnClick = () => {
+  const updateListToFirebase = () => {
     const docData = {
       skills_list: inputList
     };
@@ -47,34 +48,35 @@ const AddSkills = () => {
     updateData(docRef, docData);
   };
 
-  //TODO: Fix this bug
-
   useEffect(() => {
     if (currentUser) {
-      const unsubscribe = onSnapshot(docRef, (doc) => {
-        setLoading(false);
-        setFirebaseList(() => {
-          const newList = doc.data().skills_list;
-          // eslint-disable-next-line
-          if (newList) {
+      if (count < 1) {
+        const unsubscribe = onSnapshot(docRef, (doc) => {
+          setLoading(false);
+          setFirebaseList(() => {
+            const newList = doc.data().skills_list;
             // eslint-disable-next-line
-            newList.map((e) => {
-              if (nextId < newList.length) {
-                inputList.push({ id: nextId++, name: e.name });
-              }
-            });
-          }
+            if (newList) {
+              // eslint-disable-next-line
+              newList.map((e) => {
+                if (nextId < newList.length) {
+                  inputList.push({ id: nextId++, name: e.name });
+                }
+              });
+            }
 
-          return newList;
+            return newList;
+          });
         });
-      });
 
-      return () => {
-        unsubscribe();
-      };
+        return () => {
+          unsubscribe();
+        };
+      }
+      updateListToFirebase();
     }
     // eslint-disable-next-line
-  }, []);
+  }, [count]);
 
   return (
     <Box>
@@ -154,31 +156,7 @@ const AddSkills = () => {
           </Box>
         </Grid>
       </Grid>
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: 0,
-          right: 0,
-          padding: "1rem"
-        }}
-      >
-        <Fab
-          size="medium"
-          aria-label="add"
-          sx={{
-            backgroundColor: Colors.primaryColor,
-            color: Colors.white,
-            marginTop: "1rem",
-            marginLeft: "1rem",
-            "&:hover": {
-              backgroundColor: Colors.primaryColor
-            }
-          }}
-          onClick={onCheckBtnClick}
-        >
-          <DoneIcon />
-        </Fab>
-      </Box>
+
       <Box
         sx={{
           position: "absolute",

@@ -61,7 +61,7 @@ const HomeCard = (props) => {
           }}
         >
           <Box sx={{ color: Colors.white, textAlign: "center" }}>
-            Hold on Tight! We are coming Soon!
+            This module is under construction. Hold on tight!
           </Box>
         </Box>
       </Modal>
