@@ -30,7 +30,10 @@ const EducationForm = ({ dataFromEducationInfo, dataFromFirebase }) => {
       if (dataFromFirebase !== undefined) {
         const educationInfoFromFirebase = dataFromFirebase.education_info;
 
-        if (educationInfoFromFirebase !== undefined) {
+        if (
+          educationInfoFromFirebase !== undefined &&
+          educationInfoFromFirebase !== null
+        ) {
           setInputList(educationInfoFromFirebase);
         }
       }

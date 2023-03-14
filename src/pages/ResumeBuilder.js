@@ -88,7 +88,8 @@ const ResumeBuilder = () => {
         setObjective("");
       } else {
         //setting from props
-        setObjective(objectiveInfo.objective);
+
+        console.log("objective is ", objective);
       }
     }
   };

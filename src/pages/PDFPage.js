@@ -161,12 +161,19 @@ const MyDoc = (data) => {
         <Page size="A4">
           <View style={styles.section}>
             <Text style={styles.name}>
-              {resumeData.personal_info.firstName +
+              {resumeData.personal_info !== undefined &&
+              resumeData.personal_info !== null ? (
+                resumeData.personal_info.firstName +
                 " " +
-                resumeData.personal_info.lastName}
+                resumeData.personal_info.lastName
+              ) : (
+                <Text></Text>
+              )}
             </Text>
             <Text style={styles.desc}>
-              {resumeData.personal_info.address +
+              {resumeData.personal_info !== undefined &&
+              resumeData.personal_info !== null ? (
+                resumeData.personal_info.address +
                 ", " +
                 resumeData.personal_info.city +
                 ", " +
@@ -176,10 +183,14 @@ const MyDoc = (data) => {
                 " | " +
                 resumeData.personal_info.email +
                 " | " +
-                resumeData.personal_info.phone}
+                resumeData.personal_info.phone
+              ) : (
+                <Text></Text>
+              )}
             </Text>
 
-            {resumeData.objective !== null ? (
+            {resumeData.objective !== null &&
+            resumeData.objective !== undefined ? (
               <View>
                 <Text style={styles.heading}>Objective</Text>
                 <Text style={styles.line} />
@@ -191,46 +202,56 @@ const MyDoc = (data) => {
 
             <Text style={styles.heading}>Education</Text>
             <Text style={styles.line} />
-            {resumeData.education_info.map((e, index) => {
-              return (
-                <View style={styles.viewContainer} key={index}>
-                  <View styles={styles.educationContainer}>
-                    <Text style={styles.title}>{e.schoolName}</Text>
-                    <Text style={styles.rightInfo}>{e.schoolLocation}</Text>
-                  </View>
+            {resumeData.education_info !== undefined &&
+            resumeData.education_info !== null ? (
+              resumeData.education_info.map((e, index) => {
+                return (
+                  <View style={styles.viewContainer} key={index}>
+                    <View styles={styles.educationContainer}>
+                      <Text style={styles.title}>{e.schoolName}</Text>
+                      <Text style={styles.rightInfo}>{e.schoolLocation}</Text>
+                    </View>
 
-                  <View styles={styles.educationContainer}>
-                    <Text style={styles.subTitle}>
-                      {e.degree + " " + e.fieldOfStudy}
-                    </Text>
-                    <Text style={styles.lowerRightInfo}>
-                      {e.startDate + " - " + e.endDate}
-                    </Text>
+                    <View styles={styles.educationContainer}>
+                      <Text style={styles.subTitle}>
+                        {e.degree + " " + e.fieldOfStudy}
+                      </Text>
+                      <Text style={styles.lowerRightInfo}>
+                        {e.startDate + " - " + e.endDate}
+                      </Text>
+                    </View>
                   </View>
-                </View>
-              );
-            })}
+                );
+              })
+            ) : (
+              <Text></Text>
+            )}
 
             {/* experience */}
             <Text style={styles.heading}>Experience</Text>
             <Text style={styles.line} />
-            {resumeData.professional_experience_info.map((e, index) => {
-              return (
-                <View style={styles.viewContainer} key={index}>
-                  <View styles={styles.educationContainer}>
-                    <Text style={styles.title}>{e.companyName}</Text>
-                    <Text style={styles.rightInfo}>
-                      {e.startDate + " - " + e.endDate}
-                    </Text>
-                  </View>
+            {resumeData.professional_experience_info !== undefined &&
+            resumeData.professional_experience_info !== null ? (
+              resumeData.professional_experience_info.map((e, index) => {
+                return (
+                  <View style={styles.viewContainer} key={index}>
+                    <View styles={styles.educationContainer}>
+                      <Text style={styles.title}>{e.companyName}</Text>
+                      <Text style={styles.rightInfo}>
+                        {e.startDate + " - " + e.endDate}
+                      </Text>
+                    </View>
 
-                  <View styles={styles.educationContainer}>
-                    <Text style={styles.position}>{e.position}</Text>
-                    <Text style={styles.description}>{e.description}</Text>
+                    <View styles={styles.educationContainer}>
+                      <Text style={styles.position}>{e.position}</Text>
+                      <Text style={styles.description}>{e.description}</Text>
+                    </View>
                   </View>
-                </View>
-              );
-            })}
+                );
+              })
+            ) : (
+              <Text></Text>
+            )}
 
             {/* Skills */}
 

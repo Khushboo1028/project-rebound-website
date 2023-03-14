@@ -26,20 +26,34 @@ const NavigationButtons = ({ resumeData, dataFromFirebase }) => {
 
   const saveData = () => {
     if (resumeData.education_info === undefined) {
-      resumeData.education_info = dataFromFirebase.education_info;
+      if (dataFromFirebase.education_info !== undefined) {
+        resumeData.education_info = dataFromFirebase.education_info;
+      } else {
+        resumeData.education_info = null;
+      }
     }
     if (resumeData.professional_experience_info === undefined) {
-      resumeData.professional_experience_info =
-        dataFromFirebase.professional_experience_info;
+      if (dataFromFirebase.professional_experience_info !== undefined) {
+        resumeData.professional_experience_info =
+          dataFromFirebase.professional_experience_info;
+      } else {
+        resumeData.professional_experience_info = null;
+      }
     }
 
     if (JSON.stringify(resumeData.personal_info) === "{}") {
-      resumeData.personal_info = dataFromFirebase.personal_info;
+      if (dataFromFirebase.personal_info !== undefined) {
+        resumeData.personal_info = dataFromFirebase.personal_info;
+      }
     }
 
     if (resumeData.objective !== undefined) {
       if (resumeData.objective === "") {
-        resumeData.objective = dataFromFirebase.objective;
+        if (dataFromFirebase.objective !== undefined) {
+          resumeData.objective = dataFromFirebase.objective;
+        } else {
+          resumeData.objective = null;
+        }
       }
     } else {
       resumeData.objective = null;

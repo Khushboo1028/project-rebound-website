@@ -29,7 +29,7 @@ const ObjectiveForm = ({ dataFromObjective, dataFromFirebase }) => {
             setObjective("");
             setSkipped(true);
           }
-          dataFromObjective({ objective: "objective", isSkipped: isSkipped });
+          dataFromObjective({ objective: objective, isSkipped: isSkipped });
         }
       } else {
         dataFromObjective({ objective: objective, isSkipped: isSkipped });

@@ -34,7 +34,10 @@ const ProfessionalExperienceForm = ({
       if (dataFromFirebase !== undefined) {
         const professionalExperienceFirebaseData =
           dataFromFirebase.professional_experience_info;
-        if (professionalExperienceFirebaseData !== undefined) {
+        if (
+          professionalExperienceFirebaseData !== undefined &&
+          professionalExperienceFirebaseData !== null
+        ) {
           setInputList(professionalExperienceFirebaseData);
         }
       }
