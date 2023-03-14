@@ -145,12 +145,12 @@ const UserInformation = () => {
 
                     <FormControl fullWidth sx={{ marginTop: "2rem" }}>
                       <InputLabel id="demo-simple-select-label">
-                        How comfortable do you feel with technology in general?
+                        How comfortable do you feel with technology?
                       </InputLabel>
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        label=" How comfortable do you feel with technology in general?"
+                        label=" How comfortable do you feel with technology?"
                         onChange={(e) => {
                           setTechComfortLevel(e.target.value);
                         }}
