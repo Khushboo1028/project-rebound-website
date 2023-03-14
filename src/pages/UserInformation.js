@@ -108,38 +108,57 @@ const UserInformation = () => {
                   >
                     <FormControl fullWidth sx={{ marginTop: "2rem" }}>
                       <InputLabel id="demo-simple-select-label">
-                        What OS do you use?
+                        What kind of computer do you use?
                       </InputLabel>
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        label="Your comfort level with technology"
+                        label=" What kind of computer do you use?"
                         onChange={(e) => {
                           setOperatingSystemUsed(e.target.value);
                         }}
                       >
-                        <MenuItem value={10}>Mac</MenuItem>
-                        <MenuItem value={20}>Windows</MenuItem>
-                        <MenuItem value={30}>Linux</MenuItem>
+                        <MenuItem value={"Mac"}>Mac</MenuItem>
+                        <MenuItem value={"Windows"}>Windows</MenuItem>
+                        <MenuItem value={"Linux"}>Linux</MenuItem>
+                        <MenuItem value={"Don't Know"}>I Don't Know</MenuItem>
                       </Select>
                     </FormControl>
 
                     <FormControl fullWidth sx={{ marginTop: "2rem" }}>
                       <InputLabel id="demo-simple-select-label">
-                        Your comfort level with technology
+                        What mobile phone do you use?
                       </InputLabel>
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        label="Your comfort level with technology"
+                        label="What mobile phone do you use?"
+                        onChange={(e) => {
+                          setOperatingSystemUsed(e.target.value);
+                        }}
+                      >
+                        <MenuItem value={"Android"}>Android</MenuItem>
+                        <MenuItem value={"iOS"}>Apple/iOS</MenuItem>
+                        <MenuItem value={"Don't Know"}>I Don't Know</MenuItem>
+                      </Select>
+                    </FormControl>
+
+                    <FormControl fullWidth sx={{ marginTop: "2rem" }}>
+                      <InputLabel id="demo-simple-select-label">
+                        How comfortable do you feel with technology in general?
+                      </InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label=" How comfortable do you feel with technology in general?"
                         onChange={(e) => {
                           setTechComfortLevel(e.target.value);
                         }}
                       >
-                        <MenuItem value={10}>None</MenuItem>
-                        <MenuItem value={15}>Low</MenuItem>
-                        <MenuItem value={20}>Medium</MenuItem>
-                        <MenuItem value={30}>High</MenuItem>
+                        <MenuItem value={"None"}>None</MenuItem>
+                        <MenuItem value={"Low"}>Low</MenuItem>
+                        <MenuItem value={"Medium"}>Medium</MenuItem>
+                        <MenuItem value={"High"}>High</MenuItem>
                       </Select>
                     </FormControl>
                     <Button
